@@ -5,6 +5,7 @@
   <%= f.submit %>
 <% end %>
 
-<p>response: <%= @response["choices"][0]["message"]["content"] %></p>
+<%# <p>response: <%= @response["choices"][0]["message"]["content"] %></p>
+<p>embedding response: <%= @embedding %></p>
 
 <p><%= link_to "home", root_path %></p>

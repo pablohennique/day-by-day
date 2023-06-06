@@ -7,12 +7,20 @@ class EntriesController < ApplicationController
   def chat_test
     @client = OpenAI::Client.new
 
-    @response = @client.chat(
+    # @response = @client.chat(
+    #   parameters: {
+    #     model: "gpt-3.5-turbo",
+    #     messages: [{ role: "user", content: params[:query] }],
+    #     temperature: 0.3
+    #   }
+    # )
+
+    @embedding = @client.embeddings(
       parameters: {
-        model: "gpt-3.5-turbo",
-        messages: [{ role: "user", content: params[:query] }],
-        temperature: 0.3
+        model: "text-embedding-ada-002",
+        input: params[:query]
       }
     )
+
   end
 end
