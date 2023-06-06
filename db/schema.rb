@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_06_153306) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_06_180154) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -31,6 +31,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_06_153306) do
     t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_gratefulnesses_on_user_id"
   end
 
   create_table "obstacles", force: :cascade do |t|
@@ -66,5 +68,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_06_153306) do
 
   add_foreign_key "entries", "obstacles"
   add_foreign_key "entries", "users"
+  add_foreign_key "gratefulnesses", "users"
   add_foreign_key "recommendations", "obstacles"
 end
