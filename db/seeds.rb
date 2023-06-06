@@ -42,7 +42,7 @@ puts "Adding an entry..."
 entry_content.each do |entry|
 Entry.new(content: entry,
                 date: Date.today,
-                sentiment: mood.sample,
+                sentiment: nil,
                 user_id: users.sample,
                 obstacle_id: users.sample).save
 end
