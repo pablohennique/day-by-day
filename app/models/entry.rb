@@ -1,5 +1,5 @@
 class Entry < ApplicationRecord
   belongs_to :user
-  belongs_to :obstacle
+  belongs_to :obstacle, optional: true
 
 end

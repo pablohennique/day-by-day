@@ -1,6 +1,12 @@
 
 puts "Deleting entries..."
 Entry.delete_all
+puts "Deleting obstacles..."
+Obstacle.delete_all
+puts "Deleting recommendations..."
+Recommendation.delete_all
+puts "Deleting users..."
+User.delete_all
 
 puts "Adding a user..."
 tom = User.new(first_name:"Tom", last_name:"Kim", email:"ehdgus5289@gmail.com", password:"111111")
@@ -13,9 +19,8 @@ pablo = User.new(first_name:"Pablo", last_name:"Hennique", email:"pablo@gmail.co
 pablo.save
 
 puts "Adding obstacles..."
-obstacle = Obstacle.new(title:"Discovering the hope in life", description:"A baby squirrel story from I
-  G brightened my insight toward the humanity")
-
+obstacle = Obstacle.new(title:"Discovering the hope in life", description:"A baby squirrel story from IG brightened my insight toward the humanity")
+obstacle.save
 users = [tom, alexanne, emily, pablo]
 mood = ["Positive", "Non-positive"]
 entry_content = [
@@ -43,6 +48,6 @@ entry_content.each do |entry|
 Entry.new(content: entry,
                 date: Date.today,
                 sentiment: nil,
-                user_id: users.sample,
-                obstacle_id: users.sample).save
+                user: users.sample,
+                ).save!
 end
