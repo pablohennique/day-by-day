@@ -1,6 +1,5 @@
 <%@entries.each do |entry|  %>
 <ul>
-  <li><%= User.find(entry.user_id).first_name %></li>
   <%= "sentiment: #{entry.sentiment}" %>
   <br>
   <%= "content: #{entry.content}" %>
