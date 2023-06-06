@@ -1,22 +1,27 @@
 
 puts "Deleting entries..."
 Entry.delete_all
+puts "Deleting obstacles..."
+Obstacle.delete_all
+puts "Deleting recommendations..."
+Recommendation.delete_all
+puts "Deleting users..."
+User.delete_all
 
 puts "Adding a user..."
 tom = User.new(first_name:"Tom", last_name:"Kim", email:"ehdgus5289@gmail.com", password:"111111")
 tom.save
-alexanne = User.new(first_name:"Alexanne", last_name:"Krek", email:"alexanne@gmail.com", password:"111111")
-alexanne.save
+alexane = User.new(first_name:"Alexane", last_name:"Krek", email:"alexane@gmail.com", password:"111111")
+alexane.save
 emily = User.new(first_name:"Emily", last_name:"Brown", email:"emily6@gmail.com", password:"111111")
 emily.save
 pablo = User.new(first_name:"Pablo", last_name:"Hennique", email:"pablo@gmail.com", password:"111111")
 pablo.save
 
 puts "Adding obstacles..."
-obstacle = Obstacle.new(title:"Discovering the hope in life", description:"A baby squirrel story from I
-  G brightened my insight toward the humanity")
-
-users = [tom, alexanne, emily, pablo]
+obstacle = Obstacle.new(title:"Discovering the hope in life", description:"A baby squirrel story from IG brightened my insight toward the humanity")
+obstacle.save
+users = [tom, alexane, emily, pablo]
 mood = ["Positive", "Non-positive"]
 entry_content = [
 "I saw this story on IG that made me shed a tear. A baby squirl thought that he was being raised by a family of cats. It made me feel so hopeful about life and nature in general. Its weird in a way, but feels good.",
@@ -43,6 +48,6 @@ entry_content.each do |entry|
 Entry.new(content: entry,
                 date: Date.today,
                 sentiment: nil,
-                user_id: users.sample,
-                obstacle_id: users.sample).save
+                user: users.sample,
+                ).save!
 end
