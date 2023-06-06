@@ -6,11 +6,6 @@ class EntriesController < ApplicationController
   # this method is for OPEN AI testing purposes only
   def chat_test
     @client = OpenAI::Client.new
-
-def new
-  @entry = Entry.new
-end
-
     @response = @client.chat(
       parameters: {
         model: "gpt-3.5-turbo",
@@ -19,5 +14,16 @@ end
       }
     )
   end
+
+  def new
+    @entry = Entry.new
+  end
+
+  def create
+    @entry = Entry.new(content: params[:entry][:content], user: current_user, date:Date.today)
+    @entry.save
+    redirect_to entries_path
+  end
+
 
 end

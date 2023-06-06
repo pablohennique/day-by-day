@@ -4,6 +4,6 @@ Rails.application.routes.draw do
 
   # this route if for OPEN API testing purposes only
   post "/chat_test", to: "entries#chat_test", as: :chat_test
-
   resources :entries
+
 end
