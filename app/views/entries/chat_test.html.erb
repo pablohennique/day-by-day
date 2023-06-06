@@ -1,0 +1,10 @@
+<%# this page is for OPEN API testing purposes only %>
+
+<%= form_with(url: chat_test_path) do |f| %>
+  <%= f.text_field :query, value: params[:query] %>
+  <%= f.submit %>
+<% end %>
+
+<p>response: <%= @response["choices"][0]["message"]["content"] %></p>
+
+<p><%= link_to "home", root_path %></p>
