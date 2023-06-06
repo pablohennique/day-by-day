@@ -11,8 +11,8 @@ User.delete_all
 puts "Adding a user..."
 tom = User.new(first_name:"Tom", last_name:"Kim", email:"ehdgus5289@gmail.com", password:"111111")
 tom.save
-alexanne = User.new(first_name:"Alexanne", last_name:"Krek", email:"alexanne@gmail.com", password:"111111")
-alexanne.save
+alexane = User.new(first_name:"Alexane", last_name:"Krek", email:"alexane@gmail.com", password:"111111")
+alexane.save
 emily = User.new(first_name:"Emily", last_name:"Brown", email:"emily6@gmail.com", password:"111111")
 emily.save
 pablo = User.new(first_name:"Pablo", last_name:"Hennique", email:"pablo@gmail.com", password:"111111")
