@@ -1,9 +1,13 @@
 <%@entries.each do |entry|  %>
-<ul>
-  <%= "sentiment: #{entry.sentiment}" %>
-  <br>
-  <%= "content: #{entry.content}" %>
-  </ul>
+
+    <ul>
+    <%= "sentiment: #{entry.sentiment}" %>
+    <%= "content: #{entry.content}" %>
+    <%=link_to "edit", edit_entry_path(entry) %>
+    <%=link_to "delete", entry_path(entry),
+    data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'} %>
+    </ul>
 <% end %>
+
 
 <%= link_to "New", new_entry_path %>
