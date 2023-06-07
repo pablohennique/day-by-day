@@ -25,10 +25,13 @@ class EntriesController < ApplicationController
 
   def create
     @entry = Entry.new(content: params[:entry][:content], user: current_user, date:Date.today)
-    @entry.save
-    redirect_to entries_path
-  end
 
+    if @entry.save
+      redirect_to entries_path
+    else
+      render :new, status: 422
+    end
+  end
 
   def edit
     @entry = Entry.find(params[:id])
