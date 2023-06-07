@@ -1,6 +1,7 @@
 class EntriesController < ApplicationController
   def index
     @entries = Entry.where(user_id: current_user)
+    @rand_gratefulness = Gratefulness.all.sample
   end
 
   def show
@@ -53,6 +54,7 @@ class EntriesController < ApplicationController
     )
     @sentiment = @response["choices"][0]["message"]["content"]
     @sentiment.chop! if @sentiment.last == "."
+    @entry.update(sentiment: "Positive")
   end
 
   def turn_to_gratefulness
@@ -62,6 +64,7 @@ class EntriesController < ApplicationController
       gpt_gratefulness
       @gratefulness = @response["choices"][0]["message"]["content"]
     end
+    Gratefulness.create(content: @gratefulness, user_id: current_user)
   end
 
   def gpt_gratefulness
@@ -70,10 +73,10 @@ class EntriesController < ApplicationController
       parameters: {
         model: "gpt-3.5-turbo",
         messages: [{ role: "user",
-                     content: "Write the thesis statement of the following entry in the frist person:
-                              #{params[:entry][:content]}" }],
-        temperature: 0.1,
-        max_tokens: 30
+                     content: "Write the thesis statement of the following entry in the frist person
+                              in 30 words or less: #{params[:entry][:content]}" }],
+        temperature: 0.1
+        # max_tokens: 30
       }
     )
   end
