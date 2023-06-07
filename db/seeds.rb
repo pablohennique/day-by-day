@@ -19,8 +19,17 @@ pablo = User.new(first_name:"Pablo", last_name:"Hennique", email:"pablo@gmail.co
 pablo.save
 
 puts "Adding obstacles..."
-obstacle = Obstacle.new(title:"Discovering the hope in life", description:"A baby squirrel story from IG brightened my insight toward the humanity")
-obstacle.save
+titles = ["Discovering the hope in life", "Sacha Crying", "fight with Antoine", "Coudln't understand a lecture", "Poor Nemo",
+  "Career week was not helpful", "Story in IG was so sad"]
+obstacles = []
+
+titles.each do |title|
+  obstacle = Obstacle.new(title:title)
+  obstacles.push(obstacle)
+  obstacle.save
+end
+
+
 users = [tom, alexane, emily, pablo]
 mood = ["Positive", "Non-positive"]
 entry_content = [
@@ -49,5 +58,13 @@ Entry.new(content: entry,
                 date: Date.today,
                 sentiment: nil,
                 user: users.sample,
+                obstacle: obstacles.sample
                 ).save!
 end
+
+puts  "Adding recommendations"
+
+rec_title = []
+recommendation = Recommendation.new(title: "check the positive spot", content: "See the positive side of a person bruh", category: "Reframing",
+  obstacle:obstacles.sample)
+recommendation.save!
