@@ -58,13 +58,10 @@ class EntriesController < ApplicationController
   end
 
   def turn_to_gratefulness
-    if params[:entry][:content].length < 30
-      @gratefulness = params[:entry][:content]
-    else
-      gpt_gratefulness
-      @gratefulness = @response["choices"][0]["message"]["content"]
-    end
+    gpt_gratefulness
+    @gratefulness = @response["choices"][0]["message"]["content"]
     Gratefulness.create(content: @gratefulness, user_id: current_user)
+    raise
   end
 
   def gpt_gratefulness
@@ -73,8 +70,8 @@ class EntriesController < ApplicationController
       parameters: {
         model: "gpt-3.5-turbo",
         messages: [{ role: "user",
-                     content: "Write the thesis statement of the following entry in the frist person
-                              in 30 words or less: #{params[:entry][:content]}" }],
+                     content: "Write a gratefulness statement of 30 words or less based on
+                              the followoing entry: #{params[:entry][:content]}" }],
         temperature: 0.1
         # max_tokens: 30
       }
