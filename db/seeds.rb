@@ -1,10 +1,10 @@
 
 puts "Deleting recommendations..."
 Recommendation.destroy_all
-puts "Deleting obstacles..."
-Obstacle.destroy_all
 puts "Deleting entries..."
 Entry.destroy_all
+puts "Deleting obstacles..."
+Obstacle.destroy_all
 puts "Deleting users..."
 User.destroy_all
 
