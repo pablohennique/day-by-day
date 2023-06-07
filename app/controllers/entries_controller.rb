@@ -54,7 +54,7 @@ class EntriesController < ApplicationController
     )
     @sentiment = @response["choices"][0]["message"]["content"]
     @sentiment.chop! if @sentiment.last == "."
-    @entry.update(sentiment: "Positive")
+    @entry.update(sentiment: @sentiment)
   end
 
   def turn_to_gratefulness
