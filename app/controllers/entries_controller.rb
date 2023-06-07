@@ -61,7 +61,6 @@ class EntriesController < ApplicationController
     gpt_gratefulness
     @gratefulness = @response["choices"][0]["message"]["content"]
     Gratefulness.create(content: @gratefulness, user_id: current_user)
-    raise
   end
 
   def gpt_gratefulness
