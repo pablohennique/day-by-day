@@ -1,12 +1,12 @@
 
 puts "Deleting recommendations..."
-Recommendation.delete_all
+Recommendation.destroy_all
 puts "Deleting obstacles..."
-Obstacle.delete_all
+Obstacle.destroy_all
 puts "Deleting entries..."
-Entry.delete_all
+Entry.destroy_all
 puts "Deleting users..."
-User.delete_all
+User.destroy_all
 
 puts "Adding a user..."
 tom = User.new(first_name:"Tom", last_name:"Kim", email:"ehdgus5289@gmail.com", password:"111111")
