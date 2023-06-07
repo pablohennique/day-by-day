@@ -6,5 +6,5 @@ Rails.application.routes.draw do
   post "/chat_test", to: "entries#chat_test", as: :chat_test
   resources :entries
   resources :obstacles, only: [:index, :show]
-
+  resources :recommendations, only: [:show, :update]
 end

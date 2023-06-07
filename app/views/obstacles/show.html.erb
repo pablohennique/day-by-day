@@ -1,2 +1,20 @@
-<%=@obstacle.title  %>
-<%=@obstacle.description  %>
+<% @recommendations.each do |recommendation| %>
+
+  <% if recommendation.category == "Reframing" %>
+  <h1>Reframing</h1>
+  <% elsif recommendation.category == "Visualization"  %>
+  <h1>Visualization</h1>
+  <% elsif recommendation.category == "Compassion" %>
+  <h1>Compassion</h1>
+  <% elsif recommendation.category == "Feel Emotion" %>
+  <h1>Feel emotion</h1>
+  <% end %>
+  <div>
+    <div>
+      <%= recommendation.title %>
+    </div>
+    <div>
+      <%= link_to "details of recommendations", recommendation_path(recommendation) %>
+    </div>
+  </div>
+<% end %>
