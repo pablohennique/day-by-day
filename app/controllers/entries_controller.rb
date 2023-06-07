@@ -1,7 +1,7 @@
 class EntriesController < ApplicationController
   def index
     @entries = Entry.where(user_id: current_user)
-    @rand_gratefulness = Gratefulness.all.sample
+    @rand_gratefulness = Gratefulness.all.sample if Time.now.hour == 24
   end
 
   def show
