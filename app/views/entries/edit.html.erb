@@ -1,0 +1,4 @@
+<%= simple_form_for @entry do |f| %>
+  <%= f.input :content, as: :text, :input_html => { class: 'test', :cols => 5, :rows => 10 } %>
+  <%= f.button :submit %>
+<% end %>
