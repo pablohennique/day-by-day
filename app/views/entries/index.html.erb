@@ -1,13 +1,26 @@
-<%@entries.each do |entry|  %>
 
-    <ul>
-    <%= "sentiment: #{entry.sentiment}" %>
-    <%= "content: #{entry.content}" %>
-    <%=link_to "edit", edit_entry_path(entry) %>
-    <%=link_to "delete", entry_path(entry),
-    data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'} %>
-    </ul>
-<% end %>
+<div class="container">
+    <div>
+        <h3>Your Gratefulness Thought For the Day</h3>
+            <p><%= @rand_gratefulness.content %></p>
+            <p>You wrote this on: <%= @rand_gratefulness.created_at %></p>
+    </div>
 
+    <div>
+        <h3>Your Recent entries</h3>
+        <%@entries.each do |entry|  %>
 
-<%= link_to "New", new_entry_path %>
+            <ul>
+            <%= "sentiment: #{entry.sentiment}" %>
+            <br>
+            <%= "content: #{entry.content}" %>
+            <br>
+            <%=link_to "edit", edit_entry_path(entry) %>
+            <%=link_to "delete", entry_path(entry),
+            data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'} %>
+            </ul>
+        <% end %>
+    </div>
+
+     <%= link_to "New", new_entry_path %>
+</div>
