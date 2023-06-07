@@ -1,0 +1,8 @@
+    <h3>Your Gratefulness Thought For the Day</h3>
+
+     <% if @rand_gratefulness.nil? %>
+        <p>Start writing on your journal to receive daily gratefulness inspiration!</p>
+     <% else %>
+        <p><%= @rand_gratefulness.content %></p>
+        <p>You wrote about this on: <%= @rand_gratefulness.created_at %></p>
+    <% end %>

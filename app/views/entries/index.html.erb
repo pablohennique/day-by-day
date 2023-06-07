@@ -1,9 +1,7 @@
 
 <div class="container">
     <div>
-        <h3>Your Gratefulness Thought For the Day</h3>
-            <p><%= @rand_gratefulness.content %></p>
-            <p>You wrote this on: <%= @rand_gratefulness.created_at %></p>
+        <%= render "daily_gratefulness" %>
     </div>
 
     <div>
