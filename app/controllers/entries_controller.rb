@@ -3,17 +3,9 @@ class EntriesController < ApplicationController
     @entries = Entry.where(user_id: current_user)
   end
 
-  # this method is for OPEN AI testing purposes only
-  # def chat_test
-  #   @client = OpenAI::Client.new
-  #   @response = @client.chat(
-  #     parameters: {
-  #       model: "gpt-3.5-turbo",
-  #       messages: [{ role: "user", content: params[:query] }],
-  #       temperature: 0.3
-  #     }
-  #   )
-  # end
+  def show
+    @entry = Entry.find(params[:id])
+  end
 
   def new
     @entry = Entry.new
@@ -21,11 +13,28 @@ class EntriesController < ApplicationController
 
   def create
     @entry = Entry.new(content: params[:entry][:content], user: current_user, date: Date.today)
-    @entry.save
-    sentiment_analysis
-    turn_to_gratefulness if @sentiment == "Positive"
+    if @entry.save
+      sentiment_analysis
+      turn_to_gratefulness if @sentiment == "Positive"
+      redirect_to entries_path
+    else
+      render :new, status: 422
+    end
+  end
+
+  def edit
+    @entry = Entry.find(params[:id])
+  end
+
+  def update
+    @entry = Entry.find(params[:id])
+    @entry.update(content: params[:entry][:content])
+  end
+
+  def destroy
+    @entry = Entry.find(params[:id])
+    @entry.destroy
     redirect_to entries_path
-    raise
   end
 
   private

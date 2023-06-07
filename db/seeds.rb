@@ -21,6 +21,9 @@ pablo.save
 puts "Adding obstacles..."
 obstacle = Obstacle.new(title:"Discovering the hope in life", description:"A baby squirrel story from IG brightened my insight toward the humanity")
 obstacle.save
+
+
+
 users = [tom, alexane, emily, pablo]
 mood = ["Positive", "Non-positive"]
 entry_content = [

@@ -1,0 +1,8 @@
+<% @obstacles.each do |obstacle| %>
+<div>
+  <div>
+    <h1><%= obstacle.title %></h1>
+  </div>
+  <%= link_to "details", obstacle_path(obstacle) %>
+</div>
+<% end %>
