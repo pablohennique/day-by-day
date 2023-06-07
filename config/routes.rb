@@ -4,5 +4,5 @@ Rails.application.routes.draw do
 
   resources :entries
   resources :obstacles, only: [:index, :show]
-
+  resources :recommendations, only: [:show, :update]
 end
