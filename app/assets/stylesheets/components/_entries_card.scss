@@ -7,7 +7,6 @@
 
 }
 
-
 .entries_top{
   background-color: $blue;
   color: white;
@@ -17,16 +16,21 @@
 }
 
 .entries_bottom{
+  margin-top: 10px;
   height: 100px;
-  overflow: hidden;
-  text-overflow: ellipsis;
   text-decoration: underline;
-  white-space: nowrap;
   text-decoration-color: lightgrey;
   padding: 12px 8px;
+  p {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+  }
 }
 
 .entries_read{
+  margin-top: 20px;
   display: flex;
   align-items: center;
   justify-content:flex-start;

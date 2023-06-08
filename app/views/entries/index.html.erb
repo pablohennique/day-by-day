@@ -6,6 +6,8 @@
 
     <h3>Your Recent entries</h3>
 
+    <%= link_to "New", new_entry_path %>
+
     <div class="d-flex" style="gap:10px">
         <%@entries.each do |entry|  %>
         <button class="btn" onclick="location.href='/entries/<%=entry.id%>/edit'" >
@@ -15,5 +17,5 @@
         </button>
         <% end %>
     </div>
-    <%= link_to "New", new_entry_path %>
+
 </div>
