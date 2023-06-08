@@ -1,0 +1,17 @@
+
+<div class="entries_top px-3 py-2">
+    <%= "#{entry.date.strftime("%A")}, #{entry.date.strftime("%B")} #{entry.date.day}" %>
+</div>
+
+<div class ="entries_bottom px-3 py-2" >
+  <%= "#{entry.content}" %>
+</div>
+
+<div class ="entries_read">
+  <div class="fs-2">
+    Read
+  </div>
+  <div>
+    <i class="fa-solid fa-arrow-right fs-2"></i>
+  </div>
+</div>

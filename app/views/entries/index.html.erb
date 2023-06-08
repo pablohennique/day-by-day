@@ -4,21 +4,16 @@
         <%= render "daily_gratefulness" %>
     </div>
 
-    <div>
-        <h3>Your Recent entries</h3>
-        <%@entries.each do |entry|  %>
+    <h3>Your Recent entries</h3>
 
-            <ul>
-            <%= "sentiment: #{entry.sentiment}" %>
-            <br>
-            <%= "content: #{entry.content}" %>
-            <br>
-            <%=link_to "edit", edit_entry_path(entry) %>
-            <%=link_to "delete", entry_path(entry),
-            data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'} %>
-            </ul>
+    <div class="d-flex" style="gap:10px">
+        <%@entries.each do |entry|  %>
+        <button class="btn" onclick="location.href='/entries/<%=entry.id%>/edit'" >
+          <div class="entries_card">
+              <%= render "entries_card", entry: entry %>
+          </div>
+        </button>
         <% end %>
     </div>
-
-     <%= link_to "New", new_entry_path %>
+    <%= link_to "New", new_entry_path %>
 </div>
