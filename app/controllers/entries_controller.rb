@@ -23,18 +23,19 @@ class EntriesController < ApplicationController
       turn_to_summary
 
       # match summary together
-      @obstacles = Obstacle.all
       match_summary
+      raise
 
-      # create obstacle (if non-positive)
-      if @sentiment == "Non-Positive" && @match != "false"
+      # create obstacle (if non-positive and no match)
+      if @sentiment == "Non-Positive" && @match == "false"
         @obstacle = Obstacle.create(title: @summary)
         raise
-      else
-        raise
+      elsif @sentiment == "Non-Positive"
         @obstacle = Obstacle.find(title: @summary)
         @entry.obstacle_id = @obstacle.id
+        raise
       end
+
       redirect_to entries_path
     else
       render :new, status: 422
@@ -98,9 +99,11 @@ class EntriesController < ApplicationController
   end
 
   def match_summary
+    @obstacles = Obstacle.all
+    @obstacles_list = @obstacles.each_with_index.map { | obstacle, index | "#{index} - #{obstacle.title}"}
     gpt_match_summary
     @match = @gpt_match["choices"][0]["message"]["content"]
-    @match.downcase!
+    @match.downcase! if @match == "False"
   end
 
   def gpt_match_summary
@@ -109,10 +112,9 @@ class EntriesController < ApplicationController
       parameters: {
         model: "gpt-3.5-turbo",
         messages: [{ role: "user",
-          content: "Does the entry match any of the sentences below?
-                    If it does, return only the sentence.
-                    If it don't, return false:
-                    '#{params[:entry][:content]}' #{@obstacles}" }],
+          content: "Does the entry '#{params[:entry][:content]}' talk about the s any of the sentences below?
+                    If it does, return only the sentence, if not return 'false'.
+                    #{params[:entry][:content]} #{@obstacles_list}" }],
         temperature: 0.1
       }
     )
