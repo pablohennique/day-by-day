@@ -24,18 +24,16 @@ class EntriesController < ApplicationController
 
       # match summary together
       match_summary
-      raise
 
       # create obstacle (if non-positive and no match)
+      # add entry to obstacle (if non-positive and match)
       if @sentiment == "Non-Positive" && @match == "false"
         @obstacle = Obstacle.create(title: @summary)
-        raise
+        @entry.update(obstacle_id: @obstacle.id)
       elsif @sentiment == "Non-Positive"
-        @obstacle = Obstacle.find(title: @summary)
-        @entry.obstacle_id = @obstacle.id
-        raise
+        @obstacle = Obstacle.find_by(title: @match)
+        @entry.update(obstacle_id: @obstacle.id)
       end
-
       redirect_to entries_path
     else
       render :new, status: 422
@@ -100,9 +98,10 @@ class EntriesController < ApplicationController
 
   def match_summary
     @obstacles = Obstacle.all
-    @obstacles_list = @obstacles.each_with_index.map { | obstacle, index | "#{index} - #{obstacle.title}"}
+    @obstacles_list = @obstacles.map { | obstacle | "#{obstacle.title}" }
     gpt_match_summary
     @match = @gpt_match["choices"][0]["message"]["content"]
+    @match.chop! if @match.last == "."
     @match.downcase! if @match == "False"
   end
 
@@ -112,10 +111,10 @@ class EntriesController < ApplicationController
       parameters: {
         model: "gpt-3.5-turbo",
         messages: [{ role: "user",
-          content: "Does the entry '#{params[:entry][:content]}' talk about the s any of the sentences below?
+          content: "Does the entry '#{params[:entry][:content]}' talk about the same subject as one of the sentences below?
                     If it does, return only the sentence, if not return 'false'.
-                    #{params[:entry][:content]} #{@obstacles_list}" }],
-        temperature: 0.1
+                    #{@obstacles_list}" }],
+        temperature: 0.3
       }
     )
   end
@@ -124,7 +123,7 @@ class EntriesController < ApplicationController
     gpt_summary_entry
     @summary = @gpt_summary["choices"][0]["message"]["content"]
     @summary.chop! if @summary.last == "."
-    @entry.summary = @summary
+    @entry.update(summary: @summary)
   end
 
   def gpt_summary_entry
