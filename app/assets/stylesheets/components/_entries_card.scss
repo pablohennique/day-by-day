@@ -1,3 +1,37 @@
 .entries_card {
-  border: 1px solid
+  width: 250px;
+  background: white;
+  // box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  border-radius: 10px;
+  overflow: hidden;
+
+}
+
+
+.entries_top{
+  background-color: $blue;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  padding: 12px 8px;
+}
+
+.entries_bottom{
+  height: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-decoration: underline;
+  white-space: nowrap;
+  text-decoration-color: lightgrey;
+  padding: 12px 8px;
+}
+
+.entries_read{
+  display: flex;
+  align-items: center;
+  justify-content:flex-start;
+  padding-left: 20px;
+  padding-bottom: 20px;
+  gap: 20px;
+  font-size: 20px;
 }
