@@ -115,6 +115,7 @@ class EntriesController < ApplicationController
     gpt_summary_entry
     @summaries = []
     @summary = @gpt_summary["choices"][0]["message"]["content"]
+    @summary.chop! if @summary.last == "."
     @entry.summary = @summary
     @summaries << @summary
   end
@@ -125,7 +126,7 @@ class EntriesController < ApplicationController
       parameters: {
         model: "gpt-3.5-turbo",
         messages: [{ role: "user",
-          content: "Write one sentence to summaries this entry
+          content: "Summaries like a title, this entry
                     with proper nouns in maximum
                     7 words: #{params[:entry][:content]}" }],
         temperature: 0.1
