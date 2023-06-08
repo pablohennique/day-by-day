@@ -4,6 +4,7 @@
   <br>
 
   <% @recommendations.each do |recommendation| %>
+    <%= render "recommendation_card", recommendation: recommendation %>
 
     <% if recommendation.category == "Reframing" %>
     <h3>Reframing</h3>
