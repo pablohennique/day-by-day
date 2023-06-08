@@ -2,3 +2,6 @@
   <%= f.input :content, as: :text, :input_html => { class: 'test', :cols => 5, :rows => 10 } %>
   <%= f.button :submit %>
 <% end %>
+
+<%=link_to "delete", entry_path(@entry),
+data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'} %>
