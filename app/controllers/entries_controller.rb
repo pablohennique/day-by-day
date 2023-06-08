@@ -22,10 +22,16 @@ class EntriesController < ApplicationController
       # create summary
       turn_to_summary
 
+      # match summary together
+      @obstacles = Obstacle.all
+      match_summary
+
       # create obstacle (if non-positive)
-      if @sentiment == "Non-Positive"
+      if @sentiment == "Non-Positive" && @match != "false"
         @obstacle = Obstacle.create(title: @summary)
+        raise
       else
+        raise
         @obstacle = Obstacle.find(title: @summary)
         @entry.obstacle_id = @obstacle.id
       end
@@ -91,33 +97,32 @@ class EntriesController < ApplicationController
     )
   end
 
-  # def match_summary
-  #   gpt_match_summary
-  #   @match = @gpt_match["choices"][0]["message"]["content"]
-  # end
+  def match_summary
+    gpt_match_summary
+    @match = @gpt_match["choices"][0]["message"]["content"]
+    @match.downcase!
+  end
 
-  # def gpt_match_summary
-  #   @client = OpenAI::Client.new
-  #   @gpt_match = @client.chat(
-  #     parameters: {
-  #       model: "gpt-3.5-turbo",
-  #       messages: [{ role: "user",
-  #         content: "Does the entry match any of the sentences below?
-  #                   If it does, return only the sentence.
-  #                   If it don't, return 'false':
-  #                   '#{params[:entry][:content]}' #{@summaries}" }],
-  #       temperature: 0.1
-  #     }
-  #   )
-  # end
+  def gpt_match_summary
+    @client = OpenAI::Client.new
+    @gpt_match = @client.chat(
+      parameters: {
+        model: "gpt-3.5-turbo",
+        messages: [{ role: "user",
+          content: "Does the entry match any of the sentences below?
+                    If it does, return only the sentence.
+                    If it don't, return false:
+                    '#{params[:entry][:content]}' #{@obstacles}" }],
+        temperature: 0.1
+      }
+    )
+  end
 
   def turn_to_summary
     gpt_summary_entry
-    @summaries = []
     @summary = @gpt_summary["choices"][0]["message"]["content"]
     @summary.chop! if @summary.last == "."
     @entry.summary = @summary
-    @summaries << @summary
   end
 
   def gpt_summary_entry
