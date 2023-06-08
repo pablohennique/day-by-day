@@ -1,17 +1,17 @@
 
-<div class="entries_top px-3 py-2">
+<div class="entries_top">
     <%= "#{entry.date.strftime("%A")}, #{entry.date.strftime("%B")} #{entry.date.day}" %>
 </div>
 
-<div class ="entries_bottom px-3 py-2" >
+<div class ="entries_bottom" >
   <%= "#{entry.content}" %>
 </div>
 
 <div class ="entries_read">
-  <div class="fs-2">
+  <div>
     Read
   </div>
   <div>
-    <i class="fa-solid fa-arrow-right fs-2"></i>
+    <i class="fa-solid fa-arrow-right"></i>
   </div>
 </div>
