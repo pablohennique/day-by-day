@@ -10,3 +10,25 @@
 // Your CSS partials
 @import "components/index";
 @import "pages/index";
+
+// Text elements
+h1 {
+  font-size: 56px;
+  font-weight: bold;
+}
+
+h2 {
+  font-size: 36px;
+  font-weight: normal;
+}
+
+h3 {
+  font-size: 25px;
+  font-weight: normal;
+}
+
+
+p {
+  font-size: 18px;
+  font-weight: normal;
+}
