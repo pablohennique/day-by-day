@@ -14,25 +14,33 @@
 // Added to app.html.erb to push footer to bottom. Can remove if needed
 .container-content {
   min-height: 100vh;
+  background-color: #F8F8F8;
 }
 
 // Text elements
 h1 {
   font-size: 56px;
   font-weight: bold;
+  letter-spacing: -1.5px;
 }
 
 h2 {
   font-size: 36px;
-  font-weight: normal;
+  font-weight: 400;
+  letter-spacing: 0.2px;
 }
 
 h3 {
   font-size: 25px;
-  font-weight: normal;
+  font-weight: 400;
+  letter-spacing: -1.75px;
 }
 
 p {
   font-size: 18px;
   font-weight: normal;
+}
+
+a {
+  text-decoration: none;
 }

@@ -1,9 +1,31 @@
 .obstacle-card {
-  width: 250px;
-  height: 250px;
-  border: #EAEAEA, 1px;
+  display: block;
+  width: 290px;
+  border: 1px solid;
+  border-color: #EAEAEA;;
   border-radius: 10px;
   background-color: white;
-  padding: 35px;
-  margin: 70px;
+  padding: 45px;
+  margin: 20px;
+  color: black;
+
+  p {
+    padding: 0;
+    margin: 0;
+  }
+}
+
+.dot {
+  height: 25px;
+  width: 25px;
+  background-color: #FEC700;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.obstacle-card-link {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  // text-align: ;
 }
