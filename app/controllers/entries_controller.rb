@@ -16,10 +16,19 @@ class EntriesController < ApplicationController
     @entry = Entry.new(content: params[:entry][:content], user: current_user, date: Date.today)
     if @entry.save
       sentiment_analysis
+      # create gratefulness
       turn_to_gratefulness if @sentiment == "Positive"
-      #summary_entry (entry.summary = @gpt_summary)
-      #find match this existing summary
-      #if (non-match with Obstacle.all) && (@sentiment == "Non-Positive"), create_obstacle(title:@response)
+
+      # create summary
+      turn_to_summary
+
+      # create obstacle (if non-positive)
+      if @sentiment == "Non-Positive"
+        @obstacle = Obstacle.create(title: @summary)
+      else
+        @obstacle = Obstacle.find(title: @summary)
+        @entry.obstacle_id = @obstacle.id
+      end
       redirect_to entries_path
     else
       render :new, status: 422
@@ -82,6 +91,33 @@ class EntriesController < ApplicationController
     )
   end
 
+  # def match_summary
+  #   gpt_match_summary
+  #   @match = @gpt_match["choices"][0]["message"]["content"]
+  # end
+
+  # def gpt_match_summary
+  #   @client = OpenAI::Client.new
+  #   @gpt_match = @client.chat(
+  #     parameters: {
+  #       model: "gpt-3.5-turbo",
+  #       messages: [{ role: "user",
+  #         content: "Does the entry match any of the sentences below?
+  #                   If it does, return only the sentence.
+  #                   If it don't, return 'false':
+  #                   '#{params[:entry][:content]}' #{@summaries}" }],
+  #       temperature: 0.1
+  #     }
+  #   )
+  # end
+
+  def turn_to_summary
+    gpt_summary_entry
+    @summaries = []
+    @summary = @gpt_summary["choices"][0]["message"]["content"]
+    @entry.summary = @summary
+    @summaries << @summary
+  end
 
   def gpt_summary_entry
     @client = OpenAI::Client.new
@@ -89,11 +125,11 @@ class EntriesController < ApplicationController
       parameters: {
         model: "gpt-3.5-turbo",
         messages: [{ role: "user",
-          content: "Write a gratefulness statement of 30 words or less based on
-                   the followoing entry: #{params[:entry][:content]}" }],
+          content: "Write one sentence to summaries this entry
+                    with proper nouns in maximum
+                    7 words: #{params[:entry][:content]}" }],
         temperature: 0.1
       }
     )
   end
-
 end
