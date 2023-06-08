@@ -12,6 +12,13 @@
 @import "pages/index";
 
 // Text elements
+
+.container-content {
+  min-height: 100vh;
+  // display: flex;
+  // flex-direction: column;
+}
+
 h1 {
   font-size: 56px;
   font-weight: bold;
@@ -26,7 +33,6 @@ h3 {
   font-size: 25px;
   font-weight: normal;
 }
-
 
 p {
   font-size: 18px;
