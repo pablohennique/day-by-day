@@ -17,6 +17,9 @@ class EntriesController < ApplicationController
     if @entry.save
       sentiment_analysis
       turn_to_gratefulness if @sentiment == "Positive"
+      #summary_entry (entry.summary = @gpt_summary)
+      #find match this existing summary
+      #if (non-match with Obstacle.all) && (@sentiment == "Non-Positive"), create_obstacle(title:@response)
       redirect_to entries_path
     else
       render :new, status: 422
@@ -76,4 +79,19 @@ class EntriesController < ApplicationController
       }
     )
   end
+
+
+  def gpt_summary_entry
+    @client = OpenAI::Client.new
+    @gpt_summary = @client.chat(
+      parameters: {
+        model: "gpt-3.5-turbo",
+        messages: [{ role: "user",
+          content: "Write a gratefulness statement of 30 words or less based on
+                   the followoing entry: #{params[:entry][:content]}" }],
+        temperature: 0.1
+      }
+    )
+  end
+
 end
