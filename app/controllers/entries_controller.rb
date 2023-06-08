@@ -30,6 +30,7 @@ class EntriesController < ApplicationController
   def update
     @entry = Entry.find(params[:id])
     @entry.update(content: params[:entry][:content])
+    redirect_to entries_path
   end
 
   def destroy
@@ -46,8 +47,9 @@ class EntriesController < ApplicationController
       parameters: {
         model: "gpt-3.5-turbo",
         messages: [{ role: "user",
-                     content: "Indicate if the following entry has a positive or non-positive sentiment.
-                              Permited responses: 'Positive' or 'Non-Positive' #{params[:entry][:content]}" }],
+                     content: "Indicate the sentiment for the following entry.
+                              Permited responses: 'Positive', 'Non-Positive'
+                              #{params[:entry][:content]}" }],
         temperature: 0.3
         # max_tokens: 30
       }
