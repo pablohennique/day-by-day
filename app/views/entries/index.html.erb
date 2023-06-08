@@ -4,16 +4,29 @@
         <%= render "daily_gratefulness" %>
     </div>
 
-    <h3>Your Recent entries</h3>
+    <div>
+        <h3>Your Recent entries</h3>
 
-    <div class="d-flex" style="gap:10px">
-        <%@entries.each do |entry|  %>
-        <button class="btn" onclick="location.href='/entries/<%=entry.id%>/edit'" >
-          <div class="entries_card">
-              <%= render "entries_card", entry: entry %>
-          </div>
-        </button>
-        <% end %>
+        <br>
+
+        <%= link_to "New", new_entry_path %>
+        <br>
+        <br>
+
+        <div>
+            <%= render "calendar_search" %>
+        </div>
+        <br>
+
+        <div class="d-flex" style="gap:10px">
+            <%@entries.each do |entry| %>
+                <button class="btn" onclick="location.href='/entries/<%=entry.id%>/edit'" >
+                    <div class="entries_card">
+                        <%= render "entries_card", entry: entry %>
+                    </div>
+                </button>
+            <% end %>
+        </div>
+
     </div>
-    <%= link_to "New", new_entry_path %>
 </div>
