@@ -9,6 +9,8 @@
         <%@entries.each do |entry|  %>
 
             <ul>
+            <%= entry.date %>
+            <br>
             <%= "Sentiment: #{entry.sentiment}" %>
             <br>
             <%= "#{entry.content}" %>
