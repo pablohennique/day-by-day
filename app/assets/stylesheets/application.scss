@@ -11,14 +11,12 @@
 @import "components/index";
 @import "pages/index";
 
-// Text elements
-
+// Added to app.html.erb to push footer to bottom. Can remove if needed
 .container-content {
   min-height: 100vh;
-  // display: flex;
-  // flex-direction: column;
 }
 
+// Text elements
 h1 {
   font-size: 56px;
   font-weight: bold;
