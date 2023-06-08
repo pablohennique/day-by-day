@@ -4,4 +4,5 @@
 <% end %>
 
 <%=link_to "delete", entry_path(@entry),
-data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'} %>
+data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'},
+class: "button" %>
