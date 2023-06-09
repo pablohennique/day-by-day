@@ -1,8 +1,7 @@
 class EntriesController < ApplicationController
   def index
     @rand_gratefulness = Gratefulness.where(user_id: current_user).sample
-    @entries = Entry.where(user_id: current_user)
-    @entries = Entry.order('id DESC')
+    @entries = Entry.where(user_id: current_user).order('id DESC')
     search_by_date if params[:from_date].present? && params[:to_date].present?
   end
 
