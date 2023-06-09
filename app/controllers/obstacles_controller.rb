@@ -1,7 +1,7 @@
 class ObstaclesController < ApplicationController
 
   def index
-    @obstacles = Obstacle.order('id DESC')
+    @obstacles = Obstacle.where(user_id: current_user).order('id DESC')
   end
 
   def show
