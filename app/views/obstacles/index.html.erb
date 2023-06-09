@@ -7,12 +7,7 @@
   </div>
 </div>
 
-
-<h2>My success</h2>
-
-<div class="row">
-    <% done_obstacles = @obstacles.select { |obstacle| obstacle.done?} %>
-    <% done_obstacles.each do |d_obstacle| %>
-      <li><%= link_to d_obstacle.title, obstacle_path(d_obstacle) %></li>
-    <% end %>
-</div>
+<% done_obstacles = @obstacles.select { |obstacle| obstacle.done?} %>
+<% unless done_obstacles.count == 0 %>
+  <%= render 'done_obstacles', obstacles: @obstacles %>
+<% end %>
