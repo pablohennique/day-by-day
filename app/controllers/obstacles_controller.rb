@@ -1,9 +1,8 @@
 class ObstaclesController < ApplicationController
 
   def index
-    @obstacles = Obstacle.all
+    @obstacles = Obstacle.order('id DESC')
   end
-
 
   def show
     @obstacle = Obstacle.find(params[:id])
