@@ -2,7 +2,7 @@
 
   <h1><%= @obstacle.title %></h1>
   <br>
-  <%= button_to "Done", done_path, method:'patch', class: 'button' if @obstacle.done == false %>
+  <%= @obstacle.done == false ? (button_to "Done", done_path, method:'patch') : "Done" %>
 
   <% @recommendations.each do |recommendation| %>
     <%= render "recommendation_card", recommendation: recommendation %>
