@@ -1,3 +1,15 @@
+
+.entries_cards{
+  // display:flex;
+  // align-items: center;
+  // justify-content: center;
+  margin-top: 50px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 5px;
+}
+
+
 .entries_card {
   width: 250px;
   background: white;
@@ -16,16 +28,21 @@
 }
 
 .entries_bottom{
+  margin-top: 10px;
   height: 100px;
-  overflow: hidden;
-  text-overflow: ellipsis;
   text-decoration: underline;
-  white-space: nowrap;
   text-decoration-color: lightgrey;
   padding: 12px 8px;
+  p {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+  }
 }
 
 .entries_read{
+  margin-top: 20px;
   display: flex;
   align-items: center;
   justify-content:flex-start;
@@ -33,4 +50,21 @@
   padding-bottom: 20px;
   gap: 20px;
   font-size: 20px;
+}
+
+
+.entries_flex{
+  display:flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.entries_logo{
+  background-image: url("Group21.png");
+  background-size:cover;
+  // background-position: center;
+  height:100px;
+  width: 350px;
+  font-weight: bold;
+  font-size: 50px;
 }
