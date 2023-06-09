@@ -1,4 +1,3 @@
-
 <div class="container">
   <div class="row">
     <div class="entries_flex" style="margin-top: 100px">
@@ -6,18 +5,17 @@
         My Entries
       </div>
 
-      <div>
+      <div class="gratefulness">
           <%= render "daily_gratefulness"%>
       </div>
     </div>
 
-      <div class="entries_flex" style="margin-top: 80px; gap:200px;">
-        <div>
-          <%= link_to "NEW ENTRY", new_entry_path, class: "button px-5" %>
-        </div>
-        <div>
-          <%= render "calendar_search" %>
-        </div>
+    <div class="entries_flex" style="margin-top: 80px; gap:200px;">
+      <div>
+        <%= link_to "NEW ENTRY", new_entry_path, class: "button px-5" %>
+      </div>
+      <div>
+        <%= render "calendar_search" %>
       </div>
     </div>
 
@@ -30,5 +28,5 @@
         </button>
         <% end %>
     </div>
-
+  </div>
 </div>
