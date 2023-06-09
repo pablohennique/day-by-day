@@ -1,4 +1,6 @@
 <%= simple_form_for @entry do |f| %>
+  <%= link_to "Back to my entries", entries_path %>
+  <button  utton type="submit" class="button">SAVE</button>
   <%= f.input :content, as: :text, :input_html => { class: 'test', :cols => 5, :rows => 10 } %>
-  <%= f.button :submit %>
+
 <% end %>
