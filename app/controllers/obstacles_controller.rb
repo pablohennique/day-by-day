@@ -11,4 +11,9 @@ class ObstaclesController < ApplicationController
     @entries = Entry.where(obstacle_id: @obstacle.id)
   end
 
+  def done
+    @obstacle = Obstacle.find(params[:id])
+    @obstacle.update(done: true)
+    redirect_to obstacles_path
+  end
 end
