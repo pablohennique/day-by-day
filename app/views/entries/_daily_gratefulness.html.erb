@@ -2,7 +2,7 @@
     <h5 style="color:grey; text-align:right;">Your Gratefulness Thought For the Day</h5>
 
     <% if @rand_gratefulness.nil? %>
-        <p style="color:lightgrey">Start writing on your journal to receive daily gratefulness inspiration!</p>
+        <p style="color:lightgrey">Write some entries in your journal to start receiving your daily gratefulness inspiration!</p>
     <% else %>
         <p style="color:lightgrey"><%= @rand_gratefulness.content %></p>
         <p style="color:lightgrey">You wrote about this on: <%= @rand_gratefulness.created_at.strftime("%d %B %Y") %></p>
