@@ -1,0 +1,19 @@
+.reco-card {
+  // border: 1px solid;
+  border-radius: 10px;
+ }
+
+ .reco-card-img {
+   padding: 12px 8px;
+   border-top-left-radius: 10px;
+   border-top-right-radius: 10px;
+   background-color: $blue;
+ }
+
+ .reco-card-text {
+   background-color: white;
+   padding: 12px 8px;
+   white-space: nowrap;
+   overflow: hidden;
+   text-overflow: ellipsis;
+ }

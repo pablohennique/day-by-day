@@ -1,0 +1,20 @@
+<div class="reco-card">
+  <div class="reco-card-img" style="background-image: url('assets/images/placeholder.png');">
+  </div>
+
+  <div class ="reco-card-text">
+
+    <% case recommendation.category %>
+    <% when "Reframing" %>
+      <h3>Reframing</h3>
+    <% when "Visualization" %>
+      <h3>Visualization</h3>
+    <% when "Compassion" %>
+      <h3>Compassion</h3>
+    <% when "Feel Emotions" %>
+      <h3>Feel Emotions</h3>
+    <% end %>
+
+    <p><%= recommendation.content %></p>
+  </div>
+</div>
