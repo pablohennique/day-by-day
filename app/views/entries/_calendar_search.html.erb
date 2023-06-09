@@ -1,6 +1,5 @@
 <%= form_with url: "/entries", method: :get do |form| %>
-  <%= form.label :query, "Search your entries by date:" %>
-  <%= form.date_field :from_date, html5: true %>
-  <%= form.date_field :to_date, html5: true %>
+  <%= form.date_field :from_date, html5: true, class: "entry_calendar" %>
+  <%= form.date_field :to_date, html5: true, class: "entry_calendar" %>
   <%= form.submit "Search" %>
 <% end %>

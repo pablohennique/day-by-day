@@ -1,20 +1,27 @@
 
 <div class="container">
-    <div>
-        <%= render "daily_gratefulness" %>
+  <div class="row">
+    <div class="entries_flex" style="margin-top: 100px">
+      <div class="entries_logo">
+        My Entries
+      </div>
+
+      <div>
+          <%= render "daily_gratefulness"%>
+      </div>
     </div>
 
-    <div>
-        <h3>Your Recent entries</h3>
-
+      <div class="entries_flex" style="margin-top: 80px; gap:200px;">
         <div>
-            <%= render "calendar_search" %>
+          <%= link_to "NEW ENTRY", new_entry_path, class: "button px-5" %>
         </div>
-        <br>
+        <div>
+          <%= render "calendar_search" %>
+        </div>
+      </div>
+    </div>
 
-    <%= link_to "New", new_entry_path %>
-
-    <div class="d-flex" style="gap:10px">
+    <div class="entries_cards" >
         <%@entries.each do |entry|  %>
         <button class="btn" onclick="location.href='/entries/<%=entry.id%>/edit'" >
           <div class="entries_card">

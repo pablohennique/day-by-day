@@ -1,3 +1,15 @@
+
+.entries_cards{
+  // display:flex;
+  // align-items: center;
+  // justify-content: center;
+  margin-top: 50px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 5px;
+}
+
+
 .entries_card {
   width: 250px;
   background: white;
@@ -38,4 +50,21 @@
   padding-bottom: 20px;
   gap: 20px;
   font-size: 20px;
+}
+
+
+.entries_flex{
+  display:flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.entries_logo{
+  background-image: url("Group21.png");
+  background-size:cover;
+  // background-position: center;
+  height:100px;
+  width: 350px;
+  font-weight: bold;
+  font-size: 50px;
 }
