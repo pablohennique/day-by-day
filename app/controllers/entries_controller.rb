@@ -124,7 +124,10 @@ class EntriesController < ApplicationController
 
   def match_summary
     @obstacles = Obstacle.all
-    @obstacles_list = @obstacles.map { |obstacle| "#{obstacle.title}" }
+
+    # @obstacles_list = @obstacles.map { |obstacle| "#{obstacle.title}" }
+    @obstacles_overview_arr = @obstacles.map { |obstacle| obstacle.overview }
+
     gpt_match_summary
     @match = @gpt_match["choices"][0]["message"]["content"]
     @match.chop! if @match.last == "."
@@ -138,11 +141,11 @@ class EntriesController < ApplicationController
       parameters: {
         model: "gpt-3.5-turbo",
         messages: [{ role: "user",
-                     content: "Is there any similarity between the Entry and any of the sentences in the Sentence Array?
-                     If there is a slight match, return only the sentence where the first match was found.
+                     content: "Is there a potential match between the Entry and any of the entries in the Entries Array?
+                     If there is a match, return only the sentence where the first match was found.
                      Else, return 'false'.
-                     Entry:'#{params[:entry][:content]}
-                     Sentence Array: #{@obstacles_list}'"}],
+                     Entry:'#{params[:entry][:content]}'
+                     Entries Array: #{@obstacles_overview_arr}"}],
         temperature: 0.3
       }
     )
