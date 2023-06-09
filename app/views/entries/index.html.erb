@@ -9,16 +9,17 @@
 
         <br>
 
-        <%= link_to "New", new_entry_path %>
-        <br>
-        <br>
+        <div class="d-flex justify-content-between">
+            <%= link_to "New", new_entry_path, class: "button" %>
 
-        <div>
-            <%= render "calendar_search" %>
+            <div>
+                <%= render "calendar_search" %>
+            </div>
         </div>
+
         <br>
 
-        <div class="d-flex" style="gap:10px">
+        <div class="d-flex justify-content-between mx-5" style="gap:10px">
             <%@entries.each do |entry| %>
                 <button class="btn" onclick="location.href='/entries/<%=entry.id%>/edit'" >
                     <div class="entries_card">
