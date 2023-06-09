@@ -36,9 +36,9 @@ entry_2 = Entry.create!(content: "I woke up halfway through the night because Sa
 
 entry_3 = Entry.create!(content: "Today was the first day of career week, I think there were some good tips but I don’t know if it will really help me to find a job. However, I met Sam and got me really excited about her company. I’m going to send her my CV.",
                         date: Date.today - 4,
-                        sentiment: "Positive",
+                        sentiment: "Non-positive",
                         user: users.sample,
-                        obstacle: nil)
+                        obstacle: Obstacle.create!(title: "Career Week Was Not Helpful"))
 
 entry_4 = Entry.create!(content: "I got into a fight with Mike. He was very aggressive and I had to tell him to stop. It sucks because he is a good friend and now, we are not talking",
                         date: Date.today - 6,
@@ -62,13 +62,13 @@ entry_7 = Entry.create!(content: "I was unable to fall asleep last night because
                         date: Date.today - 16,
                         sentiment: "Non-positive",
                         user: users.sample,
-                        obstacle: Obstacle.create!(title: "Career Week Was Not Helpful"))
+                        obstacle: Obstacle.find_by(title: "Career Week Was Not Helpful"))
 
 entry_8 = Entry.create!(content: "I was watching finding nemo and it made me cry so much. The scene with the dad really touched me. It made me think about me and my dad.",
                         date: Date.today - 18,
                         sentiment: "Non-positive",
                         user: users.sample,
-                        obstacle: Obstacle.create!(title: "IG Post Made Me Cry"))
+                        obstacle: Obstacle.create!(title: "Think about my dad"))
 
 entry_9 = Entry.create!(content: "Mike was being an asshole again. This time he was the one who started the discussion. It was only logical that I would tell him to stop. If he ever brings up my sister again, I’ll lose it. I’m so pissed!",
                         date: Date.today - 19,
@@ -86,33 +86,27 @@ entry_11 = Entry.create!(content: "I saw this story on IG that made me shed a te
                          date: Date.today - 23,
                          sentiment: "Non-positive",
                          user: users.sample,
-                         obstacle: Obstacle.find_by(title: "IG Post Made Me Cry"))
+                         obstacle: Obstacle.create!(title: "IG Post Made Me Cry"))
 
-entry_12 = Entry.create!(content: "I woke up halfway through the night because Sacha was crying. Its been several days that he sleeps poorly. I think it is because of his mattress. Maybe Charlene is right and we should buy a new one. Regardless, it is messing up my days. I still feel tired after two cups of coffee.",
-                         date: Date.today - 25,
-                         sentiment: "Non-positive",
-                         user: users.sample,
-                         obstacle: Obstacle.find_by(title: "Baby Sacha Crying"))
-
-entry_13 = Entry.create!(content: "I love Mondays! It’s a bit weird, but I think it’s because I finally get some break from my being a dad and I get to sip my coffee in peace.",
+entry_12 = Entry.create!(content: "I love Mondays! It’s a bit weird, but I think it’s because I finally get some break from my being a dad and I get to sip my coffee in peace.",
                          date: Date.today - 29,
                          sentiment: "Positive",
                          user: users.sample,
                          obstacle: nil)
 
-entry_14 = Entry.create!(content: "I am happy that I found my cat. It was super scary not to see him for so long. When I found him, I recognized how much I appreciated him. I’ve had him for only 2 years but it feels like so long.",
+entry_13 = Entry.create!(content: "I am happy that I found my cat. It was super scary not to see him for so long. When I found him, I recognized how much I appreciated him. I’ve had him for only 2 years but it feels like so long.",
                          date: Date.today - 31,
                          sentiment: "Positive",
                          user: users.sample,
                          obstacle: nil)
 
-entry_15 = Entry.create!(content: "Charlene welcomed me with an amazing dinner and wine. I did not see that coming. We had a good chat and spent so much time laughing and reminiscing about our past.",
+entry_14 = Entry.create!(content: "Charlene welcomed me with an amazing dinner and wine. I did not see that coming. We had a good chat and spent so much time laughing and reminiscing about our past.",
                          date: Date.today - 45,
                          sentiment: "Positive",
                          user: users.sample,
                          obstacle: nil)
 
-entry_16 = Entry.create!(content: "Ever since I got to Canada things have been working out for the better. Sometimes I forget, but I consider myself extremely lucky to be living here. The financial and political stability do not compare at all with Mexico. And the job opportunities and quality of life is out of this world. The only thing I do miss about Mexico is the food. I wish they had good tacos here.",
+entry_15 = Entry.create!(content: "Ever since I got to Canada things have been working out for the better. Sometimes I forget, but I consider myself extremely lucky to be living here. The financial and political stability do not compare at all with Mexico. And the job opportunities and quality of life is out of this world. The only thing I do miss about Mexico is the food. I wish they had good tacos here.",
                          date: Date.today - 49,
                          sentiment: "Positive",
                          user: users.sample,
