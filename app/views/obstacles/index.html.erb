@@ -1,3 +1,4 @@
+<h1>My obstacles</h1>
 <div class="row">
   <div class="col-12 col-lg-6">
     <% @obstacles.each do |obstacle| %>
@@ -5,3 +6,8 @@
     <% end %>
   </div>
 </div>
+
+<% @done_obstacles = @obstacles.select { |obstacle| obstacle.done?} %>
+<% unless @done_obstacles.count == 0 %>
+  <%= render 'done_obstacles', obstacles: @obstacles %>
+<% end %>

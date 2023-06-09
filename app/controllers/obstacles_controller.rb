@@ -9,4 +9,10 @@ class ObstaclesController < ApplicationController
     @recommendations = Recommendation.where(obstacle_id: @obstacle.id)
     @entries = Entry.where(obstacle_id: @obstacle.id)
   end
+
+  def done
+    @obstacle = Obstacle.find(params[:id])
+    @obstacle.update(done: true)
+    redirect_to obstacles_path
+  end
 end

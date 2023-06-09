@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root to: "pages#home"
 
   resources :entries
-  resources :obstacles, only: [:index, :show]
-  resources :recommendations, only: [:show, :update]
+  resources :obstacles, only: %i[index show]
+  patch 'obstacles/:id', to: 'obstacles#done', as: :done
+  resources :recommendations, only: %i[show update]
 end
