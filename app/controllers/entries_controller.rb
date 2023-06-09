@@ -1,6 +1,6 @@
 class EntriesController < ApplicationController
   def index
-    @rand_gratefulness = Gratefulness.all.sample
+    @rand_gratefulness = Gratefulness.where(user_id: current_user).sample
     @entries = Entry.where(user_id: current_user)
     search_by_date if params[:from_date].present? && params[:to_date].present?
   end
@@ -119,7 +119,7 @@ class EntriesController < ApplicationController
   def turn_to_gratefulness
     gpt_gratefulness
     @gratefulness = @response["choices"][0]["message"]["content"]
-    Gratefulness.create(content: @gratefulness, user_id: current_user)
+    Gratefulness.create(content: @gratefulness, user_id: current_user.id)
   end
 
   def gpt_gratefulness
