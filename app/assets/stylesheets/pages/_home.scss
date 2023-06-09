@@ -1,4 +1,6 @@
 // Specific CSS for your home-page
+
+// Banner
 .banner {
   padding: 100px 0;
 
@@ -13,6 +15,7 @@
   }
 }
 
+// Benefits cards
 .cards {
   padding-top: 50px;
   padding-bottom: 100px;
@@ -35,4 +38,15 @@
     padding: 0;
     margin: 0;
   }
+}
+
+// Features
+#feature-cards {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+}
+
+#home-reco-card {
+  width: 350px;
 }
