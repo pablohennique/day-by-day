@@ -2,7 +2,7 @@
   display: block;
   // width: 290px;
   border: 1px solid;
-  border-color: #EAEAEA;;
+  border-color: #EAEAEA;
   border-radius: 10px;
   background-color: white;
   padding: 45px;
@@ -18,7 +18,7 @@
 .dot {
   height: 25px;
   width: 25px;
-  background-color: #FEC700;
+  background-color: $yellow;
   border-radius: 50%;
   display: inline-block;
 }
@@ -27,5 +27,4 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  // text-align: ;
 }
