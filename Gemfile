@@ -46,8 +46,10 @@ gem "bootsnap", require: false
 # Use Sass to process CSS
 gem "sassc-rails"
 
+gem 'trix-rails'
+
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
-# gem "image_processing", "~> 1.2"
+gem "image_processing", "~> 1.2"
 
 gem "devise"
 gem "autoprefixer-rails"

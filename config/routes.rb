@@ -6,4 +6,6 @@ Rails.application.routes.draw do
   resources :obstacles, only: %i[index show]
   patch 'obstacles/:id', to: 'obstacles#done', as: :done
   resources :recommendations, only: %i[show update]
+
+  get "messages/new", to: "messages#new", as: :new
 end
