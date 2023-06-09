@@ -1,34 +1,39 @@
-
 <div class="container">
   <div class="row">
-    <div class="entries_flex" style="margin-top: 100px">
-      <div class="entries_logo">
+    <div class="entries_flex" style="margin-top: 100px;">
+      <div class="entries_logo col-5">
         My Entries
       </div>
 
-      <div>
+      <div class="gratefulness px-3 col">
           <%= render "daily_gratefulness"%>
       </div>
     </div>
+  </div>
 
-      <div class="entries_flex" style="margin-top: 80px; gap:200px;">
-        <div>
-          <%= link_to "NEW ENTRY", new_entry_path, class: "button px-5" %>
-        </div>
-        <div>
-          <%= render "calendar_search" %>
-        </div>
+  <div class="row">
+    <div class="entries_flex" style="gap:100px;">
+      <div class="col">
+
+        <%= link_to  new_entry_path, class: "button px-5" do%>
+          <i class="fa-solid fa-pen"></i> NEW ENTRY
+        <% end %>
+      </div>
+      <div class="col">
+        <%= render "calendar_search" %>
       </div>
     </div>
+  </div>
 
-    <div class="entries_cards" >
-        <%@entries.each do |entry|  %>
-        <button class="btn" onclick="location.href='/entries/<%=entry.id%>/edit'" >
-          <div class="entries_card">
-              <%= render "entries_card", entry: entry %>
-          </div>
-        </button>
-        <% end %>
+  <div class="row">
+      <div class="entries_cards" >
+          <%@entries.each do |entry|  %>
+          <button class="btn w-25" onclick="location.href='/entries/<%=entry.id%>/edit'" >
+            <div class="entries_card col-4">
+                <%= render "entries_card", entry: entry %>
+            </div>
+          </button>
+          <% end %>
+      </div>
     </div>
-
 </div>

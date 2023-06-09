@@ -2,14 +2,14 @@
 
   <h1><%= @obstacle.title %></h1>
   <br>
+  <%= @obstacle.done == false ? (button_to "I solved this obstacle", done_path, method:'patch') : "This obstacle is solved" %>
 
   <% @recommendations.each do |recommendation| %>
     <%= render "recommendation_card", recommendation: recommendation %>
-
-    <div>
-      <%= link_to "details of recommendations", recommendation_path(recommendation) %>
-    </div>
   <% end %>
+
+
+  <h2>Entries relevant to this obstacle:</h2>
 
   <% @entries.each do |entry| %>
     <li><%= entry.content %></li>
