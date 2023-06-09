@@ -1,7 +1,20 @@
+<h1>My obstacles</h1>
 <div class="row">
   <div class="col-12 col-lg-6">
     <% @obstacles.each do |obstacle| %>
       <%= render "obstacle_card", obstacle: obstacle %>
     <% end %>
   </div>
+</div>
+
+
+<h2>My success</h2>
+
+<div class="row">
+
+    <% done_obstacles = @obstacles.select { |obstacle| obstacle.done?} %>
+    <% done_obstacles.each do |d_obstacle| %>
+    <li><%= d_obstacle.title %></li>
+    <% end %>
+
 </div>
