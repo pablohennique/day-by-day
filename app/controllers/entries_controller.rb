@@ -33,6 +33,8 @@ class EntriesController < ApplicationController
       elsif @sentiment == "Non-Positive"
         @obstacle = Obstacle.find_by(title: @match)
         @entry.update(obstacle_id: @obstacle.id)
+      else
+        @entry.update(obstacle_id: nil)
       end
       redirect_to entries_path
     else

@@ -19,4 +19,8 @@
       <%= link_to "details of recommendations", recommendation_path(recommendation) %>
     </div>
   <% end %>
+
+  <% @entries.each do |entry| %>
+    <li><%= entry.content %></li>
+  <% end %>
 </div>
