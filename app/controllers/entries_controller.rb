@@ -17,7 +17,11 @@ class EntriesController < ApplicationController
     @entry = Entry.new(content: params[:entry][:content], user: current_user, date: Date.today)
     if @entry.save
       sentiment_analysis
+      turn_to_summary
+      match_summary
       turn_to_gratefulness if @sentiment == "Positive"
+      create_obstacle if @sentiment == "Non-Positive" && @match == "false"
+      update_entry if @sentiment == "Non-Positive" && @match != "false"
       redirect_to entries_path
     else
       render :new, status: 422
@@ -66,6 +70,52 @@ class EntriesController < ApplicationController
     @entry.update(sentiment: @sentiment)
   end
 
+  def turn_to_summary
+    gpt_summary_entry
+    @summary = @gpt_summary["choices"][0]["message"]["content"]
+    @summary.chop! if @summary.last == "."
+    @entry.update(summary: @summary)
+  end
+
+  def gpt_summary_entry
+    @client = OpenAI::Client.new
+    @gpt_summary = @client.chat(
+      parameters: {
+        model: "gpt-3.5-turbo",
+        messages: [{ role: "user",
+                     content: "Summaries like a title, this entry
+                              with proper nouns in maximum
+                              7 words: #{params[:entry][:content]}" }],
+        temperature: 0.1
+      }
+    )
+  end
+
+  def match_summary
+    @obstacles = Obstacle.all
+    @obstacles_list = @obstacles.map { | obstacle | "#{obstacle.title}" }
+    gpt_match_summary
+    @match = @gpt_match["choices"][0]["message"]["content"]
+    @match.chop! if @match.last == "."
+    @match.downcase! if @match == "False"
+    @match.delete!("\"")
+  end
+
+  def gpt_match_summary
+    @client = OpenAI::Client.new
+    @gpt_match = @client.chat(
+      parameters: {
+        model: "gpt-3.5-turbo",
+        messages: [{ role: "user",
+                     content: "Does the entry '#{params[:entry][:content]}'
+                     talk about the same subject as one of the sentences below?
+                     If it does, return only the sentence, if not return 'false'.
+                    #{@obstacles_list}" }],
+        temperature: 0.3
+      }
+    )
+  end
+
   def turn_to_gratefulness
     gpt_gratefulness
     @gratefulness = @response["choices"][0]["message"]["content"]
@@ -84,5 +134,15 @@ class EntriesController < ApplicationController
         # max_tokens: 30
       }
     )
+  end
+
+  def create_obstacle
+    @obstacle = Obstacle.create(title: @summary)
+    @entry.update(obstacle_id: @obstacle.id)
+  end
+
+  def update_entry
+    @obstacle = Obstacle.find_by(title: @match)
+    @entry.update(obstacle_id: @obstacle.id)
   end
 end

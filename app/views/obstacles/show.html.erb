@@ -11,4 +11,7 @@
     </div>
   <% end %>
 
+  <% @entries.each do |entry| %>
+    <li><%= entry.content %></li>
+  <% end %>
 </div>
