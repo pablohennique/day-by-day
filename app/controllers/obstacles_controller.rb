@@ -14,6 +14,5 @@ class ObstaclesController < ApplicationController
     @obstacle = Obstacle.find(params[:id])
     @obstacle.update(done: true)
     redirect_to obstacles_path
-    raise
   end
 end
