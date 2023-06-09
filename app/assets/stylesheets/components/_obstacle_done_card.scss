@@ -1,6 +1,6 @@
 .obstacle-done-card {
   display: flex;
-  width: 300px;
+  // width: 500px;
   border: 1px solid;
   border-color: #EAEAEA;
   border-radius: 10px;
@@ -9,8 +9,13 @@
   // margin: 20px;
   color: black;
 
-  p {
-    padding: 0;
-    margin: 0;
-  }
+  // p {
+  //   padding: 0;
+  //   margin: 0;
+  // }
+}
+
+.obstacle-done-card-infos {
+  display: flex;
+
 }
