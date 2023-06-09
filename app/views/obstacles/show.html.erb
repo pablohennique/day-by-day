@@ -6,16 +6,6 @@
   <% @recommendations.each do |recommendation| %>
     <%= render "recommendation_card", recommendation: recommendation %>
 
-    <%# <% if recommendation.category == "Reframing" %>
-    <%# <h3>Reframing</h3> %>
-    <%# <% elsif recommendation.category == "Visualization"  %>
-    <%# <h3>Visualization</h3> %>
-    <%# <% elsif recommendation.category == "Compassion" %>
-    <%# <h3>Compassion</h3> %>
-    <%# <% elsif recommendation.category == "Feel Emotions" %>
-    <%# <h3>Feel Emotions</h3> %>
-    <%# <% end %>
-
     <div>
       <%= link_to "details of recommendations", recommendation_path(recommendation) %>
     </div>
