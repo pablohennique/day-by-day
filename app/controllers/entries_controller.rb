@@ -83,9 +83,9 @@ class EntriesController < ApplicationController
       parameters: {
         model: "gpt-3.5-turbo",
         messages: [{ role: "user",
-                     content: "Summaries like a title, this entry
-                              with proper nouns in maximum
-                              7 words: #{params[:entry][:content]}" }],
+                     content: "Create a title that summarizes the following entry.
+                              Include proper nouns and use 7 words maximum:
+                              #{params[:entry][:content]}" }],
         temperature: 0.1
       }
     )
