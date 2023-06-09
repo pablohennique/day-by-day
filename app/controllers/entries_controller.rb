@@ -19,9 +19,9 @@ class EntriesController < ApplicationController
       sentiment_analysis
       turn_to_summary
       match_summary
-      turn_to_gratefulness if @sentiment == "Positive"
-      create_obstacle if @sentiment == "Non-Positive" && @match == "false"
-      update_entry if @sentiment == "Non-Positive" && @match != "false"
+      turn_to_gratefulness if @sentiment == "5"
+      create_obstacle if (@sentiment == "1" || @sentiment == "2" || @sentiment == "3") && @match == "false"
+      update_entry if (@sentiment == "1" || @sentiment == "2" || @sentiment == "3") && @match != "false"
       redirect_to entries_path
     else
       render :new, status: 422
@@ -58,8 +58,9 @@ class EntriesController < ApplicationController
       parameters: {
         model: "gpt-3.5-turbo",
         messages: [{ role: "user",
-                     content: "Indicate the sentiment for the following entry.
-                              Permited responses: 'Positive', 'Non-Positive'
+                     content: "Perform a sentiment analysis for the following
+                              entry and give a score from 1 to 5. 1 being 'Extremely Negative'
+                              and 5 being ' Extremely Positive'. Return only the number.
                               #{params[:entry][:content]}" }],
         temperature: 0.3
         # max_tokens: 30
