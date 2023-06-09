@@ -11,5 +11,9 @@
  }
 
  .reco-card-text {
+   background-color: white;
    padding: 12px 8px;
+   white-space: nowrap;
+   overflow: hidden;
+   text-overflow: ellipsis;
  }
