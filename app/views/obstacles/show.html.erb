@@ -9,9 +9,16 @@
   <% end %>
 
 
-  <h2>Entries relevant to this obstacle:</h2>
-
-  <% @entries.each do |entry| %>
-    <li><%= entry.content %></li>
-  <% end %>
+  <h2>Entries relevant to this obstacle</h2>
+  <div class="row">
+    <div class="entries_cards" >
+      <% @entries.each do |entry| %>
+        <button class="btn w-25" onclick="location.href='/entries/<%=entry.id%>/edit'" >
+          <div class="entries_card col-4">
+            <%= render "entries/entries_card", entry: entry %>
+          </div>
+        </button>
+      <% end %>
+    </div>
+  </div>
 </div>
