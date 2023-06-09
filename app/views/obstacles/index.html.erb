@@ -1,13 +1,15 @@
 <h1>My obstacles</h1>
+
+<% @done_obstacles = @obstacles.select { |obstacle| obstacle.done?} %>
+
 <div class="row">
   <div class="col-12 col-lg-6">
     <% @obstacles.each do |obstacle| %>
-      <%= render "obstacle_card", obstacle: obstacle %>
+      <%= render "obstacle_card", obstacle: obstacle unless obstacle.done?%>
     <% end %>
   </div>
 </div>
 
-<% @done_obstacles = @obstacles.select { |obstacle| obstacle.done?} %>
 <% unless @done_obstacles.count == 0 %>
   <%= render 'done_obstacles', obstacles: @obstacles %>
 <% end %>
