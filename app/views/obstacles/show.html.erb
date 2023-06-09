@@ -6,11 +6,10 @@
 
   <% @recommendations.each do |recommendation| %>
     <%= render "recommendation_card", recommendation: recommendation %>
-
-    <div>
-      <%= link_to "details of recommendations", recommendation_path(recommendation) %>
-    </div>
   <% end %>
+
+
+  <h2>Entries relevant to this obstacle:</h2>
 
   <% @entries.each do |entry| %>
     <li><%= entry.content %></li>

@@ -1,6 +1,7 @@
 .reco-card {
   // border: 1px solid;
   border-radius: 10px;
+  padding-bottom: 30px;
  }
 
  .reco-card-img {
@@ -13,7 +14,7 @@
  .reco-card-text {
    background-color: white;
    padding: 12px 8px;
-   white-space: nowrap;
-   overflow: hidden;
-   text-overflow: ellipsis;
+  //  white-space: nowrap;
+  //  overflow: hidden;
+  //  text-overflow: ellipsis;
  }
