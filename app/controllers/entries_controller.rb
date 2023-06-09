@@ -138,8 +138,8 @@ class EntriesController < ApplicationController
       parameters: {
         model: "gpt-3.5-turbo",
         messages: [{ role: "user",
-                     content: "Does the Entry match any of the sentences in the following array?
-                     If there is a match, return only the sentence of the first match.
+                     content: "Is there any similarity between the Entry and any of the sentences in the Sentence Array?
+                     If there is a slight match, return only the sentence where the first match was found.
                      Else, return 'false'.
                      Entry:'#{params[:entry][:content]}
                      Sentence Array: #{@obstacles_list}'"}],
@@ -201,7 +201,6 @@ class EntriesController < ApplicationController
     apply_compassion if @gpt_recommendations_content.include?("Compassion")
     apply_feel_emotions if @gpt_recommendations_content.include?("Emotions")
     apply_visualization if @gpt_recommendations_content.include?("Visualization")
-    raise
   end
 
   def apply_reframing
