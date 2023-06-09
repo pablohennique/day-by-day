@@ -1,14 +1,19 @@
+.entry_calendar{
+  width: 250px;
+  border-radius: 20px;
+  padding: 10px 20px;
+  border-style:none;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+}
 
 .entries_cards{
   // display:flex;
   // align-items: center;
   // justify-content: center;
-  // margin-top: 50px;
-  // display: grid;
-  // grid-template-columns: 1fr 1fr 1fr 1fr;
-  // grid-gap: 5px;
-  display: inline-block;
-  padding: 50px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  // display: inline-block;
+  // padding: 50px;
 }
 
 
@@ -18,7 +23,7 @@
   // box-shadow: 0 0 15px rgba(0,0,0,0.2);
   border-radius: 10px;
   overflow: hidden;
-  margin-top: 20px;
+  margin-top: 50px;
 
 }
 
@@ -31,6 +36,7 @@
 }
 
 .entries_bottom{
+  text-align: start;
   height: 100px;
   text-decoration: underline;
   text-decoration-color: lightgrey;
@@ -57,8 +63,10 @@
 
 .entries_flex{
   display:flex;
-  align-items:flex-start;
-  justify-content: space-around;
+  align-items: flex-start;
+  justify-content: center;
+  padding-left: 30px;
+  padding-right: 30px;
 }
 
 .entries_logo{
@@ -69,4 +77,40 @@
   width: 350px;
   font-weight: bold;
   font-size: 50px;
+}
+
+
+// Smallest device
+@media (min-width: 100px) and (max-width: 575px) {
+  .entries_cards{
+    grid-template-columns: 1fr;
+  }
+}
+
+// Small devices (landscape phones, 576px and up)
+@media (min-width: 576px) {
+  .entries_cards{
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+}
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) {
+  .entreis_cards {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) {
+  .entreis_cards {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+// Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) {
+  .entreis_cards {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
 }
