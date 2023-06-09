@@ -1,7 +1,8 @@
 class EntriesController < ApplicationController
   def index
-    @entries = Entry.where(user_id: current_user)
     @rand_gratefulness = Gratefulness.all.sample
+    @entries = Entry.where(user_id: current_user)
+    search_by_date if params[:from_date].present? && params[:to_date].present?
   end
 
   def show
@@ -56,6 +57,12 @@ class EntriesController < ApplicationController
     @entry = Entry.find(params[:id])
     @entry.destroy
     redirect_to entries_path
+  end
+
+  def search_by_date
+    @from_date = params[:from_date]
+    @to_date = params[:to_date]
+    @entries = @entries.where('date BETWEEN ? AND ?', @from_date, @to_date)
   end
 
   private

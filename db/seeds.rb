@@ -29,7 +29,7 @@ titles.each do |title|
   obstacle.save
 end
 
-
+puts "Adding an entry..."
 users = [tom, alexane, emily, pablo]
 mood = ["Positive", "Non-positive"]
 entry_content = [
@@ -50,7 +50,6 @@ entry_content = [
   "I am happy that I found my cat. It was super scary not to see him for so long. When I found him, I recognized how much I appreciated him. I’ve had him for only 2 years but it feels like so long.",
   "Charlene welcomed me with an amazing dinner and wine. I did not see that coming. We had a good chat and spent so much time laughing and reminiscing about our past.",
   "Ever since I got to Canada things have been working out for the better. Sometimes I forget, but I consider myself extremely lucky to be living here. The financial and political stability do not compare at all with Mexico. And the job opportunities and quality of life is out of this world. The only thing I do miss about Mexico is the food. I wish they had good tacos here."]
-puts "Adding an entry..."
 
 entry_content.each do |entry|
   Entry.new(content: entry,
@@ -59,6 +58,7 @@ entry_content.each do |entry|
             user: users.sample,
             obstacle: obstacles.sample).save!
 end
+
 
 puts "Adding recommendations"
 

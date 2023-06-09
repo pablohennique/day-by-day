@@ -1,8 +1,7 @@
-<% @obstacles.each do |obstacle| %>
-<div>
-  <div>
-    <h1><%= obstacle.title %></h1>
+<div class="row">
+  <div class="col-12 col-lg-6">
+    <% @obstacles.each do |obstacle| %>
+      <%= render "obstacle_card", obstacle: obstacle %>
+    <% end %>
   </div>
-  <%= link_to "Recommendations?", obstacle_path(obstacle) %>
 </div>
-<% end %>
