@@ -1,10 +1,11 @@
-<h1 class="text-center">My obstacles</h1>
-<div class="row">
+<h1 class="text-center pt-5 pb-4">My obstacles</h1>
+<div class="row justify-content-around">
   <% @obstacles.each do |obstacle| %>
     <%= render "obstacle_card", obstacle: obstacle %>
   <% end %>
 </div>
 
+<h2>Obstacles I've overcome</h2>
 <% @done_obstacles = @obstacles.select { |obstacle| obstacle.done?} %>
 <% unless @done_obstacles.count == 0 %>
   <%= render 'done_obstacles', obstacles: @obstacles %>
