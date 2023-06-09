@@ -7,7 +7,7 @@
   </div>
 </div>
 
-<% done_obstacles = @obstacles.select { |obstacle| obstacle.done?} %>
-<% unless done_obstacles.count == 0 %>
+<% @done_obstacles = @obstacles.select { |obstacle| obstacle.done?} %>
+<% unless @done_obstacles.count == 0 %>
   <%= render 'done_obstacles', obstacles: @obstacles %>
 <% end %>
