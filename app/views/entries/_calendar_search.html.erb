@@ -1,17 +1,18 @@
 <%= simple_form_for "/entries", method: :get do |f| %>
-  <div class="row">
-    <div class="col">
-      <%= f.input :opens_at, as: :string,
-                  wrapper_html: { class: "mb-4" },
-                  label_html: { class: "form-label text-secondary fw-bold" },
-                  input_html: { data: { controller: "flatpickr" } } %>
-    </div>
-    <div class="col">
-      <%= f.input :closes_at, as: :string,
-                  wrapper_html: { class: "mb-4" },
-                  label_html: { class: "form-label text-secondary fw-bold" },
-                  input_html: { data: { controller: "flatpickr" } } %>
-    </div>
+<div class="d-flex justify-content-around align-items-center" >
+  <div>
+    <%= f.input :opens_at, as: :string,
+                placeholder: 'Start                                           |                                              End',
+                wrapper_html: { class: "mb-4 text-muted" },
+                label_html: { class: "form-label text-secondary fw-bold" },
+                input_html: { data: { controller: "flatpickr" },class:"entry_calendar_left"},
+                label:false %>
   </div>
-  <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+
+  <div>
+    <%= button_tag type: 'submit',class:"btn position-relative"  do %>
+        <i class="fa-solid fa-magnifying-glass"></i>
+    <% end %>
+  </div>
+</div>
 <% end %>
