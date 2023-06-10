@@ -2,7 +2,7 @@
 <div class="d-flex justify-content-around align-items-center" >
   <div>
     <%= f.input :opens_at, as: :string,
-                placeholder: 'Start                                           |                                              End',
+                placeholder: 'Start                                  |                                     End',
                 wrapper_html: { class: "mb-4 text-muted" },
                 label_html: { class: "form-label text-secondary fw-bold" },
                 input_html: { data: { controller: "flatpickr" },class:"entry_calendar_left"},
@@ -10,8 +10,8 @@
   </div>
 
   <div>
-    <%= button_tag type: 'submit',class:"btn position-relative"  do %>
-        <i class="fa-solid fa-magnifying-glass"></i>
+    <%= button_tag type: 'submit',class:"btn entry_calendar_search"  do %>
+        <i class="fa-solid fa-magnifying-glass text-light"></i>
     <% end %>
   </div>
 </div>
