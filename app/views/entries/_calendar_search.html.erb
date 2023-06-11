@@ -1,18 +1,17 @@
-<%= simple_form_for "/entries", method: :get do |f| %>
+<%= form_with  url: "/entries", method: :get  do |form| %>
 <div class="d-flex justify-content-around align-items-center" >
   <div>
-    <%= f.input :opens_at, as: :string,
-                placeholder: 'Start                                  |                                     End',
-                wrapper_html: { class: "mb-4 text-muted" },
-                label_html: { class: "form-label text-secondary fw-bold" },
-                input_html: { data: { controller: "flatpickr" },class:"entry_calendar_left"},
+    <%= form.datetime_field :To,
+                data: {controller: "flatpickr"},
+                class:"entry_calendar_left",
+                placeholder: 'To                                    |   From                                    ',
                 label:false %>
   </div>
 
   <div>
-    <%= button_tag type: 'submit',class:"btn entry_calendar_search"  do %>
+    <button type="submt" class="btn entry_calendar_search">
         <i class="fa-solid fa-magnifying-glass text-light"></i>
-    <% end %>
+    </button>
   </div>
 </div>
 <% end %>

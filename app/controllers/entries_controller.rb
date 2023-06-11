@@ -3,7 +3,7 @@ class EntriesController < ApplicationController
     @rand_gratefulness = Gratefulness.where(user_id: current_user).sample
     @entries = Entry.where(user_id: current_user)
     @entries = Entry.order('id DESC')
-    search_by_date if params[:from_date].present? && params[:to_date].present?
+    search_by_date if !params[:To].nil? && params[:To].split[0].present? && params[:To].split[2].present?
   end
 
   def show
@@ -46,8 +46,8 @@ class EntriesController < ApplicationController
   end
 
   def search_by_date
-    @from_date = params[:from_date]
-    @to_date = params[:to_date]
+    @from_date = params[:To].split[0]
+    @to_date =  params[:To].split[2]
     @entries = @entries.where('date BETWEEN ? AND ?', @from_date, @to_date)
   end
 
@@ -59,7 +59,7 @@ class EntriesController < ApplicationController
       parameters: {
         model: "gpt-3.5-turbo",
         messages: [{ role: "user",
-                     content: "Indicate the sentiment for the following entry.
+                  content: "Indicate the sentiment for the following entry.
                               Permited responses: 'Positive', 'Non-Positive'
                               #{params[:entry][:content]}" }],
         temperature: 0.3

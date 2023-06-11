@@ -7,7 +7,7 @@ export default class extends Controller {
   connect() {
     new flatpickr(this.element, {
       mode: "range",
-      locale: { rangeSeparator:  '                      |                        ' },
+      locale: { rangeSeparator:  '                      |     ' },
       showMonths: 2
     });
   }
