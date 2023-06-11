@@ -78,6 +78,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_09_184636) do
     t.boolean "done", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "overview"
   end
 
   create_table "recommendations", force: :cascade do |t|
