@@ -2,6 +2,15 @@ class ObstaclesController < ApplicationController
 
   def index
     @obstacles = Obstacle.order('id DESC')
+    @current_entries = Entry.where(user_id: current_user)
+
+    @user_obstacles = []
+
+    @current_entries.each do |entry|
+      if !entry.obstacle_id.nil?
+        @user_obstacles.push(Obstacle.find(entry.obstacle_id))
+      end
+    end
   end
 
   def show

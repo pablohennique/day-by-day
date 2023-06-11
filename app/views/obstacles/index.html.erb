@@ -1,7 +1,8 @@
 <h1>My obstacles</h1>
 <div class="row">
   <div class="col-12 col-lg-6">
-    <% @obstacles.each do |obstacle| %>
+
+    <% @user_obstacles.each do |obstacle| %>
       <%= render "obstacle_card", obstacle: obstacle %>
     <% end %>
   </div>
