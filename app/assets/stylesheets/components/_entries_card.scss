@@ -1,9 +1,26 @@
-.entry_calendar{
-  width: 250px;
-  border-radius: 20px;
-  padding: 10px 20px;
-  border-style:none;
-  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+.entry_calendar_search{
+  position: relative;
+  left: -52px;
+  bottom: 1px;
+  background-color: #5550F3;
+  border-radius: 100%;
+}
+
+.entry_calendar_left{
+  border-radius: 40px;
+  background-color: white;
+  box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.2);
+  position: relative;
+  width: 500px;
+  padding: 15px 30px 15px 30px;
+}
+.entry_calendar_right{
+  border-radius: 10px 40px 40px 10px;
+  background-color: white;
+  box-shadow: 10px 0px 10px 0px rgba(0,0,0,0.2);
+  position: relative;
+  width: 300px;
+  left: -50px;
 }
 
 .entries_cards{

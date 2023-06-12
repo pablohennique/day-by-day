@@ -2,6 +2,7 @@ class ObstaclesController < ApplicationController
 
   def index
     @obstacles = Obstacle.where(user_id: current_user).order('id DESC')
+    @done_obstacles = @obstacles.select {|obstacle| obstacle.done?}
   end
 
   def show

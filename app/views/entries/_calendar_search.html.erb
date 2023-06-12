@@ -1,5 +1,17 @@
-<%= form_with url: "/entries", method: :get do |form| %>
-  <%= form.date_field :from_date, html5: true, class: "entry_calendar" %>
-  <%= form.date_field :to_date, html5: true, class: "entry_calendar" %>
-  <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+<%= form_with  url: "/entries", method: :get  do |form| %>
+<div class="d-flex justify-content-around align-items-center" >
+  <div>
+    <%= form.datetime_field :To,
+                data: {controller: "flatpickr"},
+                class:"entry_calendar_left",
+                placeholder: 'To                                    |   From                                    ',
+                label:false %>
+  </div>
+
+  <div>
+    <button type="submit" class="btn entry_calendar_search">
+        <i class="fa-solid fa-magnifying-glass text-light"></i>
+    </button>
+  </div>
+</div>
 <% end %>
