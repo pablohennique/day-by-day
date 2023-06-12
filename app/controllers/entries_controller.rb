@@ -200,74 +200,26 @@ class EntriesController < ApplicationController
   end
 
   def apply_tactics
-    apply_reframing if @gpt_recommendations_content.include?("Reframing")
-    apply_compassion if @gpt_recommendations_content.include?("Compassion")
-    apply_feel_emotions if @gpt_recommendations_content.include?("Emotions")
-    apply_visualization if @gpt_recommendations_content.include?("Visualization")
+    apply_tactic("Reframing") if @gpt_recommendations_content.include?("Reframing")
+    apply_tactic("Compassion") if @gpt_recommendations_content.include?("Compassion")
+    apply_tactic("Emotions") if @gpt_recommendations_content.include?("Emotions")
+    apply_tactic("Visualization") if @gpt_recommendations_content.include?("Visualization")
   end
 
-  def apply_reframing
+  def apply_tactic(tactic)
     @client = OpenAI::Client.new
     @gpt_reframing_recommendation = @client.chat(
       parameters: {
         model: "gpt-3.5-turbo",
         messages: [{ role: "user",
                      content: "Considering 4 tactics: Reframing, Compassion, Feel Emotions and Visualization.
-                              How could I apply Reframing to the following situation:
+                              How could I apply #{tactic} to the following situation:
                               #{@gpt_obstacle_overview_content}" }],
         temperature: 0.1
       }
     )
     @reframing_recommendation_content = @gpt_reframing_recommendation["choices"][0]["message"]["content"]
-    Recommendation.create(content: @reframing_recommendation_content, category: "Reframing", obstacle: @obstacle)
-  end
-
-  def apply_compassion
-    @client = OpenAI::Client.new
-    @gpt_compassion_recommendation = @client.chat(
-      parameters: {
-        model: "gpt-3.5-turbo",
-        messages: [{ role: "user",
-                     content: "Considering 4 tactics: Reframing, Compassion, Feel Emotions and Visualization.
-                              How could I apply Compassion to the following situation:
-                              #{@gpt_obstacle_overview_content}" }],
-        temperature: 0.1
-      }
-    )
-    @compassion_recommendation_content = @gpt_compassion_recommendation["choices"][0]["message"]["content"]
-    Recommendation.create(content: @compassion_recommendation_content, category: "Compassion", obstacle: @obstacle)
-  end
-
-  def apply_feel_emotions
-    @client = OpenAI::Client.new
-    @gpt_emotions_recommendation = @client.chat(
-      parameters: {
-        model: "gpt-3.5-turbo",
-        messages: [{ role: "user",
-                     content: "Considering 4 tactics: Reframing, Compassion, Feel Emotions and Visualization.
-                              How could I apply Feel Emotions to the following situation:
-                              #{@gpt_obstacle_overview_content}" }],
-        temperature: 0.1
-      }
-    )
-    @emotions_recommendation_content = @gpt_emotions_recommendation["choices"][0]["message"]["content"]
-    Recommendation.create(content: @emotions_recommendation_content, category: "Feel Emotions", obstacle: @obstacle)
-  end
-
-  def apply_visualization
-    @client = OpenAI::Client.new
-    @gpt_visualization_recommendation = @client.chat(
-      parameters: {
-        model: "gpt-3.5-turbo",
-        messages: [{ role: "user",
-                     content: "Considering 4 tactics: Reframing, Compassion, Feel Emotions and Visualization.
-                              How could I apply Visualization to the following situation:
-                              #{@gpt_obstacle_overview_content}" }],
-        temperature: 0.1
-      }
-    )
-    @visualization_recommendation_content = @gpt_visualization_recommendation["choices"][0]["message"]["content"]
-    Recommendation.create(content: @visualization_recommendation_content, category: "Visualization", obstacle: @obstacle)
+    Recommendation.create(content: @reframing_recommendation_content, category: tactic, obstacle: @obstacle)
   end
   # RECOMMENDATIONS END
 end
