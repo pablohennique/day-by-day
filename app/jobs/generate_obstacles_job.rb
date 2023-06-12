@@ -98,6 +98,7 @@ class GenerateObstaclesJob < ApplicationJob
   end
 
   def get_recommendations
+    Recommendation.where(obstacle: @obstacle).destroy_all
     @client = OpenAI::Client.new
     @gpt_recommendations = @client.chat(
       parameters: {

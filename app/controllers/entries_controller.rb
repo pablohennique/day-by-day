@@ -17,15 +17,16 @@ class EntriesController < ApplicationController
   def create
     @entry = Entry.new(rich_body: params[:entry][:rich_body], user: current_user, date: Date.today)
     @entry.content = @entry.rich_body.body.to_plain_text
-    sentiment_analysis(@entry.content)
-    if @entry.sentiment == "Positive"
-      turn_to_gratefulness(@entry.content)
-      redirect_to entries_path
-    elsif @entry.sentiment == "Non-Positive"
-      GenerateObstaclesJob.perform_now(@entry)
-      # summarize_entries_in_obstacle
-      # get_recommendations
-      redirect_to entries_path
+    if @entry.save
+      sentiment_analysis(@entry.content)
+      if @entry.sentiment == "Positive"
+        turn_to_gratefulness(@entry.content)
+      elsif @entry.sentiment == "Non-Positive"
+        GenerateObstaclesJob.perform_now(@entry)
+        # summarize_entries_in_obstacle
+        # get_recommendations
+      end
+      redirect_to edit_entry_path(@entry)
     else
       render :new, status: 422
     end
@@ -49,7 +50,7 @@ class EntriesController < ApplicationController
 
   def search_by_date
     @from_date = params[:To].split[0]
-    @to_date =  params[:To].split[2]
+    @to_date = params[:To].split[2]
     @entries = @entries.where('date BETWEEN ? AND ?', @from_date, @to_date)
   end
 
@@ -63,8 +64,8 @@ class EntriesController < ApplicationController
         model: "gpt-3.5-turbo",
         messages: [{ role: "user",
                   content: "Indicate the sentiment for the following entry.
-                              Permited responses: 'Positive', 'Non-Positive'
-                              #{entry}" }],
+                  Permited responses: 'Positive', 'Neutral', 'Negative'
+                  #{entry}" }],
         temperature: 0.3
         # max_tokens: 30
       }
@@ -180,6 +181,7 @@ class EntriesController < ApplicationController
   # end
 
   # def get_recommendations
+  #   Recommendation.where(obstacle: @obstacle).destroy_all
   #   @client = OpenAI::Client.new
   #   @gpt_recommendations = @client.chat(
   #     parameters: {
