@@ -2,7 +2,7 @@
 
 <div class="row">
   <div class="col-12 col-lg-6">
-    <% @user_obstacles.each do |obstacle| %>
+    <% @obstacles.each do |obstacle| %>
       <%= render "obstacle_card", obstacle: obstacle unless obstacle.done?%>
     <% end %>
   </div>

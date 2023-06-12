@@ -1,7 +1,7 @@
 <% @done_obstacles.each do |d_obstacle| %>
   <a href="<%= obstacle_path(d_obstacle) %>" class="obstacle-done-card">
     <%= image_tag('icon_check.png') %>
-    <p><%= d_obstacle[0].title %></p>
+    <p><%= d_obstacle.title %></p>
     <i class="fa-solid fa-arrow-right"></i>
   </a>
 <% end %>
