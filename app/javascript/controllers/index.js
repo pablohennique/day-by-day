@@ -9,3 +9,6 @@ application.register("flatpickr", FlatpickrController)
 
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
+
+import ReadMore from 'stimulus-read-more'
+application.register('read-more', ReadMore)
