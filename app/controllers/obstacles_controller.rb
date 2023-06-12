@@ -1,10 +1,11 @@
 class ObstaclesController < ApplicationController
 
   def index
-    @obstacles = Obstacle.order('id DESC')
+    @obstacles = Obstacle.where(user_id: current_user).order('id DESC')
   end
 
   def show
+    raise
     @obstacle = Obstacle.find(params[:id])
     @recommendations = Recommendation.where(obstacle_id: @obstacle.id)
     @entries = Entry.where(obstacle_id: @obstacle.id)
