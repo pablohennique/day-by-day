@@ -1,8 +1,31 @@
-<%= simple_form_for @entry do |f| %>
-  <%= f.input :content, as: :text, :input_html => { class: 'test', :cols => 5, :rows => 10 } %>
-  <%= f.button :submit %>
-<% end %>
+<div class="row">
+  <%= simple_form_for @entry do |f| %>
+    <div class="my-4">
+    <%= link_to entries_path do%>
+        <i class="fa-solid fa-arrow-left"></i>  Back to my entries
+    </div>
+    <% end %>
 
-<%=link_to "delete", entry_path(@entry),
-data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'},
-class: "button" %>
+    <div class="d-flex align-items-center justify-content-between mb-5 mt-5">
+      <div>
+        <p style="font-size: 35px;font-weight: bold;"><%= @entry.date.strftime('%A, %B %d')   %></p>
+      </div>
+      <div>
+        <button type="submit" class="new_button">SAVE</button>
+      </div>
+    </div>
+
+    <div>
+      <%= f.rich_text_area :content, class:"entry_new" %>
+    </div>
+    <br>
+    <div class="d-flex align-items-center justify-content-between mb-5">
+    <div></div>
+    <div class="mt-5">
+      <%=link_to "DELETE", entry_path(@entry),
+      data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'},
+      class: "danger_button" %>
+      </div>
+    </div>
+  <% end%>
+</div>
