@@ -19,10 +19,10 @@ class EntriesController < ApplicationController
     if @entry.save
       sentiment_analysis
       turn_to_summary
-      match_summary
       if @sentiment == "Positive"
         turn_to_gratefulness
       elsif @sentiment == "Non-Positive"
+        match_summary
         create_obstacle if @match == "false"
         update_entry if @match != "false"
         summarize_entries_in_obstacle
@@ -126,7 +126,7 @@ class EntriesController < ApplicationController
     @obstacles = Obstacle.all
 
     # @obstacles_list = @obstacles.map { |obstacle| "#{obstacle.title}" }
-    @obstacles_overview_arr = @obstacles.map { |obstacle| obstacle.overview }
+    @obstacles_titles_arr = @obstacles.map { |obstacle| obstacle.title }
 
     gpt_match_summary
     @match = @gpt_match["choices"][0]["message"]["content"]
@@ -141,18 +141,18 @@ class EntriesController < ApplicationController
       parameters: {
         model: "gpt-3.5-turbo",
         messages: [{ role: "user",
-                     content: "Is there a potential match between the Entry and any of the entries in the Entries Array?
-                     If there is a match, return only the sentence where the first match was found.
-                     Else, return 'false'.
-                     Entry:'#{params[:entry][:content]}'
-                     Entries Array: #{@obstacles_overview_arr}"}],
+                     content: "Could the content of the 'Entry' belong to any of the titles found in the Titles Array?
+                     If it could, return ONLY the string from the Titles Array where the connection was made. Do not provide any additional explanation.
+                     If no similarities are found, return 'false'.
+                     Overview:'#{params[:entry][:content]}'
+                     Title Array: '#{@obstacles_titles_arr}'"}],
         temperature: 0.3
       }
     )
   end
 
   def create_obstacle
-    @obstacle = Obstacle.create(title: @summary)
+    @obstacle = Obstacle.create(title: @summary, user_id: current_user.id)
     @entry.update(obstacle_id: @obstacle.id)
   end
 
