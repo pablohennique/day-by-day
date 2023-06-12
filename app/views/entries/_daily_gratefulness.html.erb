@@ -4,6 +4,6 @@
       <p class="gratefulness_p">Start writing on your journal to receive daily gratefulness inspiration!</p>
   <% else %>
       <p class="gratefulness_p"><%= @rand_gratefulness.content %></p>
-      <p class="gratefulness_p">You wrote about this on: <%= @rand_gratefulness.created_at.strftime("%d %B %Y") %></p>
+      <p class="gratefulness_p" style="font-size:15px;">You wrote about this on: <%= @rand_gratefulness.created_at.strftime("%d %B %Y") %></p>
   <% end %>
 </div>
