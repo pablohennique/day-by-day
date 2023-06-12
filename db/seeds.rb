@@ -77,40 +77,40 @@ entry_9 = Entry.create!(content: "Mike was being an asshole again. This time he 
                         obstacle: Obstacle.find_by(title: "Fight with Mike"))
 
 entry_10 = Entry.create!(content: "I keep thinking about finding a job once I am done with the bootcamp. I sure hope it won’t be too hard given all the tech layoffs. Sophia gave me some words of encouragement. It helped a lot, but I can’t help but be doubtful at times.",
-                         date: Date.today - 21,
-                         sentiment: "Non-positive",
-                         user: pablo,
-                         obstacle: Obstacle.find_by(title: "Career Week Was Not Helpful"))
+                        date: Date.today - 21,
+                        sentiment: "Non-positive",
+                        user: pablo,
+                        obstacle: Obstacle.find_by(title: "Career Week Was Not Helpful"))
 
 entry_11 = Entry.create!(content: "I saw this story on IG that made me shed a tear. A baby squirl thought that he was being raised by a family of cats. It made me feel so hopeful about life and nature in general. Its weird in a way, but feels good.",
-                         date: Date.today - 23,
-                         sentiment: "Non-positive",
-                         user: pablo,
-                         obstacle: Obstacle.create!(title: "IG Post Made Me Cry", user_id: pablo.id))
+                        date: Date.today - 23,
+                        sentiment: "Non-positive",
+                        user: pablo,
+                        obstacle: Obstacle.create!(title: "IG Post Made Me Cry", user_id: pablo.id))
 
 entry_12 = Entry.create!(content: "I love Mondays! It’s a bit weird, but I think it’s because I finally get some break from my being a dad and I get to sip my coffee in peace.",
-                         date: Date.today - 29,
-                         sentiment: "Positive",
-                         user: pablo,
-                         obstacle: nil)
+                        date: Date.today - 29,
+                        sentiment: "Positive",
+                        user: pablo,
+                        obstacle: nil)
 
 entry_13 = Entry.create!(content: "I am happy that I found my cat. It was super scary not to see him for so long. When I found him, I recognized how much I appreciated him. I’ve had him for only 2 years but it feels like so long.",
-                         date: Date.today - 31,
-                         sentiment: "Positive",
-                         user: pablo,
-                         obstacle: nil)
+                        date: Date.today - 31,
+                        sentiment: "Positive",
+                        user: pablo,
+                        obstacle: nil)
 
 entry_14 = Entry.create!(content: "Charlene welcomed me with an amazing dinner and wine. I did not see that coming. We had a good chat and spent so much time laughing and reminiscing about our past.",
-                         date: Date.today - 45,
-                         sentiment: "Positive",
-                         user: pablo,
-                         obstacle: nil)
+                        date: Date.today - 45,
+                        sentiment: "Positive",
+                        user: pablo,
+                        obstacle: nil)
 
 entry_15 = Entry.create!(content: "Ever since I got to Canada things have been working out for the better. Sometimes I forget, but I consider myself extremely lucky to be living here. The financial and political stability do not compare at all with Mexico. And the job opportunities and quality of life is out of this world. The only thing I do miss about Mexico is the food. I wish they had good tacos here.",
-                         date: Date.today - 49,
-                         sentiment: "Positive",
-                         user: pablo,
-                         obstacle: nil)
+                        date: Date.today - 49,
+                        sentiment: "Positive",
+                        user: pablo,
+                        obstacle: nil)
 
 
 puts "Adding recommendations"

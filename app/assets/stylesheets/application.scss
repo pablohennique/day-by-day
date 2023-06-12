@@ -10,6 +10,9 @@
 // Your CSS partials
 @import "components/index";
 @import "pages/index";
+@import "actiontext";
+@import "flatpickr/dist/flatpickr";
+@import "flatpickr/dist/themes/material_blue";
 
 // Added to app.html.erb to push footer to bottom. Can remove if needed
 .container-content {
