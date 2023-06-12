@@ -122,21 +122,21 @@
 
 // Medium devices (tablets, 768px and up)
 @media (min-width: 768px) {
-  .entreis_cards {
+  .entries_cards {
     grid-template-columns: 1fr 1fr 1fr;
   }
 }
 
 // Large devices (desktops, 992px and up)
 @media (min-width: 992px) {
-  .entreis_cards {
+  .entries_cards {
     grid-template-columns: 1fr 1fr 1fr;
   }
 }
 
 // Extra large devices (large desktops, 1200px and up)
 @media (min-width: 1200px) {
-  .entreis_cards {
+  .entries_cards {
     grid-template-columns: 1fr 1fr 1fr 1fr;
   }
 }
