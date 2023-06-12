@@ -1,5 +1,7 @@
 .obstacle-done-card {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
   width: 350px;
   border: 1px solid;
   border-color: #EAEAEA;
@@ -8,8 +10,6 @@
   padding: 45px;
   margin: 20px;
   color: black;
-  justify-content: space-between;
-  align-items: center;
 
   p {
     padding: 0;
