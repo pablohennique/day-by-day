@@ -2,10 +2,10 @@ class ObstaclesController < ApplicationController
 
   def index
     @obstacles = Obstacle.where(user_id: current_user).order('id DESC')
+    @done_obstacles = @obstacles.select { |obstacle| obstacle.done? }
   end
 
   def show
-    raise
     @obstacle = Obstacle.find(params[:id])
     @recommendations = Recommendation.where(obstacle_id: @obstacle.id)
     @entries = Entry.where(obstacle_id: @obstacle.id)

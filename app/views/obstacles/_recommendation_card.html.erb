@@ -1,20 +1,18 @@
-<div class="reco-card">
-  <div class="reco-card-img" style="background-image: url('assets/images/placeholder.png');">
-  </div>
+<div class="reco-card-top" style="background-image: url('assets/images/placeholder.png');">
+</div>
 
-  <div class ="reco-card-text">
+<div class ="reco-card-text">
 
-    <% case recommendation.category %>
-    <% when "Reframing" %>
-      <h3>Reframe</h3>
-    <% when "Visualization" %>
-      <h3>Visualize</h3>
-    <% when "Compassion" %>
-      <h3>Show Compassion</h3>
-    <% when "Feel Emotions" %>
-      <h3>Feel Emotions</h3>
-    <% end %>
+  <% case recommendation.category %>
+  <% when "Reframing" %>
+    <h3>Reframe</h3>
+  <% when "Visualization" %>
+    <h3>Visualize</h3>
+  <% when "Compassion" %>
+    <h3>Show Compassion</h3>
+  <% when "Feel Emotions" %>
+    <h3>Feel Emotions</h3>
+  <% end %>
 
-    <p><%= recommendation.content %></p>
-  </div>
+  <p><%= recommendation.content %></p>
 </div>
