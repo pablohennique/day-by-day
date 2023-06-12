@@ -1,13 +1,25 @@
 <div class="container">
+  <%= link_to "Back to my obstacles", obstacles_path%>
+  <div class="row">
+    <div class="recos-heading">
+      <h1 class="mt-5 mb-5"><%= @obstacle.title %></h1>
+      <br>
+      <%# <%= @obstacle.done == false ? (button_to "I solved this obstacle", done_path, method:'patch') : "This obstacle is solved" %>
+      <% if @obstacle.done %>
+        <%= render "obstacle_resolved_card" %>
+      <% else %>
+        <%= (button_to "Mark obstacle as resolved", done_path, method:'patch', class:"bootstrap-override-button") %>
+      <% end %>
+    </div>
+  </div>
 
-  <h1><%= @obstacle.title %></h1>
-  <br>
-  <%= @obstacle.done == false ? (button_to "I solved this obstacle", done_path, method:'patch') : "This obstacle is solved" %>
-
+<div class="reco-cards">
   <% @recommendations.each do |recommendation| %>
-    <%= render "recommendation_card", recommendation: recommendation %>
+    <div class="reco-card">
+      <%= render "recommendation_card", recommendation: recommendation %>
+    </div>
   <% end %>
-
+</div>
 
   <h2>Entries relevant to this obstacle</h2>
   <div class="row">
