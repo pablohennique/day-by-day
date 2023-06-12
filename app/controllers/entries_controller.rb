@@ -22,7 +22,7 @@ class EntriesController < ApplicationController
       turn_to_summary(@entry.content)
       if @sentiment == "Positive"
         turn_to_gratefulness(@entry.content)
-      elsif @sentiment == "Non-Positive"
+      elsif @sentiment != "Positive"
         match_summary(@entry.content)
         create_obstacle if @match == "false"
         update_entry if @match != "false"
@@ -53,7 +53,7 @@ class EntriesController < ApplicationController
 
   def search_by_date
     @from_date = params[:To].split[0]
-    @to_date =  params[:To].split[2]
+    @to_date = params[:To].split[2]
     @entries = @entries.where('date BETWEEN ? AND ?', @from_date, @to_date)
   end
 
@@ -67,8 +67,8 @@ class EntriesController < ApplicationController
         model: "gpt-3.5-turbo",
         messages: [{ role: "user",
                   content: "Indicate the sentiment for the following entry.
-                              Permited responses: 'Positive', 'Non-Positive'
-                              #{entry}" }],
+                  Permited responses: 'Positive', 'Neutral', 'Negative'
+                  #{entry}" }],
         temperature: 0.3
         # max_tokens: 30
       }
@@ -184,6 +184,7 @@ class EntriesController < ApplicationController
   end
 
   def get_recommendations
+    Recommendation.where(obstacle: @obstacle).destroy_all
     @client = OpenAI::Client.new
     @gpt_recommendations = @client.chat(
       parameters: {
