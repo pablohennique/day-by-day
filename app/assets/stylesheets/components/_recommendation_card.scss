@@ -33,18 +33,12 @@
   padding-right: 20px;
 
   p {
-    overflow: scroll;
+    overflow: hidden;
     display: -webkit-box;
     -webkit-box-orient: vertical;
+    -webkit-line-clamp: var(--read-more-line-clamp, 3);
   }
 }
-
-// .truncate-overflow {
-// overflow: hidden;
-// display: -webkit-box;
-// -webkit-box-orient: vertical;
-// -webkit-line-clamp: 3;
-// }
 
 .recos-heading{
   display: flex;
