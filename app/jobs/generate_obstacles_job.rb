@@ -1,50 +1,21 @@
-class EntriesController < ApplicationController
-  def index
-    @rand_gratefulness = Gratefulness.where(user_id: current_user).sample
-    @entries = Entry.where(user_id: current_user)
-    @entries = Entry.order('id DESC')
-    search_by_date if !params[:To].nil? && params[:To].split[0].present? && params[:To].split[2].present?
-  end
+class GenerateObstaclesJob < ApplicationJob
+  queue_as :default
 
-  def show
-    @entry = Entry.find(params[:id])
-  end
-
-  def new
-    @entry = Entry.new
-  end
-
-  def create
-    @entry = Entry.new(rich_body: params[:entry][:rich_body], user: current_user, date: Date.today)
-    @entry.content = @entry.rich_body.body.to_plain_text
-    if @entry.save
-      GenerateObstaclesJob.perform_now(@entry)
-      redirect_to entries_path
+  def perform(entry)
+    @entry = entry
+    sentiment_analysis(@entry.content)
+    turn_to_summary(@entry.content)
+    if @sentiment == "Positive"
+      turn_to_gratefulness(@entry.content)
+    elsif @sentiment == "Non-Positive"
+      match_summary(@entry.content)
+      create_obstacle if @match.include?("false")
+      update_entry if @match != "false"
+      summarize_entries_in_obstacle
+      get_recommendations
     else
-      render :new, status: 422
+      p "#{@match}"
     end
-  end
-
-  def edit
-    @entry = Entry.find(params[:id])
-  end
-
-  def update
-    @entry = Entry.find(params[:id])
-    @entry.update(content: params[:entry][:content])
-    redirect_to entries_path
-  end
-
-  def destroy
-    @entry = Entry.find(params[:id])
-    @entry.destroy
-    redirect_to entries_path
-  end
-
-  def search_by_date
-    @from_date = params[:To].split[0]
-    @to_date =  params[:To].split[2]
-    @entries = @entries.where('date BETWEEN ? AND ?', @from_date, @to_date)
   end
 
   private
@@ -57,8 +28,8 @@ class EntriesController < ApplicationController
         model: "gpt-3.5-turbo",
         messages: [{ role: "user",
                   content: "Indicate the sentiment for the following entry.
-                              Permited responses: 'Positive', 'Non-Positive'
-                              #{entry}" }],
+                            Permited responses: 'Positive', 'Non-Positive'
+                            #{entry}" }],
         temperature: 0.3
         # max_tokens: 30
       }
@@ -74,7 +45,7 @@ class EntriesController < ApplicationController
   def turn_to_gratefulness(entry)
     gpt_gratefulness(entry)
     @gratefulness = @response["choices"][0]["message"]["content"]
-    Gratefulness.create(content: @gratefulness, user_id: current_user.id)
+    Gratefulness.create(content: @gratefulness, user_id: @entry.user_id)
   end
 
   def gpt_gratefulness(entry)
@@ -114,10 +85,7 @@ class EntriesController < ApplicationController
   end
 
   def match_summary(entry)
-    @obstacles = Obstacle.all
-
-    # @obstacles_list = @obstacles.map { |obstacle| "#{obstacle.title}" }
-    @obstacles_titles_arr = @obstacles.map { |obstacle| obstacle.title }
+    @obstacles_titles_arr = Obstacle.pluck(:title)
 
     gpt_match_summary(entry)
     @match = @gpt_match["choices"][0]["message"]["content"]
@@ -144,7 +112,7 @@ class EntriesController < ApplicationController
   end
 
   def create_obstacle
-    @obstacle = Obstacle.create(title: @summary, user_id: current_user.id)
+    @obstacle = Obstacle.create(title: @summary, user_id: @entry.user_id)
     @entry.update(obstacle_id: @obstacle.id)
   end
 
@@ -153,6 +121,7 @@ class EntriesController < ApplicationController
     @entry.update(obstacle_id: @obstacle.id)
   end
   # OBSTACLE ENDS
+
 
   # RECOMMENDATIONS START
   def summarize_entries_in_obstacle
