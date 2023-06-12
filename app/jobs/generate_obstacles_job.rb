@@ -3,64 +3,18 @@ class GenerateObstaclesJob < ApplicationJob
 
   def perform(entry)
     @entry = entry
-    sentiment_analysis(@entry.content)
     turn_to_summary(@entry.content)
-    if @sentiment == "Positive"
-      turn_to_gratefulness(@entry.content)
-    elsif @sentiment == "Non-Positive"
-      match_summary(@entry.content)
-      create_obstacle if @match.include?("false")
-      update_entry if @match != "false"
-      summarize_entries_in_obstacle
-      get_recommendations
+    match_summary(@entry.content)
+    if @match.include?("fs") || @match.include?("false")
+      create_obstacle
     else
-      p "#{@match}"
+      update_entry
     end
+    summarize_entries_in_obstacle
+    get_recommendations
   end
 
   private
-
-  # SENTIMENT ANALYSIS STARTS
-  def sentiment_analysis(entry)
-    @client = OpenAI::Client.new
-    @response = @client.chat(
-      parameters: {
-        model: "gpt-3.5-turbo",
-        messages: [{ role: "user",
-                  content: "Indicate the sentiment for the following entry.
-                            Permited responses: 'Positive', 'Non-Positive'
-                            #{entry}" }],
-        temperature: 0.3
-        # max_tokens: 30
-      }
-    )
-    @sentiment = @response["choices"][0]["message"]["content"]
-    @sentiment.chop! if @sentiment.last == "."
-    @entry.update(sentiment: @sentiment)
-  end
-  # SENTIMENT ANALYSIS ENDS
-
-
-  # GRATEFULNESS STARTS
-  def turn_to_gratefulness(entry)
-    gpt_gratefulness(entry)
-    @gratefulness = @response["choices"][0]["message"]["content"]
-    Gratefulness.create(content: @gratefulness, user_id: @entry.user_id)
-  end
-
-  def gpt_gratefulness(entry)
-    @client = OpenAI::Client.new
-    @response = @client.chat(
-      parameters: {
-        model: "gpt-3.5-turbo",
-        messages: [{ role: "user",
-                     content: "Write a gratefulness statement of 30 words or less based on
-                              the followoing entry: #{entry}" }],
-        temperature: 0.1
-      }
-    )
-  end
-  # GRATEFULNESS ENDS
 
   # OBSTACLES STARTS
   def turn_to_summary(entry)
@@ -85,13 +39,14 @@ class GenerateObstaclesJob < ApplicationJob
   end
 
   def match_summary(entry)
-    @obstacles_titles_arr = Obstacle.pluck(:title)
+    # @obstacles_titles_arr = Obstacle.pluck(:title)
+    @obstacles_titles_arr = Obstacle.all.map { |obstacle| "#{obstacle.id} - #{obstacle.title}" }
 
     gpt_match_summary(entry)
     @match = @gpt_match["choices"][0]["message"]["content"]
     @match.chop! if @match.last == "."
     @match.downcase! if @match == "False"
-    @match.delete!("\"")
+    @match.delete!("'Potential match: '\"")
   end
 
   def gpt_match_summary(entry)
@@ -102,7 +57,7 @@ class GenerateObstaclesJob < ApplicationJob
         messages: [{ role: "user",
                      content: "I'm attempting to match life situations that might be related to each other. These situations are separate entries in a user's journal.
                      Indicate if there is a potential match between the New Entry and the Existing Entries Array.
-                     If there is a potential match, return ONLY the string from the Existing Entries Array where the match might exist. Do not provide any additional explanation.
+                     If there is a potential match, return the id associated to the Existing Entries Array where the match might exist. Do not provide any additional explanation.
                      If no relationship is found, return 'false'.
                      New Entry:'#{entry}'
                      Existing Entries Array: '#{@obstacles_titles_arr}'"}],
@@ -117,11 +72,11 @@ class GenerateObstaclesJob < ApplicationJob
   end
 
   def update_entry
-    @obstacle = Obstacle.find_by(title: @match)
+    @match.to_i
+    @obstacle = Obstacle.find_by(id: @match)
     @entry.update(obstacle_id: @obstacle.id)
   end
   # OBSTACLE ENDS
-
 
   # RECOMMENDATIONS START
   def summarize_entries_in_obstacle
