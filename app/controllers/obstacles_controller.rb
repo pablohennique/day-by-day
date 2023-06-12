@@ -5,12 +5,15 @@ class ObstaclesController < ApplicationController
     @current_entries = Entry.where(user_id: current_user)
 
     @user_obstacles = []
-
     @current_entries.each do |entry|
-      if !entry.obstacle_id.nil?
-        @user_obstacles.push(Obstacle.find(entry.obstacle_id))
-      end
+      @user_obstacles.push(Obstacle.find(entry.obstacle_id)) if !entry.obstacle_id.nil?
     end
+
+    @done_obstacles = []
+    @user_obstacles.each do |obstacle|
+      @done_obstacles.push(@user_obstacles.select { |obstacle| obstacle.done?})
+    end
+
   end
 
   def show
