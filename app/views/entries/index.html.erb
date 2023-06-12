@@ -11,19 +11,17 @@
     </div>
   </div>
 
-  <div class="row">
-    <div class="entries_flex" style="gap:100px;">
-      <div class="col">
-
-        <%= link_to  new_entry_path, class: "button px-5" do%>
+    <div class="d-flex justify-content-around" style="gap:390px;">
+      <div class="mt-2">
+        <%= link_to new_entry_path, class: "button" do%>
           <i class="fa-solid fa-pen"></i> NEW ENTRY
         <% end %>
       </div>
-      <div class="col">
+
+      <div class="d-flex justify-content-around align-items-center" >
         <%= render "calendar_search" %>
       </div>
     </div>
-  </div>
 
   <div class="row">
       <div class="entries_cards" >

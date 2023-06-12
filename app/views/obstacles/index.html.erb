@@ -1,7 +1,5 @@
 <h1 class="text-center pt-5 pb-4">My obstacles</h1>
 
-<% @done_obstacles = @obstacles.select { |obstacle| obstacle.done? } %>
-
 <div class="row">
   <div class="row justify-content-around">
     <% @obstacles.each do |obstacle| %>
