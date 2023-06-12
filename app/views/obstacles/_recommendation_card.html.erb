@@ -1,8 +1,4 @@
 <div class="reco-card-top" style="background-image: url('assets/images/placeholder.png');">
-</div>
-
-<div class ="reco-card-text">
-
   <% case recommendation.category %>
   <% when "Reframing" %>
     <h3>Reframe</h3>
@@ -13,12 +9,8 @@
   <% when "Feel Emotions" %>
     <h3>Feel Emotions</h3>
   <% end %>
+</div>
 
+<div class ="reco-card-text">
   <p><%= recommendation.content %></p>
-
-  <%# <button onclick="truncateText()">Show less</button> %>
-
-  <%# <button onclick="document.querySelector('p').classList.remove('line-clamp-3')">Read more</button>
-  <button onclick="document.querySelector('p').classList.add('line-clamp-3')">Read less</button> %>
-
 </div>

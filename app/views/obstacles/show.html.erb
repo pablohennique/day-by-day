@@ -1,4 +1,5 @@
 <div class="container">
+  <%= link_to "Back to my obstacles", obstacles_path%>
   <div class="row">
     <div class="recos-heading">
       <h1 class="mt-5 mb-5"><%= @obstacle.title %></h1>
@@ -7,7 +8,7 @@
       <% if @obstacle.done %>
         <%= render "obstacle_resolved_card" %>
       <% else %>
-        <%= (button_to "Mark obstacle as resolved", done_path, method:'patch', class:"generic-button") %>
+        <%= (button_to "Mark obstacle as resolved", done_path, method:'patch', class:"bootstrap-override-button") %>
       <% end %>
     </div>
   </div>
