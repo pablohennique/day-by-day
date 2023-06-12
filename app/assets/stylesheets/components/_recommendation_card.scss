@@ -5,21 +5,19 @@
 }
 
 .reco-card {
-// width: 500px;
   border-radius: 10px;
-  // padding-bottom: 30px;
   margin-bottom: 10px;
 }
 
 .reco-card-top {
-  padding: 20px;
+  padding: 15px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   background-color: $purple;
   color: white;
 
   p {
-    padding: 0;
+    padding-top: 0;
     margin: 0;
   }
 }
@@ -36,8 +34,15 @@
     overflow: hidden;
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: var(--read-more-line-clamp, 3);
+    -webkit-line-clamp: var(--read-more-line-clamp, 4);
   }
+}
+
+.grey-link{
+  border: none !important;
+  background-color: white !important;
+  color: rgb(104, 104, 104) !important;
+  padding: none !important;
 }
 
 .recos-heading{
