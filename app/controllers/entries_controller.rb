@@ -28,7 +28,7 @@ class EntriesController < ApplicationController
         summarize_entries_in_obstacle
         get_recommendations
       end
-      redirect_to entries_path
+      redirect_to edit_entry_path(@entry)
     else
       render :new, status: 422
     end
