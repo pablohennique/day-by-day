@@ -1,19 +1,20 @@
 class GenerateObstacleJob < ApplicationJob
   queue_as :default
 
-  def perform
+  def perform(entry)
+    @entry = entry
     turn_to_summary
     match_summary
-    if @sentiment == "Positive"
+    p @entry.sentiment
+    if @entry.sentiment == "Positive"
       turn_to_gratefulness
-    elsif @sentiment == "Non-Positive"
-      create_obstacle if @match == "false"
+    elsif @entry.sentiment == "Non-Positive"
+      create_obstacle if @match.include?"false"
       update_entry if @match != "false"
       summarize_entries_in_obstacle
       get_recommendations
     end
   end
-
 
   private
 
@@ -31,18 +32,16 @@ class GenerateObstacleJob < ApplicationJob
         model: "gpt-3.5-turbo",
         messages: [{ role: "user",
                     content: "Create a title that summarizes this entry.
-                              Include proper nouns and use maximum
-                              7 words: #{params[:entry][:content]}" }],
+                              Include proper nouns and use maximum 7 words:
+                              #{@entry.content}" }],
         temperature: 0.1
       }
     )
   end
 
   def match_summary
-    @obstacles = Obstacle.all
-
     # @obstacles_list = @obstacles.map { |obstacle| "#{obstacle.title}" }
-    @obstacles_overview_arr = @obstacles.map { |obstacle| obstacle.overview }
+    @obstacles_overview_arr = Obstacle.pluck(:title)
 
     gpt_match_summary
     @match = @gpt_match["choices"][0]["message"]["content"]
@@ -57,18 +56,41 @@ class GenerateObstacleJob < ApplicationJob
       parameters: {
         model: "gpt-3.5-turbo",
         messages: [{ role: "user",
-                    content: "Is there a potential match between the Entry and any of the entries in the Entries Array?
-                    If there is a match, return only the sentence where the first match was found.
-                    Else, return 'false'.
-                    Entry:'#{params[:entry][:content]}'
-                    Entries Array: #{@obstacles_overview_arr}"}],
+                    content: "Is there a potential match between the Entry and
+                              any of the entries in the Entries Array?
+                              If there is a match, return only the sentence where the first match was found.
+                              Else, return 'false'.
+                              Entry:'#{@entry.content}'
+                              Entries Array: #{@obstacles_overview_arr}"}],
         temperature: 0.3
       }
     )
   end
 
+  # GRATEFULNESS STARTS
+  def turn_to_gratefulness
+    gpt_gratefulness
+    @gratefulness = @response["choices"][0]["message"]["content"]
+    Gratefulness.create(content: @gratefulness, user_id: current_user.id)
+  end
+
+  def gpt_gratefulness
+    @client = OpenAI::Client.new
+    @response = @client.chat(
+      parameters: {
+        model: "gpt-3.5-turbo",
+        messages: [{ role: "user",
+                      content: "Write a gratefulness statement of 30 words or less based on
+                              the followoing entry: #{@entry.content}" }],
+        temperature: 0.1
+      }
+    )
+  end
+  # GRATEFULNESS ENDS
+
+  # OBSTACLES START
   def create_obstacle
-    @obstacle = Obstacle.create(title: @summary)
+    @obstacle = Obstacle.create(title: @summary, user: @entry.user)
     @entry.update(obstacle_id: @obstacle.id)
   end
 
