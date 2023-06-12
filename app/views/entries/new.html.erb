@@ -1,6 +1,6 @@
 <%= link_to "Back to my entries", entries_path%>
 <%= simple_form_for @entry do |f| %>
   <button type="submit" class="button">SAVE</button>
-  <%= f.rich_text_area :content %>
+  <%= f.rich_text_area :rich_body %>
   <%= f.submit %>
 <% end%>
