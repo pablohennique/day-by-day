@@ -6,6 +6,16 @@
   <p><%= "#{entry.content}" %></p>
 </div>
 
-<div class ="entries_read">
-    <%= entry.sentiment %>
+<div class ="entries_read d-flex align-self-center">
+   <% case entry.sentiment %>
+      <% when "Positive" %>
+        <i style="color:#FEC700" class="fa-regular fa-face-smile-beam fa-lg"></i>
+        <p class="mb-0 sentiment_description">GOOD</p>
+      <% when "Neutral" %>
+      <i style="color:#679BF7" class="fa-regular fa-face-meh fa-lg"></i>
+        <p class="mb-0 sentiment_description">NEUTRAL</p>
+      <% when "Negative" %>
+        <i style="color:#F14D1B" class="fa-regular fa-face-frown fa-lg"></i>
+        <p class="mb-0 sentiment_description">BAD</p>
+    <% end %>
 </div>
