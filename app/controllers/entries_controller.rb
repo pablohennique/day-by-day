@@ -15,14 +15,15 @@ class EntriesController < ApplicationController
   end
 
   def create
-    @entry = Entry.new(content: params[:entry][:content], user: current_user, date: Date.today)
+    @entry = Entry.new(rich_body: params[:entry][:rich_body], user: current_user, date: Date.today)
+    @entry.content = @entry.rich_body.body.to_plain_text
     if @entry.save
-      sentiment_analysis
-      turn_to_summary
-      match_summary
+      sentiment_analysis(@entry.content)
+      turn_to_summary(@entry.content)
       if @sentiment == "Positive"
-        turn_to_gratefulness
+        turn_to_gratefulness(@entry.content)
       elsif @sentiment == "Non-Positive"
+        match_summary(@entry.content)
         create_obstacle if @match == "false"
         update_entry if @match != "false"
         summarize_entries_in_obstacle
@@ -59,7 +60,7 @@ class EntriesController < ApplicationController
   private
 
   # SENTIMENT ANALYSIS STARTS
-  def sentiment_analysis
+  def sentiment_analysis(entry)
     @client = OpenAI::Client.new
     @response = @client.chat(
       parameters: {
@@ -67,7 +68,7 @@ class EntriesController < ApplicationController
         messages: [{ role: "user",
                   content: "Indicate the sentiment for the following entry.
                               Permited responses: 'Positive', 'Non-Positive'
-                              #{params[:entry][:content]}" }],
+                              #{entry}" }],
         temperature: 0.3
         # max_tokens: 30
       }
@@ -80,20 +81,20 @@ class EntriesController < ApplicationController
 
 
   # GRATEFULNESS STARTS
-  def turn_to_gratefulness
-    gpt_gratefulness
+  def turn_to_gratefulness(entry)
+    gpt_gratefulness(entry)
     @gratefulness = @response["choices"][0]["message"]["content"]
     Gratefulness.create(content: @gratefulness, user_id: current_user.id)
   end
 
-  def gpt_gratefulness
+  def gpt_gratefulness(entry)
     @client = OpenAI::Client.new
     @response = @client.chat(
       parameters: {
         model: "gpt-3.5-turbo",
         messages: [{ role: "user",
                      content: "Write a gratefulness statement of 30 words or less based on
-                              the followoing entry: #{params[:entry][:content]}" }],
+                              the followoing entry: #{entry}" }],
         temperature: 0.1
       }
     )
@@ -101,14 +102,14 @@ class EntriesController < ApplicationController
   # GRATEFULNESS ENDS
 
   # OBSTACLES STARTS
-  def turn_to_summary
-    gpt_summary_entry
+  def turn_to_summary(entry)
+    gpt_summary_entry(entry)
     @summary = @gpt_summary["choices"][0]["message"]["content"]
     @summary.chop! if @summary.last == "."
     @entry.update(summary: @summary)
   end
 
-  def gpt_summary_entry
+  def gpt_summary_entry(entry)
     @client = OpenAI::Client.new
     @gpt_summary = @client.chat(
       parameters: {
@@ -116,43 +117,44 @@ class EntriesController < ApplicationController
         messages: [{ role: "user",
                      content: "Create a title that summarizes this entry.
                               Include proper nouns and use maximum
-                              7 words: #{params[:entry][:content]}" }],
+                              7 words: #{entry}" }],
         temperature: 0.1
       }
     )
   end
 
-  def match_summary
+  def match_summary(entry)
     @obstacles = Obstacle.all
 
     # @obstacles_list = @obstacles.map { |obstacle| "#{obstacle.title}" }
-    @obstacles_overview_arr = @obstacles.map { |obstacle| obstacle.overview }
+    @obstacles_titles_arr = @obstacles.map { |obstacle| obstacle.title }
 
-    gpt_match_summary
+    gpt_match_summary(entry)
     @match = @gpt_match["choices"][0]["message"]["content"]
     @match.chop! if @match.last == "."
     @match.downcase! if @match == "False"
     @match.delete!("\"")
   end
 
-  def gpt_match_summary
+  def gpt_match_summary(entry)
     @client = OpenAI::Client.new
     @gpt_match = @client.chat(
       parameters: {
         model: "gpt-3.5-turbo",
         messages: [{ role: "user",
-                     content: "Is there a potential match between the Entry and any of the entries in the Entries Array?
-                     If there is a match, return only the sentence where the first match was found.
-                     Else, return 'false'.
-                     Entry:'#{params[:entry][:content]}'
-                     Entries Array: #{@obstacles_overview_arr}"}],
+                     content: "I'm attempting to match life situations that might be related to each other. These situations are separate entries in a user's journal.
+                     Indicate if there is a potential match between the New Entry and the Existing Entries Array.
+                     If there is a potential match, return ONLY the string from the Existing Entries Array where the match might exist. Do not provide any additional explanation.
+                     If no relationship is found, return 'false'.
+                     New Entry:'#{entry}'
+                     Existing Entries Array: '#{@obstacles_titles_arr}'"}],
         temperature: 0.3
       }
     )
   end
 
   def create_obstacle
-    @obstacle = Obstacle.create(title: @summary)
+    @obstacle = Obstacle.create(title: @summary, user_id: current_user.id)
     @entry.update(obstacle_id: @obstacle.id)
   end
 
@@ -200,74 +202,26 @@ class EntriesController < ApplicationController
   end
 
   def apply_tactics
-    apply_reframing if @gpt_recommendations_content.include?("Reframing")
-    apply_compassion if @gpt_recommendations_content.include?("Compassion")
-    apply_feel_emotions if @gpt_recommendations_content.include?("Emotions")
-    apply_visualization if @gpt_recommendations_content.include?("Visualization")
+    apply_tactic("Reframing") if @gpt_recommendations_content.include?("Reframing")
+    apply_tactic("Compassion") if @gpt_recommendations_content.include?("Compassion")
+    apply_tactic("Feel Emotions") if @gpt_recommendations_content.include?("Emotions")
+    apply_tactic("Visualization") if @gpt_recommendations_content.include?("Visualization")
   end
 
-  def apply_reframing
+  def apply_tactic(tactic)
     @client = OpenAI::Client.new
     @gpt_reframing_recommendation = @client.chat(
       parameters: {
         model: "gpt-3.5-turbo",
         messages: [{ role: "user",
                      content: "Considering 4 tactics: Reframing, Compassion, Feel Emotions and Visualization.
-                              How could I apply Reframing to the following situation:
+                              How could I apply #{tactic} to the following situation:
                               #{@gpt_obstacle_overview_content}" }],
         temperature: 0.1
       }
     )
     @reframing_recommendation_content = @gpt_reframing_recommendation["choices"][0]["message"]["content"]
-    Recommendation.create(content: @reframing_recommendation_content, category: "Reframing", obstacle: @obstacle)
-  end
-
-  def apply_compassion
-    @client = OpenAI::Client.new
-    @gpt_compassion_recommendation = @client.chat(
-      parameters: {
-        model: "gpt-3.5-turbo",
-        messages: [{ role: "user",
-                     content: "Considering 4 tactics: Reframing, Compassion, Feel Emotions and Visualization.
-                              How could I apply Compassion to the following situation:
-                              #{@gpt_obstacle_overview_content}" }],
-        temperature: 0.1
-      }
-    )
-    @compassion_recommendation_content = @gpt_compassion_recommendation["choices"][0]["message"]["content"]
-    Recommendation.create(content: @compassion_recommendation_content, category: "Compassion", obstacle: @obstacle)
-  end
-
-  def apply_feel_emotions
-    @client = OpenAI::Client.new
-    @gpt_emotions_recommendation = @client.chat(
-      parameters: {
-        model: "gpt-3.5-turbo",
-        messages: [{ role: "user",
-                     content: "Considering 4 tactics: Reframing, Compassion, Feel Emotions and Visualization.
-                              How could I apply Feel Emotions to the following situation:
-                              #{@gpt_obstacle_overview_content}" }],
-        temperature: 0.1
-      }
-    )
-    @emotions_recommendation_content = @gpt_emotions_recommendation["choices"][0]["message"]["content"]
-    Recommendation.create(content: @emotions_recommendation_content, category: "Feel Emotions", obstacle: @obstacle)
-  end
-
-  def apply_visualization
-    @client = OpenAI::Client.new
-    @gpt_visualization_recommendation = @client.chat(
-      parameters: {
-        model: "gpt-3.5-turbo",
-        messages: [{ role: "user",
-                     content: "Considering 4 tactics: Reframing, Compassion, Feel Emotions and Visualization.
-                              How could I apply Visualization to the following situation:
-                              #{@gpt_obstacle_overview_content}" }],
-        temperature: 0.1
-      }
-    )
-    @visualization_recommendation_content = @gpt_visualization_recommendation["choices"][0]["message"]["content"]
-    Recommendation.create(content: @visualization_recommendation_content, category: "Visualization", obstacle: @obstacle)
+    Recommendation.create(content: @reframing_recommendation_content, category: tactic, obstacle: @obstacle)
   end
   # RECOMMENDATIONS END
 end
