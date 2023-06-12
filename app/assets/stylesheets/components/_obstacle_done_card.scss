@@ -16,3 +16,21 @@
     margin: 0;
   }
 }
+
+.obstacle-resolved-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  // width: 350px;
+  border: 1px solid;
+  border-color: #EAEAEA;
+  border-radius: 10px;
+  background-color: white;
+  padding: 15px;
+  color: black;
+
+  p {
+    padding: 5px;
+    margin: 0;
+  }
+}

@@ -7,7 +7,7 @@
       <% if @obstacle.done %>
         <%= render "obstacle_resolved_card" %>
       <% else %>
-        <%= (button_to "I solved this obstacle", done_path, method:'patch') %>
+        <%= (button_to "Mark obstacle as resolved", done_path, method:'patch', class:"generic-button") %>
       <% end %>
     </div>
   </div>
