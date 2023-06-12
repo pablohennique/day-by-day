@@ -10,7 +10,7 @@
   </div>
 </div>
 
-<h2>Obstacles I've overcome</h2>
 <% unless @done_obstacles.count == 0 %>
+  <h2>Obstacles I've overcome</h2>
   <%= render 'done_obstacles', obstacles: @obstacles %>
 <% end %>
