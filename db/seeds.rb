@@ -32,31 +32,31 @@ entry_2 = Entry.create!(content: "I woke up halfway through the night because Sa
                         date: Date.today - 1,
                         sentiment: "Non-positive",
                         user: pablo,
-                        obstacle: Obstacle.create!(title: "Baby Sacha Crying"))
+                        obstacle: Obstacle.create!(title: "Baby Sacha Crying", user_id: pablo.id))
 
 entry_3 = Entry.create!(content: "Today was the first day of career week, I think there were some good tips but I don’t know if it will really help me to find a job. However, I met Sam and got me really excited about her company. I’m going to send her my CV.",
                         date: Date.today - 4,
                         sentiment: "Non-positive",
                         user: pablo,
-                        obstacle: Obstacle.create!(title: "Career Week Was Not Helpful"))
+                        obstacle: Obstacle.create!(title: "Career Week Was Not Helpful", user_id: pablo.id))
 
 entry_4 = Entry.create!(content: "I got into a fight with Mike. He was very aggressive and I had to tell him to stop. It sucks because he is a good friend and now, we are not talking",
                         date: Date.today - 6,
                         sentiment: "Positive",
                         user: pablo,
-                        obstacle: Obstacle.create!(title: "Fight with Mike"))
+                        obstacle: Obstacle.create!(title: "Fight with Mike", user_id: pablo.id))
 
 entry_5 = Entry.create!(content: "I found a coin while I was walking to work. It made me think about my grandmother. She always used to say that finding a penny would make give you luck for the rest of the day. I miss her",
                         date: Date.today - 10,
                         sentiment: "Non-positive",
                         user: pablo,
-                        obstacle: Obstacle.create!(title: "Miss my grandmother"))
+                        obstacle: Obstacle.create!(title: "Miss my grandmother", user_id: pablo.id))
 
 entry_6 = Entry.create!(content: "I did not understand a single thing the Stephan was talking about during the lecture today. The entire AJAX concept is way above my head. I am happy Mark asked about it because otherwise I would have been more lost",
                         date: Date.today - 11,
                         sentiment: "Non-positive",
                         user: pablo,
-                        obstacle: Obstacle.create!(title: "Coudln't Understand a Lecture"))
+                        obstacle: Obstacle.create!(title: "Coudln't Understand a Lecture", user_id: pablo.id))
 
 entry_7 = Entry.create!(content: "I was unable to fall asleep last night because I could not stop thinking about whether or not I will be able to find a job. I concluded that I just have to do my best and trust that things will work out in the end.",
                         date: Date.today - 16,
@@ -68,7 +68,7 @@ entry_8 = Entry.create!(content: "I was watching finding nemo and it made me cry
                         date: Date.today - 18,
                         sentiment: "Non-positive",
                         user: pablo,
-                        obstacle: Obstacle.create!(title: "Think about my dad"))
+                        obstacle: Obstacle.create!(title: "Think about my dad", user_id: pablo.id))
 
 entry_9 = Entry.create!(content: "Mike was being an asshole again. This time he was the one who started the discussion. It was only logical that I would tell him to stop. If he ever brings up my sister again, I’ll lose it. I’m so pissed!",
                         date: Date.today - 19,
@@ -86,7 +86,7 @@ entry_11 = Entry.create!(content: "I saw this story on IG that made me shed a te
                          date: Date.today - 23,
                          sentiment: "Non-positive",
                          user: pablo,
-                         obstacle: Obstacle.create!(title: "IG Post Made Me Cry"))
+                         obstacle: Obstacle.create!(title: "IG Post Made Me Cry", user_id: pablo.id))
 
 entry_12 = Entry.create!(content: "I love Mondays! It’s a bit weird, but I think it’s because I finally get some break from my being a dad and I get to sip my coffee in peace.",
                          date: Date.today - 29,
