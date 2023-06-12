@@ -1,38 +1,47 @@
+.reco-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
 
 .reco-card {
-  // width: 500px;
-  border-radius: 10px;
-  padding-bottom: 30px;
-  margin-bottom: 25px;
- }
+// width: 500px;
+border-radius: 10px;
+padding-bottom: 30px;
+margin-bottom: 10px;
+}
 
- .reco-card-top {
-   padding: 25px;
-   border-top-left-radius: 10px;
-   border-top-right-radius: 10px;
-   background-color: $yellow;
- }
+.reco-card-top {
+  padding: 25px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  background-color: $yellow;
+}
 
- .reco-card-text {
-   background-color: white;
-   padding: 12px 8px;
-   border-bottom-left-radius: 10px;
-   border-bottom-right-radius: 10px;
-   padding-left: 20px;
-   padding-right: 20px;
+.reco-card-text {
+  background-color: white;
+  padding: 12px 8px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
 
-   p {
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
+  p {
+  overflow: scroll;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
   }
- }
+}
 
- .recos-heading{
-  display:flex;
+// .truncate-overflow {
+// overflow: hidden;
+// display: -webkit-box;
+// -webkit-box-orient: vertical;
+// -webkit-line-clamp: 3;
+// }
+
+.recos-heading{
+  display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-left: 30px;
-  padding-right: 30px;
 }

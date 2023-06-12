@@ -7,12 +7,13 @@
     </div>
   </div>
 
+<div class="reco-cards">
   <% @recommendations.each do |recommendation| %>
-    <div class="justify-content-around col-6">
+    <div class="reco-card">
       <%= render "recommendation_card", recommendation: recommendation %>
     </div>
   <% end %>
-
+</div>
 
   <h2>Entries relevant to this obstacle</h2>
   <div class="row">
