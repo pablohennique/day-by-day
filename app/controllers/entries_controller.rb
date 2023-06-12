@@ -21,8 +21,8 @@ class EntriesController < ApplicationController
       sentiment_analysis(@entry.content)
       if @entry.sentiment == "Positive"
         turn_to_gratefulness(@entry.content)
-      elsif @entry.sentiment == "Non-Positive"
-        GenerateObstaclesJob.perform_now(@entry)
+      elsif @entry.sentiment != "Positive"
+        GenerateObstaclesJob.perform_later(@entry)
         # summarize_entries_in_obstacle
         # get_recommendations
       end
