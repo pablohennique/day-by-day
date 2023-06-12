@@ -1,96 +1,22 @@
-class EntriesController < ApplicationController
-  def index
-    @rand_gratefulness = Gratefulness.where(user_id: current_user).sample
-    @entries = Entry.where(user_id: current_user).order('id DESC')
-    search_by_date if params[:from_date].present? && params[:to_date].present?
-  end
+class GenerateObstacleJob < ApplicationJob
+  queue_as :default
 
-  def show
-    @entry = Entry.find(params[:id])
-  end
-
-  def new
-    @entry = Entry.new
-  end
-
-  def create
-    @entry = Entry.new(content: params[:entry][:content], user: current_user, date: Date.today)
-    if @entry.save
-      sentiment_analysis
-      GenerateObstacleJob.perform_later
-      redirect_to entries_path
-    else
-      render :new, status: 422
+  def perform
+    turn_to_summary
+    match_summary
+    if @sentiment == "Positive"
+      turn_to_gratefulness
+    elsif @sentiment == "Non-Positive"
+      create_obstacle if @match == "false"
+      update_entry if @match != "false"
+      summarize_entries_in_obstacle
+      get_recommendations
     end
   end
 
-  def edit
-    @entry = Entry.find(params[:id])
-  end
-
-  def update
-    @entry = Entry.find(params[:id])
-    @entry.update(content: params[:entry][:content])
-    redirect_to entries_path
-  end
-
-  def destroy
-    @entry = Entry.find(params[:id])
-    @entry.destroy
-    redirect_to entries_path
-  end
-
-  def search_by_date
-    @from_date = params[:from_date]
-    @to_date = params[:to_date]
-    @entries = @entries.where('date BETWEEN ? AND ?', @from_date, @to_date)
-  end
 
   private
 
-  # SENTIMENT ANALYSIS STARTS
-  def sentiment_analysis
-    @client = OpenAI::Client.new
-    @response = @client.chat(
-      parameters: {
-        model: "gpt-3.5-turbo",
-        messages: [{ role: "user",
-                     content: "Indicate the sentiment for the following entry.
-                              Permited responses: 'Positive', 'Non-Positive'
-                              #{params[:entry][:content]}" }],
-        temperature: 0.3
-        # max_tokens: 30
-      }
-    )
-    @sentiment = @response["choices"][0]["message"]["content"]
-    @sentiment.chop! if @sentiment.last == "."
-    @entry.update(sentiment: @sentiment)
-  end
-  # SENTIMENT ANALYSIS ENDS
-
-
-  # GRATEFULNESS STARTS
-  def turn_to_gratefulness
-    gpt_gratefulness
-    @gratefulness = @response["choices"][0]["message"]["content"]
-    Gratefulness.create(content: @gratefulness, user_id: current_user.id)
-  end
-
-  def gpt_gratefulness
-    @client = OpenAI::Client.new
-    @response = @client.chat(
-      parameters: {
-        model: "gpt-3.5-turbo",
-        messages: [{ role: "user",
-                     content: "Write a gratefulness statement of 30 words or less based on
-                              the followoing entry: #{params[:entry][:content]}" }],
-        temperature: 0.1
-      }
-    )
-  end
-  # GRATEFULNESS ENDS
-
-  # OBSTACLES STARTS
   def turn_to_summary
     gpt_summary_entry
     @summary = @gpt_summary["choices"][0]["message"]["content"]
@@ -104,7 +30,7 @@ class EntriesController < ApplicationController
       parameters: {
         model: "gpt-3.5-turbo",
         messages: [{ role: "user",
-                     content: "Create a title that summarizes this entry.
+                    content: "Create a title that summarizes this entry.
                               Include proper nouns and use maximum
                               7 words: #{params[:entry][:content]}" }],
         temperature: 0.1
@@ -131,11 +57,11 @@ class EntriesController < ApplicationController
       parameters: {
         model: "gpt-3.5-turbo",
         messages: [{ role: "user",
-                     content: "Is there a potential match between the Entry and any of the entries in the Entries Array?
-                     If there is a match, return only the sentence where the first match was found.
-                     Else, return 'false'.
-                     Entry:'#{params[:entry][:content]}'
-                     Entries Array: #{@obstacles_overview_arr}"}],
+                    content: "Is there a potential match between the Entry and any of the entries in the Entries Array?
+                    If there is a match, return only the sentence where the first match was found.
+                    Else, return 'false'.
+                    Entry:'#{params[:entry][:content]}'
+                    Entries Array: #{@obstacles_overview_arr}"}],
         temperature: 0.3
       }
     )
@@ -161,7 +87,7 @@ class EntriesController < ApplicationController
       parameters: {
         model: "gpt-3.5-turbo",
         messages: [{ role: "user",
-                     content: "Create a summary of all the sentences included in the following array.
+                    content: "Create a summary of all the sentences included in the following array.
                               Write the summary from the first person perspective.
                               #{@list_entries_associated_to_obstacle}" }],
         temperature: 0.1
@@ -177,7 +103,7 @@ class EntriesController < ApplicationController
       parameters: {
         model: "gpt-3.5-turbo",
         messages: [{ role: "user",
-                     content: "For the following entry, which of the following 4 techniques
+                    content: "For the following entry, which of the following 4 techniques
                               could be applied? (1-Reframing, 2-Compassion, 3-Feel Emotions,
                               4-Visualization). Only return the techniques that are highly applicable.
                               Do not include any additional information.
@@ -202,7 +128,7 @@ class EntriesController < ApplicationController
       parameters: {
         model: "gpt-3.5-turbo",
         messages: [{ role: "user",
-                     content: "Considering 4 tactics: Reframing, Compassion, Feel Emotions and Visualization.
+                    content: "Considering 4 tactics: Reframing, Compassion, Feel Emotions and Visualization.
                               How could I apply Reframing to the following situation:
                               #{@gpt_obstacle_overview_content}" }],
         temperature: 0.1
@@ -218,7 +144,7 @@ class EntriesController < ApplicationController
       parameters: {
         model: "gpt-3.5-turbo",
         messages: [{ role: "user",
-                     content: "Considering 4 tactics: Reframing, Compassion, Feel Emotions and Visualization.
+                    content: "Considering 4 tactics: Reframing, Compassion, Feel Emotions and Visualization.
                               How could I apply Compassion to the following situation:
                               #{@gpt_obstacle_overview_content}" }],
         temperature: 0.1
@@ -234,7 +160,7 @@ class EntriesController < ApplicationController
       parameters: {
         model: "gpt-3.5-turbo",
         messages: [{ role: "user",
-                     content: "Considering 4 tactics: Reframing, Compassion, Feel Emotions and Visualization.
+                    content: "Considering 4 tactics: Reframing, Compassion, Feel Emotions and Visualization.
                               How could I apply Feel Emotions to the following situation:
                               #{@gpt_obstacle_overview_content}" }],
         temperature: 0.1
@@ -250,7 +176,7 @@ class EntriesController < ApplicationController
       parameters: {
         model: "gpt-3.5-turbo",
         messages: [{ role: "user",
-                     content: "Considering 4 tactics: Reframing, Compassion, Feel Emotions and Visualization.
+                    content: "Considering 4 tactics: Reframing, Compassion, Feel Emotions and Visualization.
                               How could I apply Visualization to the following situation:
                               #{@gpt_obstacle_overview_content}" }],
         temperature: 0.1

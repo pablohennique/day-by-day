@@ -5,7 +5,6 @@ class ObstaclesController < ApplicationController
   end
 
   def show
-    raise
     @obstacle = Obstacle.find(params[:id])
     @recommendations = Recommendation.where(obstacle_id: @obstacle.id)
     @entries = Entry.where(obstacle_id: @obstacle.id)
