@@ -4,11 +4,14 @@
 
 import { application } from "./application"
 
+import AnnotateController from "./annotate_controller"
+application.register("annotate", AnnotateController)
+
 import FlatpickrController from "./flatpickr_controller"
 application.register("flatpickr", FlatpickrController)
 
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
 
-import ReadMore from 'stimulus-read-more'
-application.register('read-more', ReadMore)
+import ReadMoreController from "./read_more_controller"
+application.register("read-more", ReadMoreController)
