@@ -12,7 +12,7 @@ export default class extends Controller {
     } else if (this.hasHighlightTarget) {
       annotate(this.highlightTarget, { type: 'highlight', color: '#FEC700' }).show();
     } else if (this.hasUnderlineTarget) {
-      annotate(this.underlineTarget, { type: 'underline', color: '#FEC700' }).show();
+      annotate(this.underlineTarget, { type: 'underline', color: '#FEC700', strokeWidth:5 }).show();
     } else if (this.hasCircleTarget) {
       annotate(this.circleTarget, { type: 'circle', color: '#FEC700' }).show();
     } else if (this.hasBoxTarget) {
