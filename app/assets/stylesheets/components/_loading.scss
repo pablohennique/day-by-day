@@ -1,5 +1,5 @@
 .loading_card {
-  background: #FFFFFF;
+  // background: #FFFFFF;
   border-radius: 20px;
 }
 
@@ -8,9 +8,14 @@
 }
 
 .loading_text {
-  padding: 0px 150px;
+  padding: 0px 200px;
+  padding-bottom: 50px;
 }
 
 .loading_gif {
   width: 100px;
+}
+
+.hidden {
+  display: none;
 }

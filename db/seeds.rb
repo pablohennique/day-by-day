@@ -41,7 +41,7 @@ Entry.create!(content: "Today was the first day of career week, I think there we
 
 Entry.create!(content: "I got into a fight with Mike. He was very aggressive and I had to tell him to stop. It sucks because he is a good friend and now, we are not talking",
                         date: Date.today - 6,
-                        sentiment: "Positive",
+                        sentiment: "Negative",
                         user: pablo,
                         obstacle: Obstacle.create!(title: "Fight with Mike", user_id: pablo.id))
 
