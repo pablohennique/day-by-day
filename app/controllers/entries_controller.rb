@@ -45,6 +45,10 @@ class EntriesController < ApplicationController
 
   def edit
     @entry = Entry.find(params[:id])
+    unless @entry.obstacle_id.nil?
+      ob_id = @entry.obstacle_id
+      @obstacle = Obstacle.find(ob_id)
+    end
   end
 
   def update
