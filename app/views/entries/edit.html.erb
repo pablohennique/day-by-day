@@ -21,11 +21,20 @@
     <br>
     <div class="d-flex align-items-center justify-content-between mb-5">
     <div></div>
-    <div class="mt-5">
+    <div class="mt-4">
       <%=link_to "DELETE", entry_path(@entry),
       data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'},
       class: "danger_button" %>
       </div>
     </div>
   <% end%>
+
+  <div class="mb-5">
+    <% if !@obstacle.nil? %>
+      <h2>Explore Recommendations</h2>
+      <br>
+      <%= render "obstacles/obstacle_card", obstacle: @obstacle, class:"margin-left:0px;"%>
+    <% end %>
+  </div>
+
 </div>
