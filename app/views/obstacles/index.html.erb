@@ -1,14 +1,16 @@
 <div data-controller="annotate">
-  <h1 class="text-center pt-5 pb-4"><span data-annotate-target="underline">My obstacles</span></h1>
+  <h1 class="pt-5 pb-4"><span data-annotate-target="underline">My obstacles</span></h1>
 </div>
-<div>
-  <div class="row">
-    <div class="row justify-content-around">
+
+<div class="row">
+    <div class="col-lg-6 col-sm-12">
       <% @obstacles.each do |obstacle| %>
         <%= render "obstacle_card", obstacle: obstacle unless obstacle.done?%>
       <% end %>
     </div>
-  </div>
+    <div class="col-lg-6 col-sm-12">
+      <p>image</p>
+    </div>
 </div>
 
 <% unless @done_obstacles.count == 0 %>
