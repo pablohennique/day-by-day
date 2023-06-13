@@ -1,10 +1,5 @@
 <h1 class="text-center pt-5 pb-4">My obstacles</h1>
-<div class="d-flex">
-  <div >
-    <iframe src="https://giphy.com/embed/ZMQpwaa37PXbsPYRoe" width="400" height="500" frameBorder="0" class="giphy-embed sticky-top" allowFullScreen></iframe>
-  </div>
-
-  <div class="d-flex">
+  <div>
     <div class="row">
       <div class="row justify-content-around">
         <% @obstacles.each do |obstacle| %>
@@ -13,7 +8,6 @@
       </div>
     </div>
   </div>
-</div>
 
 <% unless @done_obstacles.count == 0 %>
   <h2 class="text-center pt-5 pb-4">Obstacles I've overcome</h2>
