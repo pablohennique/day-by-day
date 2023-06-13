@@ -3,14 +3,6 @@ class EntriesController < ApplicationController
     @entries = Entry.where(user_id: current_user).order('id DESC')
     # Entries - Per months
     @entries_by_months = @entries.group_by { |entry_month| entry_month.date.month }
-    @months = @entries_by_months.map { |group| Date::MONTHNAMES[group.first] }
-    # @entries_by_months.first[1] - April
-    @entries_of_one_month = @entries_by_months.map do |group|
-      group[1]
-    end
-    # raise
-
-
     # Gratefulness
     @rand_gratefulness = Gratefulness.where(user_id: current_user).sample
     # Search

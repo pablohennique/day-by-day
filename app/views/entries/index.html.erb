@@ -23,38 +23,21 @@
     </div>
   </div>
 
-<% @entries_by_months.each do |key, value| %>
-    <h3><%= key %></h3>
-    <% value.each do |entry| %>
-    <li><%= entry.content %></li>
-    <li><%= entry.date %></li>
-    <% end %>
-  <% end %>
-
-
-  <% @months.each do |month| %>
-    <h2><%= month %></h2>
-      <% @entries_of_one_month.each do |entry| %>
-        <li><%= entry[0].content %> </li>
-      <% end %>
-  <% end %>
-
-
-
-
-
   <div class="row">
-      <div class="entries_cards" >
-          <% @entries.each do |entry| %>
-          <button class="btn w-25" onclick="location.href='/entries/<%=entry.id%>/edit'" >
-            <div class="entries_card col-4">
-                <%= render "entries_card", entry: entry %>
-            </div>
-          </button>
-          <% end %>
-      </div>
-    </div>
-   </div>
+      <% @entries_by_months.each do |key, value| %>
+        <h2><%= Date::MONTHNAMES[key] %></h2>
+        <div class="entries_cards" >
+            <% value.each do |entry| %>
+              <button class="btn w-25" onclick="location.href='/entries/<%=entry.id%>/edit'" >
+                <div class="entries_card col-4">
+                    <%= render "entries_card", entry: entry %>
+                </div>
+              </button>
+            <% end %>
+        </div>
+      <% end %>
+  </div>
 
-   <%= render 'happy_memory', good_memory: @good_memory %>
+  <%= render 'happy_memory', good_memory: @good_memory %>
+
 </div>
