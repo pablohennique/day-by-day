@@ -5,7 +5,9 @@ class EntriesController < ApplicationController
     @entries_by_months = @entries.group_by { |entry_month| entry_month.date.month }
     @months = @entries_by_months.map { |group| Date::MONTHNAMES[group.first] }
     # @entries_by_months.first[1] - April
-    @entries_of_one_month = @entries_by_months.map { |group| group[1] }
+    @entries_of_one_month = @entries_by_months.map do |group|
+      group[1]
+    end
     # raise
 
 
