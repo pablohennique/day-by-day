@@ -1,10 +1,18 @@
 <h1 class="text-center pt-5 pb-4">My obstacles</h1>
+<div class="d-flex">
+  <div class="d-flex">
+    <iframe src="https://giphy.com/embed/ZMQpwaa37PXbsPYRoe" width="270" height="480" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+    <iframe src="https://giphy.com/embed/VbEuHLBUPQm55MyqJg" width="439" height="480" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+</div>
 
-<div class="row">
-  <div class="row justify-content-around">
-    <% @obstacles.each do |obstacle| %>
-      <%= render "obstacle_card", obstacle: obstacle unless obstacle.done?%>
-    <% end %>
+  <div class="d-flex">
+    <div class="row">
+      <div class="row justify-content-around">
+        <% @obstacles.each do |obstacle| %>
+          <%= render "obstacle_card", obstacle: obstacle unless obstacle.done?%>
+        <% end %>
+      </div>
+    </div>
   </div>
 </div>
 
