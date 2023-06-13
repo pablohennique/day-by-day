@@ -4,3 +4,5 @@ import "./controllers"
 import "bootstrap"
 import "trix"
 import "@rails/actiontext"
+import "./carousel"
+import 'swiper/css/bundle'

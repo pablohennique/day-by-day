@@ -23,20 +23,92 @@
     </div>
   </div>
 
-  <div class="row">
-      <% @entries_by_months.each do |key, value| %>
-        <h2><%= Date::MONTHNAMES[key] %></h2>
-        <div class="entries_cards" >
-            <% value.each do |entry| %>
-              <button class="btn w-25" onclick="location.href='/entries/<%=entry.id%>/edit'" >
-                <div class="entries_card col-4">
-                    <%= render "entries_card", entry: entry %>
-                </div>
-              </button>
+
+  <%# -----------STIMULUS CAROUSEL----------- %>
+
+      <div class="row mx-auto my-auto swiper-container" data-controller="carousel">
+        <div class="swiper-wrapper">
+
+            <% @entries_by_months.each do |key, value| %>
+
+                <h2><%= Date::MONTHNAMES[key] %></h2>
+
+                              <div class="row">
+                                      <% value.each do |entry| %>
+                                              <div class="col-sm-3">
+
+                                                    <div class="swiper-slide">
+                                                              <div class="entries_cards" >
+                                                                      <button class="btn w-25" onclick="location.href='/entries/<%=entry.id%>/edit'" >
+                                                                        <div class="entries_card">
+                                                                            <%= render "entries_card", entry: entry %>
+                                                                        </div>
+                                                                      </button>
+                                                              </div>
+                                                    </div>
+                                              </div>
+                                      <% end %>
+                              </div>
+
             <% end %>
         </div>
-      <% end %>
-  </div>
+      </div>
+
+
+  <%# -----------STIMULUS CAROUSEL----------- %>
+
+
+
+  <%# -----------BOOSTRAMPS CAROUSEL----------- %>
+
+                                    <div class="row mx-auto my-auto">
+                                      <div id="myCarousel" class="carousel slide w-100" data-ride="carousel">
+                                        <div class="carousel-inner" role="listbox">
+
+                                                  <% @entries_by_months.each do |key, value| %>
+
+                                                              <div class="carousel-item py-5 active">
+                                                                <div class="row">
+                                                                    <h2><%= Date::MONTHNAMES[key] %></h2>
+
+                                                                            <% value.each do |entry| %>
+                                                                                <div class="col-sm-3">
+                                                                                <div>
+
+                                                                                    <div class="entries_cards" >
+                                                                                            <button class="btn w-25" onclick="location.href='/entries/<%=entry.id%>/edit'" >
+                                                                                              <div class="entries_card">
+                                                                                                  <%= render "entries_card", entry: entry %>
+                                                                                              </div>
+                                                                                            </button>
+                                                                                    </div>
+                                                                                </div>
+                                                                                </div>
+                                                                            <% end %>
+
+                                                                </div>
+                                                              </div>
+
+                                                  <% end %>
+                                      <div class="col-12">
+                                          <a class="carousel-control-prev text-dark" href="#myCarousel" role="button" data-slide="prev">
+                                              <span class="fa fa-chevron-left" aria-hidden="true"></span>
+                                              <span class="sr-only">Previous</span>
+                                          </a>
+                                          <a class="carousel-control-next text-dark" href="#myCarousel" role="button" data-slide="next">
+                                              <span class="fa fa-chevron-right" aria-hidden="true"></span>
+                                              <span class="sr-only">Next</span>
+                                          </a>
+                                      </div>
+
+                                                </div>
+                                            </div>
+                                          </div>
+                                    </div>
+
+
+ <%# -----------BOOSTRAMPS CAROUSEL----------- %>
+
 
   <%= render 'happy_memory', good_memory: @good_memory %>
 
