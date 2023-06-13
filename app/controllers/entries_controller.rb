@@ -1,10 +1,17 @@
 class EntriesController < ApplicationController
   def index
-    @rand_gratefulness = Gratefulness.where(user_id: current_user).sample
     @entries = Entry.where(user_id: current_user).order('id DESC')
-    @entries_by_months = Entry.where()
-    @good_memory = Entry.where(sentiment: "Positive").sample
+    # Entries - Per months
+    @entries_by_months = @entries.group_by { |entry| entry.date.month }
+    @months = @entries_by_months.map { |group| Date::MONTHNAMES[group.first] }
+    @entries_of_one_month = @entries_by_months.map { |group| [group[1][0]] }
+    # Gratefulness
+    @rand_gratefulness = Gratefulness.where(user_id: current_user).sample
+    # Search
     search_by_date if !params[:To].nil? && params[:To].split[0].present? && params[:To].split[2].present?
+    # Good memory
+    @good_memory = Entry.where(sentiment: "Positive").sample
+
   end
 
   def show
