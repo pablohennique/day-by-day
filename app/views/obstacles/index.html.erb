@@ -1,5 +1,5 @@
 <div class="row" id="obstacle-header" data-controller="annotate">
-  <h1 class="col-lg-6 col-sm-12 pt-5 pb-5"><span data-annotate-target="underline">My obstacles</span></h1>
+  <h1 class="col-lg-6 col-sm-12"><span data-annotate-target="underline">My obstacles</span></h1>
   <p class="col-lg-6 col-sm-12">Take action to overcome the obstacles you face</p>
 </div>
 
@@ -14,9 +14,11 @@
     </div>
 </div>
 
-<% unless @done_obstacles.count == 0 %>
-  <h2 class="pt-5 pb-4">Obstacles I've overcome</h2>
-  <div class="row justify-content-around">
-    <%= render 'done_obstacles', obstacles: @obstacles %>
-  </div>
-<% end %>
+<div class="pb-5">
+  <% unless @done_obstacles.count == 0 %>
+    <h2 class="pt-5 pb-5">Obstacles I've overcome</h2>
+    <div class="row justify-content-around">
+      <%= render 'done_obstacles', obstacles: @obstacles %>
+    </div>
+  <% end %>
+</div>
