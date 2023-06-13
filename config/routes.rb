@@ -6,4 +6,9 @@ Rails.application.routes.draw do
   resources :obstacles, only: %i[index show]
   patch 'obstacles/:id', to: 'obstacles#done', as: :done
   resources :recommendations, only: %i[show update]
+
+  require "sidekiq"
+  authenticate :user, ->(user) { user.admin? } do
+    mount Sidekiq::Web => '/sidekiq'
+  end
 end

@@ -15,7 +15,7 @@ alexane = User.new(first_name:"Alexane", last_name:"Krek", email:"alexane@gmail.
 alexane.save
 emily = User.new(first_name:"Emily", last_name:"Brown", email:"emily6@gmail.com", password:"111111")
 emily.save
-pablo = User.new(first_name:"Pablo", last_name:"Hennique", email:"pablo@gmail.com", password:"111111")
+pablo = User.new(first_name:"Pablo", last_name:"Hennique", email:"pablo@gmail.com", password:"111111", admin: true)
 pablo.save
 
 
