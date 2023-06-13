@@ -15,7 +15,3 @@ application.register("hello", HelloController)
 
 import ReadMoreController from "./read_more_controller"
 application.register("read-more", ReadMoreController)
-
-
-import Carousel from 'stimulus-carousel'
-application.register("carousel", Carousel)
