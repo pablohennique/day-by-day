@@ -4,6 +4,9 @@
 
 import { application } from "./application"
 
+import { annotate } from "../rough_notation"
+annotate()
+
 import FlatpickrController from "./flatpickr_controller"
 application.register("flatpickr", FlatpickrController)
 
@@ -12,6 +15,3 @@ application.register("hello", HelloController)
 
 import ReadMore from 'stimulus-read-more'
 application.register('read-more', ReadMore)
-
-import { annotate } from "./rough_notation"
-annotate()
