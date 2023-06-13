@@ -30,7 +30,7 @@ class GenerateObstaclesJob < ApplicationJob
       parameters: {
         model: "gpt-3.5-turbo",
         messages: [{ role: "user",
-                     content: "Create a title that summarizes this entry.
+                    content: "Create a title that summarizes this entry.
                               Include proper nouns and use maximum
                               7 words: #{entry}" }],
         temperature: 0.1
@@ -55,12 +55,12 @@ class GenerateObstaclesJob < ApplicationJob
       parameters: {
         model: "gpt-3.5-turbo",
         messages: [{ role: "user",
-                     content: "I'm attempting to match life situations that might be related to each other. These situations are separate entries in a user's journal.
-                     Indicate if there is a potential match between the New Entry and the Existing Entries Array.
-                     If there is a potential match, return the id associated to the Existing Entries Array where the match might exist. Do not provide any additional explanation.
-                     If no relationship is found, return 'false'.
-                     New Entry:'#{entry}'
-                     Existing Entries Array: '#{@obstacles_titles_arr}'"}],
+                    content: "I'm attempting to match life situations that might be related to each other. These situations are separate entries in a user's journal.
+                    Indicate if there is a potential match between the New Entry and the Existing Entries Array.
+                    If there is a potential match, return the id associated to the Existing Entries Array where the match might exist. Do not provide any additional explanation.
+                    If no relationship is found, return 'false'.
+                    New Entry:'#{entry}'
+                    Existing Entries Array: '#{@obstacles_titles_arr}'"}],
         temperature: 0.3
       }
     )
@@ -87,7 +87,7 @@ class GenerateObstaclesJob < ApplicationJob
       parameters: {
         model: "gpt-3.5-turbo",
         messages: [{ role: "user",
-                     content: "Create a summary of all the sentences included in the following array.
+                    content: "Create a summary of all the sentences included in the following array.
                               Write the summary from the first person perspective.
                               #{@list_entries_associated_to_obstacle}" }],
         temperature: 0.1
@@ -104,7 +104,7 @@ class GenerateObstaclesJob < ApplicationJob
       parameters: {
         model: "gpt-3.5-turbo",
         messages: [{ role: "user",
-                     content: "For the following entry, which of the following 4 techniques
+                    content: "For the following entry, which of the following 4 techniques
                               could be applied? (1-Reframing, 2-Compassion, 3-Feel Emotions,
                               4-Visualization). Only return the techniques that are highly applicable.
                               Do not include any additional information.
@@ -129,7 +129,7 @@ class GenerateObstaclesJob < ApplicationJob
       parameters: {
         model: "gpt-3.5-turbo",
         messages: [{ role: "user",
-                     content: "Considering 4 tactics: Reframing, Compassion, Feel Emotions and Visualization.
+                    content: "Considering 4 tactics: Reframing, Compassion, Feel Emotions and Visualization.
                               How could I apply #{tactic} to the following situation:
                               #{@gpt_obstacle_overview_content}" }],
         temperature: 0.1
