@@ -44,12 +44,17 @@
 .entries_card {
   width: 250px;
   background: white;
-  // box-shadow: 0 0 15px rgba(0,0,0,0.2);
   border-radius: 10px;
   overflow: hidden;
   margin-top: 50px;
-
+  transition: box-shadow .3s;
 }
+
+.entries_card:hover{
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+
 
 .entries_top{
   background-color: $blue;
