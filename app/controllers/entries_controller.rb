@@ -2,6 +2,7 @@ class EntriesController < ApplicationController
   def index
     @rand_gratefulness = Gratefulness.where(user_id: current_user).sample
     @entries = Entry.where(user_id: current_user).order('id DESC')
+    @entries_by_months = Entry.where()
     @good_memory = Entry.where(sentiment: "Positive").sample
     search_by_date if !params[:To].nil? && params[:To].split[0].present? && params[:To].split[2].present?
   end
