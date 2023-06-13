@@ -1,17 +1,19 @@
-<div class="banner">
-  <%= render "banner" %>
-</div>
-
-<div class="container">
-  <h2 class="text-center">Why choose Day by Day?</h2>
-  <div class="cards">
-    <%= render "benefits_cards" %>
+<div class="container" data-controller="annotate">
+  <div class="banner">
+    <%= render "banner" %>
   </div>
-</div>
 
-<div class="container">
-  <div class="cta">
-    <h2>Start journaling today</h2>
+  <div class="container">
+    <h2 class="text-center">Why choose Day by Day?</h2>
+    <div class="cards">
+      <%= render "benefits_cards" %>
+    </div>
   </div>
-    <a class="button" href="#">GET STARTED</a>
+
+  <div class="container">
+    <div class="cta text-center">
+      <h2>Start your inner work</h2>
+      <a class="button" href="/entries">GO</a>
+    </div>
+  </div>
 </div>
