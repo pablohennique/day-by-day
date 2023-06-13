@@ -28,6 +28,7 @@ class EntriesController < ApplicationController
     else
       render :new, status: 422
     end
+
   end
 
   def edit
