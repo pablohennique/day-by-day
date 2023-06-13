@@ -11,17 +11,17 @@
     </div>
   </div>
 
-    <div class="d-flex justify-content-around" style="gap:390px;">
-      <div class="mt-2">
-        <%= link_to new_entry_path, class: "button" do%>
-          <i class="fa-solid fa-pen"></i> NEW ENTRY
-        <% end %>
-      </div>
-
-      <div class="d-flex justify-content-around align-items-center" >
-        <%= render "calendar_search" %>
-      </div>
+  <div class="d-flex justify-content-around" style="gap:390px;">
+    <div class="mt-2">
+      <%= link_to new_entry_path, class: "button" do%>
+        <i class="fa-solid fa-pen"></i> NEW ENTRY
+      <% end %>
     </div>
+
+    <div class="d-flex justify-content-around align-items-center" >
+      <%= render "calendar_search" %>
+    </div>
+  </div>
 
   <div class="row">
       <div class="entries_cards" >
@@ -34,4 +34,6 @@
           <% end %>
       </div>
     </div>
+   </div>
+
 </div>
