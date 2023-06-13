@@ -1,3 +1,7 @@
+.obstacle-done-grid {
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
 .obstacle-done-card {
   display: flex;
   justify-content: space-between;
@@ -7,14 +11,24 @@
   border-color: #EAEAEA;
   border-radius: 10px;
   background-color: white;
-  padding: 45px;
+  padding: 30px;
   margin: 20px;
   color: black;
   transition: box-shadow .3s;
 
   p {
-    padding: 0;
+    padding-left: 15px;
     margin: 0;
+  }
+
+  .fa-circle-check {
+    font-size: 30px;
+    color: $yellow;
+  }
+
+  .obstacle-done-infos {
+    display: flex;
+    align-items: center;
   }
 }
 
@@ -22,6 +36,7 @@
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 
+// Card that appears on obstacle show page ("this obstacle has been resolved"
 .obstacle-resolved-card {
   display: flex;
   justify-content: space-between;
