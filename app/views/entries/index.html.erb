@@ -23,13 +23,19 @@
     </div>
   </div>
 
+
+
+
   <% @months.each do |month| %>
-  <li><%= month %></li>
+    <h2><%= month %></h2>
+      <% @entries_of_one_month.each do |entry| %>
+        <li><%= entry[0].content %> </li>
+      <% end %>
   <% end %>
 
-  <% @entries_of_one_month.each do |entry| %>
-    <li><%= entry[0].content %> </li>
-  <% end %>
+
+
+
 
   <div class="row">
       <div class="entries_cards" >
