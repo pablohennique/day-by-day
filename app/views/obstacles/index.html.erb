@@ -1,14 +1,15 @@
-<div data-controller="annotate">
-  <h1 class="pt-5 pb-4"><span data-annotate-target="underline">My obstacles</span></h1>
+<div class="row" id="obstacle-header" data-controller="annotate">
+  <h1 class="col-lg-6 col-sm-12 pt-5 pb-5"><span data-annotate-target="underline">My obstacles</span></h1>
+  <p class="col-lg-6 col-sm-12">Take action to overcome the obstacles you face</p>
 </div>
 
 <div class="row">
-    <div class="col-lg-6 col-sm-12">
+    <div class="col-lg-8 col-sm-12">
       <% @obstacles.each do |obstacle| %>
         <%= render "obstacle_card", obstacle: obstacle unless obstacle.done?%>
       <% end %>
     </div>
-    <div class="col-lg-6 col-sm-12">
+    <div class="col-lg-4 col-sm-12">
       <p>image</p>
     </div>
 </div>
