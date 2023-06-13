@@ -23,7 +23,13 @@
     </div>
   </div>
 
-
+<% @entries_by_months.each do |key, value| %>
+    <h3><%= key %></h3>
+    <% value.each do |entry| %>
+    <li><%= entry.content %></li>
+    <li><%= entry.date %></li>
+    <% end %>
+  <% end %>
 
 
   <% @months.each do |month| %>
