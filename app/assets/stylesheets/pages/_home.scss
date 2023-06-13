@@ -13,6 +13,10 @@
     margin: 0;
     color: black;
   }
+
+  p {
+    margin-bottom: 30px;
+  }
 }
 
 // Benefits cards
@@ -38,15 +42,22 @@
     padding: 0;
     margin: 0;
   }
+
+  i {
+    font-size: 30px;
+    padding-bottom: 10px;
+  }
 }
 
-// Features
-#feature-cards {
-  display: flex;
-  align-items: center;
-  justify-content: left;
-}
+// CTA
+.cta {
+  padding-top: 100px;
+  padding-bottom: 200px;
 
-#home-reco-card {
-  width: 350px;
+  h2 {
+    // text-align: center;
+    font-size: 56px;
+    font-weight: 800;
+    margin-bottom: 50px;
+  }
 }
