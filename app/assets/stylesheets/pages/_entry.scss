@@ -1,0 +1,21 @@
+.good_memory {
+  margin-top: 50px;
+  margin-bottom: 50px;
+  padding: 70px;
+  background-color: white;
+
+    .row {
+      justify-content: space-between;
+      align-items: center;
+    }
+}
+
+
+.good_memory h2 {
+  text-align: end;
+}
+
+.good_memory p {
+  color: gray;
+  text-align: end;
+}

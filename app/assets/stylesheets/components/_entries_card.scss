@@ -105,6 +105,17 @@
   font-size: 50px;
 }
 
+.sentiment_description{
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 26px;
+  letter-spacing: 1px;
+  color: #838383;
+  border: 2px solid #E8E8E8;
+  border-radius: 10px;
+  padding: 0px 12px;
+}
+
 
 // Smallest device
 @media (min-width: 100px) and (max-width: 575px) {
