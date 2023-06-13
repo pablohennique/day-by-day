@@ -74,7 +74,11 @@ class GenerateObstaclesJob < ApplicationJob
   def update_entry
     @match.to_i
     @obstacle = Obstacle.find_by(id: @match)
-    @entry.update(obstacle_id: @obstacle.id)
+    if @obstacle.done == true
+      create_obstacle
+    else
+      @entry.update(obstacle_id: @obstacle.id)
+    end
   end
   # OBSTACLE ENDS
 
