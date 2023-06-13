@@ -25,7 +25,7 @@
 
   <div class="row">
       <div class="entries_cards" >
-          <%@entries.each do |entry|  %>
+          <% @entries.each do |entry| %>
           <button class="btn w-25" onclick="location.href='/entries/<%=entry.id%>/edit'" >
             <div class="entries_card col-4">
                 <%= render "entries_card", entry: entry %>
@@ -35,5 +35,8 @@
       </div>
     </div>
    </div>
+
+   <%= render 'happy_memory', good_memory: @good_memory %>
+
 
 </div>
