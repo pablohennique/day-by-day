@@ -36,23 +36,7 @@
     </div>
    </div>
 
-  <div class="row">
-    <div class="good_memory">
-      <div class="px-3 col-5">
-        <iframe src="https://giphy.com/embed/VbEuHLBUPQm55MyqJg"
-                width="350" height="390" frameBorder="0" class="giphy-embed" allowFullScreen>
-        </iframe>
-      </div>
-
-      <div >
-          <h2>My happy memory</h2>
-        <p>"<%= @good_memory.content %>"</p>
-        <p><em><%="#{@good_memory.date.strftime("%A")}, #{@good_memory.date.strftime("%B")} #{@good_memory.date.day}" %></em></p>
-      </div>
-    </div>
-  </div>
-
-
+   <%= render 'happy_memory', good_memory: @good_memory %>
 
 
 </div>
