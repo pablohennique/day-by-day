@@ -10,8 +10,8 @@ application.register("flatpickr", FlatpickrController)
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
 
-import ReadMoreController from "./read_more_controller"
-application.register("read-more", ReadMoreController)
+import ReadMore from 'stimulus-read-more'
+application.register('read-more', ReadMore)
 
-import RoughNotationController from "./rough_notation_controller"
-application.register("rough-notation", RoughNotationController)
+import { annotate } from "./rough_notation"
+annotate()
