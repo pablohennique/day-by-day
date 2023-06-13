@@ -3,7 +3,7 @@ import { annotate } from 'rough-notation'
 
 // Connects to data-controller="annotate"
 export default class extends Controller {
-  static targets = ['banner', 'cta', 'underline', 'circle']
+  static targets = ['banner', 'cta', 'underline', 'circle', 'box']
 
   connect() {
     // console.log(this.element);
@@ -15,6 +15,8 @@ export default class extends Controller {
       annotate(this.underlineTarget, { type: 'underline', color: '#FEC700' }).show();
     } else if (this.hasCircleTarget) {
       annotate(this.circleTarget, { type: 'circle', color: '#FEC700' }).show();
+    } else if (this.hasBoxTarget) {
+      annotate(this.boxTarget, { type: 'box', color: '#FEC700' }).show();
     }
   }
 }
