@@ -8,11 +8,16 @@
   padding: 45px;
   margin: 20px;
   color: black;
+  transition: box-shadow .3s;
 
   p {
     padding: 0;
     margin: 0;
   }
+}
+
+.obstacle-card:hover{
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 
 .dot {
