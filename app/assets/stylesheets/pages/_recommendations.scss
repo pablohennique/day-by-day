@@ -1,0 +1,54 @@
+// Recommendation cards grid
+.reco-cards {
+  display: flex;
+  justify-content: space-between;
+}
+
+// h1, h2, and obstacle resolved button/card
+.recos-heading{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 60px;
+  margin-bottom: 60px;
+
+  p {
+    font-weight: 500px;
+    font-size: 16px;
+    margin: 0px;
+    padding-bottom: 5px;
+    color: grey !important;
+  }
+
+  .subtitle {
+    font-size: 18px;
+    color: grey !important;
+    padding-top: 5px;
+  }
+}
+
+// "This obstacle has been marked as resolved" card
+.obstacle-resolved-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid;
+  border-color: #EAEAEA;
+  border-radius: 10px;
+  background-color: white;
+  padding: 15px;
+  color: black;
+
+  p {
+    padding: 5px;
+    margin: 0;
+  }
+}
+
+// Back to obstacles page link
+.grey-link{
+  border: none !important;
+  background-color: white !important;
+  color: rgb(104, 104, 104) !important;
+  padding: none !important;
+}
