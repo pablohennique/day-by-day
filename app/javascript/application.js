@@ -8,8 +8,6 @@ import "@rails/actiontext"
 
 // import 'swiper/swiper-bundle.min.css'
 
-
-
 // Try carousel with Bootstrap
 // import "./carousel"
 // import 'bootstrap/js/dist/util';
