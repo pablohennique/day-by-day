@@ -4,6 +4,11 @@
   justify-content: space-between;
 }
 
+.back-link {
+  margin-top: 50px;
+  padding: 0px;
+}
+
 // h1, h2, and obstacle resolved button/card
 .recos-heading{
   display: flex;
@@ -11,6 +16,7 @@
   justify-content: space-between;
   margin-top: 70px;
   margin-bottom: 60px;
+  padding: 0px;
 
   p {
     font-weight: 500px;
