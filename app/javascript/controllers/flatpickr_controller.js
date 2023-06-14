@@ -8,7 +8,8 @@ export default class extends Controller {
     new flatpickr(this.element, {
       mode: "range",
       locale: { rangeSeparator:  '                      |     ' },
-      showMonths: 2
+      showMonths: 2,
+      maxDate: "today"
     });
   }
 }
