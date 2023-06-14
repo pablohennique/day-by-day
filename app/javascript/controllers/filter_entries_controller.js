@@ -5,7 +5,6 @@ export default class extends Controller {
   static targets = ['list', 'carousel']
 
   connect() {
-    console.log("hello from filter controller");
   }
 
   showResult(event) {
