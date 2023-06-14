@@ -3,8 +3,8 @@ class GenerateObstaclesJob < ApplicationJob
 
   def perform(entry)
     @entry = entry
-    match_summary(@entry.content)
     turn_to_summary(@entry.content)
+    match_summary(@entry.content)
     if @match.include?("fs") || @match.include?("false")
       create_obstacle
     else
