@@ -1,8 +1,8 @@
 class EntriesController < ApplicationController
   def index
     @rand_gratefulness = Gratefulness.where(user_id: current_user).sample
-    @entries = Entry.where(user_id: current_user)
-    @entries = Entry.order('id DESC')
+    @entries = Entry.where(user_id: current_user).order('id DESC')
+    @good_memory = Entry.where(sentiment: "Positive").sample
     search_by_date if !params[:To].nil? && params[:To].split[0].present? && params[:To].split[2].present?
   end
 
@@ -28,10 +28,15 @@ class EntriesController < ApplicationController
     else
       render :new, status: 422
     end
+
   end
 
   def edit
     @entry = Entry.find(params[:id])
+    unless @entry.obstacle_id.nil?
+      ob_id = @entry.obstacle_id
+      @obstacle = Obstacle.find(ob_id)
+    end
   end
 
   def update

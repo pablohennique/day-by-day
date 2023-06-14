@@ -4,6 +4,9 @@
 
 import { application } from "./application"
 
+import AnnotateController from "./annotate_controller"
+application.register("annotate", AnnotateController)
+
 import FlatpickrController from "./flatpickr_controller"
 application.register("flatpickr", FlatpickrController)
 
