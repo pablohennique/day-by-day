@@ -1,17 +1,20 @@
 <div class="container">
-
   <div class="row">
     <div class="mt-5">
       <%= link_to "Back to my obstacles", obstacles_path%>
     </div>
     <div class="recos-heading">
-      <h1 class="mt-5 mb-5"><%= @obstacle.title %></h1>
-      <br>
-      <% if @obstacle.done %>
-        <%= render "obstacle_resolved_card" %>
-      <% else %>
-        <%= (button_to "Mark obstacle as resolved", done_path, method:'patch', class:"bootstrap-override-button") %>
-      <% end %>
+      <div>
+        <p>OBSTACLE IDENTIFIED</p>
+        <h1><%= @obstacle.title %></h1>
+        <h2 class="subtitle">Explore science-backed tactics to help you face this challenge</h2>
+      </div>
+        <% if @obstacle.done %>
+          <%= render "obstacle_resolved_card" %>
+        <% else %>
+          <%= (button_to "Mark obstacle as resolved", done_path, method:'patch', class:"bootstrap-override-button") %>
+        <% end %>
+      </div>
     </div>
   </div>
 
