@@ -13,7 +13,11 @@ class GenerateObstaclesJob < ApplicationJob
     end
     summarize_entries_in_obstacle
     get_recommendations
-    # broadcast_to()
+    SideqikChannel.broadcast_to(
+      @entry.user,
+      "hello"
+      # render_to_string(partial: "message", locals: {message: @message})
+    )
   end
 
   private
