@@ -27,7 +27,7 @@
       </div>
     </div>
 
-    <div class="reco-cards hidden" data-loading-target="recoCards">
+    <div class="reco-cards row hidden" data-loading-target="recoCards">
       <% @recommendations.each do |recommendation| %>
         <div class="reco-card">
           <%= render "recommendation_card", recommendation: recommendation %>

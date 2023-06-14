@@ -1,10 +1,13 @@
 // Recommendation cards grid
 .reco-cards {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
+  display: flex;
+  justify-content: space-between;
+  // align-items: center;
+  // flex-wrap: wrap;
+  // column-gap: 100px;
 }
 
+// h1, h2, and obstacle resolved button/card
 .recos-heading{
   display: flex;
   align-items: center;
@@ -22,16 +25,34 @@
 
   .subtitle {
     font-size: 18px;
-    // line-height: 25px;
     color: grey !important;
     padding-top: 5px;
+  }
 }
+
+// "This obstacle has been marked as resolved" card
+.obstacle-resolved-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid;
+  border-color: #EAEAEA;
+  border-radius: 10px;
+  background-color: white;
+  padding: 15px;
+  color: black;
+
+  p {
+    padding: 5px;
+    margin: 0;
+  }
 }
 
 // Recommendation card
 .reco-card {
   border-radius: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 50px;
+  width: 640px;
 }
 
 .reco-card-top {

@@ -48,21 +48,3 @@
 .obstacle-done-card:hover{
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
-
-// Card that appears on obstacle show page ("this obstacle has been marked as resolved")
-.obstacle-resolved-card {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border: 1px solid;
-  border-color: #EAEAEA;
-  border-radius: 10px;
-  background-color: white;
-  padding: 15px;
-  color: black;
-
-  p {
-    padding: 5px;
-    margin: 0;
-  }
-}
