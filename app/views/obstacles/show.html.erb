@@ -1,56 +1,59 @@
-<div class="container">
+<div class="container-content">
+    <div class="container">
 
-  <%= link_to "Back to my obstacles", obstacles_path%>
-  <div class="row">
-    <div class="mt-5">
       <%= link_to "Back to my obstacles", obstacles_path%>
-    </div>
-    <div class="recos-heading">
-      <h1 class="mt-5 mb-5"><%= @obstacle.title %></h1>
-      <br>
-      <%# <%= @obstacle.done == false ? (button_to "I solved this obstacle", done_path, method:'patch') : "This obstacle is solved" %>
-      <% if @obstacle.done %>
-        <%= render "obstacle_resolved_card" %>
-      <% else %>
-        <%= (button_to "Mark obstacle as resolved", done_path, method:'patch', class:"bootstrap-override-button") %>
-      <% end %>
-    </div>
-  </div>
-
-  <div data-controller="loading" data-loading-id-value="<%= @obstacle.id %>">
-
-    <div class="text-center loading_card" data-loading-target="loadingCard">
-      <div class="loading_margins">
-        <h2 class="loading_text">Generating personalized recommendations that will help you solve your obstacle...</h2>
-        <%= image_tag "loading.gif", class: "loading_gif" %>
-      </div>
-    </div>
-
-    <div class="reco-cards hidden" data-loading-target="recoCards">
-      <% @recommendations.each do |recommendation| %>
-        <div class="reco-card">
-          <%= render "recommendation_card", recommendation: recommendation %>
+      <div class="row">
+        <div class="mt-5">
+          <%= link_to "Back to my obstacles", obstacles_path%>
         </div>
-      <% end %>
-    </div>
+        <div class="recos-heading">
+          <h1 class="mt-5 mb-5"><%= @obstacle.title %></h1>
+          <br>
+          <%# <%= @obstacle.done == false ? (button_to "I solved this obstacle", done_path, method:'patch') : "This obstacle is solved" %>
+          <% if @obstacle.done %>
+            <%= render "obstacle_resolved_card" %>
+          <% else %>
+            <%= (button_to "Mark obstacle as resolved", done_path, method:'patch', class:"bootstrap-override-button") %>
+          <% end %>
+        </div>
+      </div>
 
+      <div data-controller="loading" data-loading-id-value="<%= @obstacle.id %>">
 
-  </div>
-
-  <br>
-  <br>
-
-  <h2>Entries relevant to this obstacle</h2>
-  <div class="row">
-    <div class="entries_cards" >
-      <% @entries.each do |entry| %>
-        <button class="btn w-25" onclick="location.href='/entries/<%=entry.id%>/edit'" >
-          <div class="entries_card col-4">
-            <%= render "entries/entries_card", entry: entry %>
+        <div class="text-center loading_card" data-loading-target="loadingCard">
+          <div class="loading_margins">
+            <h2 class="loading_text">Generating personalized recommendations that will help you solve your obstacle...</h2>
+            <%= image_tag "loading.gif", class: "loading_gif" %>
           </div>
-        </button>
-      <% end %>
+        </div>
+
+        <div class="reco-cards hidden" data-loading-target="recoCards">
+          <% @recommendations.each do |recommendation| %>
+            <div class="reco-card">
+              <%= render "recommendation_card", recommendation: recommendation %>
+            </div>
+          <% end %>
+        </div>
+
+
+      </div>
+
+      <br>
+      <br>
+
+      <h2>Entries relevant to this obstacle</h2>
+      <div class="row">
+        <div class="entries_cards" >
+          <% @entries.each do |entry| %>
+            <button class="btn w-25" onclick="location.href='/entries/<%=entry.id%>/edit'" >
+              <div class="entries_card col-4">
+                <%= render "entries/entries_card", entry: entry %>
+              </div>
+            </button>
+          <% end %>
+        </div>
+      </div>
+
     </div>
   </div>
-
 </div>

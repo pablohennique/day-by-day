@@ -1,40 +1,42 @@
-<div class="row">
-  <%= simple_form_for @entry do |f| %>
-    <div class="my-4">
-    <%= link_to entries_path do%>
-        <i class="fa-solid fa-arrow-left"></i>  Back to my entries
-    </div>
-    <% end %>
-
-    <div class="d-flex align-items-center justify-content-between mb-5 mt-5">
-      <div data-controller="annotate">
-        <p style="font-size: 35px;font-weight: bold;" data-annotate-target="box"><%= @entry.date.strftime('%A, %B %d')   %></p>
+<div class="container-content">
+  <div class="row">
+    <%= simple_form_for @entry do |f| %>
+      <div class="my-4">
+      <%= link_to entries_path do%>
+          <i class="fa-solid fa-arrow-left"></i>  Back to my entries
       </div>
+      <% end %>
+
+      <div class="d-flex align-items-center justify-content-between mb-5 mt-5">
+        <div data-controller="annotate">
+          <p style="font-size: 35px;font-weight: bold;" data-annotate-target="box"><%= @entry.date.strftime('%A, %B %d')   %></p>
+        </div>
+        <div>
+          <button type="submit" class="new_button">SAVE</button>
+        </div>
+      </div>
+
       <div>
-        <button type="submit" class="new_button">SAVE</button>
+        <%= f.rich_text_area :rich_body, class:"entry_new" %>
       </div>
-    </div>
-
-    <div>
-      <%= f.rich_text_area :rich_body, class:"entry_new" %>
-    </div>
-    <br>
-    <div class="d-flex align-items-center justify-content-between mb-5">
-    <div></div>
-    <div class="mt-4">
-      <%=link_to "DELETE", entry_path(@entry),
-      data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'},
-      class: "danger_button" %>
-      </div>
-    </div>
-  <% end%>
-
-  <div class="mb-5">
-    <% if !@obstacle.nil? %>
-      <h2>Explore Recommendations</h2>
       <br>
-      <%= render "obstacles/obstacle_card", obstacle: @obstacle, class:"margin-left:0px;"%>
-    <% end %>
-  </div>
+      <div class="d-flex align-items-center justify-content-between mb-5">
+      <div></div>
+      <div class="mt-4">
+        <%=link_to "DELETE", entry_path(@entry),
+        data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'},
+        class: "danger_button" %>
+        </div>
+      </div>
+    <% end%>
 
+    <div class="mb-5">
+      <% if !@obstacle.nil? %>
+        <h2>Explore Recommendations</h2>
+        <br>
+        <%= render "obstacles/obstacle_card", obstacle: @obstacle, class:"margin-left:0px;"%>
+      <% end %>
+    </div>
+
+  </div>
 </div>
