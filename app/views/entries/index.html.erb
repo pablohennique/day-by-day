@@ -5,7 +5,7 @@
       <div class="entries_flex" style="margin-top: 100px;" data-controller="annotate">
 
         <div class="entries_logo col-5">
-          <span data-annotate-target="underline">My Entries</span>
+          <span data-annotate-target="underline">My entries</span>
         </div>
 
         <div class="gratefulness px-3 col">
@@ -18,23 +18,30 @@
 </div>
 <%# --FIRST BLOCK-- %>
 
-<div class="container-content">
+<div class="container-content py-5">
 
 <%# --SECOND BLOCK (NEW, SEARCH AND CAROUSEL)-- %>
 
-  <div class="d-flex justify-content-around" style="gap:390px;">
+
+
+    <div class="entries-items">
+      <div class="d-flex justify-content-between align-content-center">
+
+          <%= link_to new_entry_path, class: "new_button" do%>
+            <i class="fa-solid fa-pen"></i> WRITE A NEW ENTRY
+          <% end %>
+
+        <div class="d-flex justify-content-around align-items-center" >
+          <%= render "calendar_search" %>
+        </div>
+
+      </div>
+    </div>
+
+
+    <%# CAROUSEL %>
+
     <div class="mt-2">
-      <%= link_to new_entry_path, class: "button" do%>
-        <i class="fa-solid fa-pen"></i> NEW ENTRY
-      <% end %>
-    </div>
-
-    <div class="d-flex justify-content-around align-items-center" >
-      <%= render "calendar_search" %>
-    </div>
-  </div>
-
-    <div class="mt-5">
       <swiper-container class="carousel" navigation="true">
         <%= render 'carousel_entries', entries_by_months: @entries_by_months %>
       </swiper-container>
@@ -56,4 +63,4 @@
 
 <%# --THIRST BLOCK-- %>
 
-</div> <%#-container-content
+</div>
