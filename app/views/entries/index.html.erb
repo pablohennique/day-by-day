@@ -23,8 +23,22 @@
     </div>
   </div>
 
+  <%# <div>
+    <%= render 'carousel_entries', entries_by_months: @entries_by_months %>
+  <%# </div> %>
 
-          <%= render 'carousel_entries', entries_by_months: @entries_by_months %>
+<%# --simulus-- %>
+
+<div data-controller="carousel" class="swiper-container">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide">Slide 1</div>
+    <div class="swiper-slide">Slide 2</div>
+    <div class="swiper-slide">Slide 3</div>
+  </div>
+</div>
+
+<%# --simulus-- %>
+
 
   <div class="good_memory">
     <div class="row">

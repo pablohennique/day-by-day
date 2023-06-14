@@ -1,77 +1,72 @@
-<div class="container my-3">
-      <%# --ITEMS-- %>
-      <div class="row mx-auto my-auto">
-        <div id="myCarousel" class="carousel slide w-100" data-ride="carousel">
-          <div class="carousel-inner" role="listbox">
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+  <%# --SLIDES-- %>
+      <div class="carousel-inner" role="listbox">
 
-                  <%# --FIRST MONTH-- %>
-                    <div class="carousel-item py-5 active">
-                      <div class="row">
+              <%# --FIRST MONTH-- %>
+                <div class="carousel-item active">
+                  <div class="row">
+                    <h2><%= Date::MONTHNAMES[@entries_by_months.first[0]] %></h2>
 
-                            <h2><%= Date::MONTHNAMES[@entries_by_months.first[0]] %></h2>
+                        <% @entries_by_months.first[1].each do |entry| %>
+                                <div class="col-sm-3">
 
-                                <% @entries_by_months.first[1].each do |entry| %>
-                                    <div class="col-sm-3">
-                                    <div>
-
-                                        <div class="entries_cards" >
-                                                <button class="btn w-25" onclick="location.href='/entries/<%=entry.id%>/edit'" >
-                                                  <div class="entries_card">
-                                                      <%= render "entries_card", entry: entry %>
-                                                  </div>
-                                                </button>
-                                        </div>
+                                    <div class="entries_cards" >
+                                            <button class="btn w-25" onclick="location.href='/entries/<%=entry.id%>/edit'" >
+                                              <div class="entries_card">
+                                                  <%= render "entries_card", entry: entry %>
+                                              </div>
+                                            </button>
                                     </div>
-                                    </div>
-                                <% end %>
 
-                        </div>
+                                </div>
+                        <% end %>
+
                     </div>
-                  <%# --FIRST MONTH-- %>
+                </div>
+              <%# --FIRST MONTH-- %>
 
 
-                  <%# --OTHERS MONTHS-- %>
-                      <% @entries_by_months.each do |key, value| %>
-                                  <div class="carousel-item py-5">
-                                    <div class="row">
-                                        <h2><%= Date::MONTHNAMES[key] %></h2>
+              <%# --OTHERS MONTHS-- %>
+              <% @entries_by_months.each do |key, value| %>
+                  <div class="carousel-item">
+                    <div class="row">
+                        <h2><%= Date::MONTHNAMES[key] %></h2>
 
-                                                <% value.each do |entry| %>
-                                                    <div class="col-sm-3">
-                                                    <div>
+                              <% value.each do |entry| %>
+                                  <div class="col-sm-3">
+                                  <div>
 
-                                                        <div class="entries_cards" >
-                                                                <button class="btn w-25" onclick="location.href='/entries/<%=entry.id%>/edit'" >
-                                                                  <div class="entries_card">
-                                                                      <%= render "entries_card", entry: entry %>
-                                                                  </div>
-                                                                </button>
-                                                        </div>
-                                                    </div>
-                                                    </div>
-                                                <% end %>
-                                    </div>
+                                      <div class="entries_cards" >
+                                              <button class="btn w-25" onclick="location.href='/entries/<%=entry.id%>/edit'" >
+                                                <div class="entries_card">
+                                                    <%= render "entries_card", entry: entry %>
+                                                </div>
+                                              </button>
+                                      </div>
                                   </div>
-                      <% end %>
-                  <%# --OTHERS MONTHS-- %>
+                                  </div>
+                              <% end %>
+                    </div>
+                  </div>
+              <% end %>
+              <%# --OTHERS MONTHS-- %>
+      </div>
+  <%# --SLIDES-- %>
+
+
+  <%# --CONTROLLER-- %>
+  <div class="row">
+        <div class="col-12">
+            <a class="carousel-control-prev text-dark" href="#myCarousel" role="button" data-slide="prev">
+                <i class="fa-solid fa-arrow-left fa-xl"></i>
+                <span class="sr-only"></span>
+            </a>
+            <a class="carousel-control-next text-dark" href="#myCarousel" role="button" data-slide="next">
+                <i class="fa-solid fa-arrow-right fa-xl"></i>
+                <span wclass="sr-only"></span>
+            </a>
           </div>
-        </div>
-      </div>
-      <%# --ITEMS-- %>
 
-
-      <%# --ARROW CAROUSEL-- %>
-      <div class="row">
-            <div class="col-12">
-                <a class="carousel-control-prev text-dark" href="#myCarousel" role="button" data-slide="prev">
-                    <span class="fa fa-chevron-left" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="carousel-control-next text-dark" href="#myCarousel" role="button" data-slide="next">
-                    <span class="fa fa-chevron-right" aria-hidden="true"></span>
-                    <span wclass="sr-only">Next</span>
-                </a>
-            </div>
-      </div>
-      <%# --ARROW CAROUSEL-- %>
+  </div>
+  <%# --CONTROLLER-- %>
 </div>

@@ -4,5 +4,11 @@ import "./controllers"
 import "bootstrap"
 import "trix"
 import "@rails/actiontext"
-import "./carousel"
-import 'swiper/css/bundle'
+import "swiper"
+
+
+
+// Try carousel with Bootstrap
+// import "./carousel"
+// import 'bootstrap/js/dist/util';
+// import 'bootstrap/js/dist/dropdown';

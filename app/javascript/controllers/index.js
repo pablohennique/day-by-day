@@ -15,3 +15,6 @@ application.register("hello", HelloController)
 
 import ReadMoreController from "./read_more_controller"
 application.register("read-more", ReadMoreController)
+
+import CarouselController from "./carousel_controller"
+application.register("carousel", CarouselController)
