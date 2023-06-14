@@ -16,5 +16,8 @@ application.register("hello", HelloController)
 import LoadingController from "./loading_controller"
 application.register("loading", LoadingController)
 
+import ObstacleLoadingController from "./obstacle_loading_controller"
+application.register("obstacle-loading", ObstacleLoadingController)
+
 import ReadMoreController from "./read_more_controller"
 application.register("read-more", ReadMoreController)

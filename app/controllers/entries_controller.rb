@@ -22,7 +22,9 @@ class EntriesController < ApplicationController
       if @entry.sentiment == "Positive"
         turn_to_gratefulness(@entry.content)
       elsif @entry.sentiment != "Positive"
-        GenerateObstaclesJob.perform_later(@entry)
+        obstacle_in_progress = Obstacle.new(user_id: current_user.id, status: "started")
+        obstacle_in_progress.save(validate: false)
+        GenerateObstaclesJob.perform_later(@entry, obstacle_in_progress)
       end
       redirect_to edit_entry_path(@entry)
     else

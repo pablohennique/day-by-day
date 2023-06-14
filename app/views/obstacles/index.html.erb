@@ -1,11 +1,17 @@
 <div data-controller="annotate">
   <h1 class="text-center pt-5 pb-4"><span data-annotate-target="underline">My obstacles</span></h1>
 </div>
-<div>
+
+<div data-controller="obstacle-loading">
+
   <div class="row">
     <div class="row justify-content-around">
       <% @obstacles.each do |obstacle| %>
-        <%= render "obstacle_card", obstacle: obstacle unless obstacle.done?%>
+        <% if obstacle.status == "started" %>
+          <%= render "loading_obstacle_card", obstacle: obstacle %>
+        <% else %>
+          <%= render "obstacle_card", obstacle: obstacle unless obstacle.done?%>
+        <% end %>
       <% end %>
     </div>
   </div>

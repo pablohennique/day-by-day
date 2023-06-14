@@ -1,22 +1,28 @@
 class GenerateObstaclesJob < ApplicationJob
   queue_as :default
 
-  def perform(entry)
+  def perform(entry, obstacle_in_progress)
     @entry = entry
+    @obstacle_in_progress = obstacle_in_progress
     turn_to_summary(@entry.content)
     match_summary(@entry.content)
     if @match.include?("fs") || @match.include?("false")
-      create_obstacle
+      set_obstacle
     else
       update_entry
     end
     summarize_entries_in_obstacle
     get_recommendations
+    # broadcast_to()
   end
 
   private
 
   # OBSTACLES STARTS
+  def delete_obstacle_in_progress
+    @obstacle_in_progress.destroy
+  end
+
   def turn_to_summary(entry)
     gpt_summary_entry(entry)
     @summary = @gpt_summary["choices"][0]["message"]["content"]
@@ -40,7 +46,7 @@ class GenerateObstaclesJob < ApplicationJob
 
   def match_summary(entry)
     # @obstacles_titles_arr = Obstacle.pluck(:title)
-    @obstacles_titles_arr = Obstacle.all.map { |obstacle| "#{obstacle.id} - #{obstacle.title}" }
+    @obstacles_titles_arr = Obstacle.where(user_id: @entry.user.id).where.not(title: nil).map { |obstacle| "#{obstacle.id} - #{obstacle.title}" }
 
     gpt_match_summary(entry)
     @match = @gpt_match["choices"][0]["message"]["content"]
@@ -66,18 +72,20 @@ class GenerateObstaclesJob < ApplicationJob
     )
   end
 
-  def create_obstacle
-    @obstacle = Obstacle.create(title: @summary, user_id: @entry.user_id)
-    @entry.update(obstacle_id: @obstacle.id)
+  def set_obstacle
+    @obstacle_in_progress.update(title: @summary, status: "completed")
+    @entry.update(obstacle_id: @obstacle_in_progress.id)
+    @obstacle = @obstacle_in_progress
   end
 
   def update_entry
-    @match.to_i
+    # @match.to_i
     @obstacle = Obstacle.find_by(id: @match)
     if @obstacle.done == true
-      create_obstacle
+      set_obstacle
     else
       @entry.update(obstacle_id: @obstacle.id)
+      delete_obstacle_in_progress
     end
   end
   # OBSTACLE ENDS
