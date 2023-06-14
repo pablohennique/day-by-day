@@ -1,4 +1,6 @@
 <div class="container">
+
+  <%= link_to "Back to my obstacles", obstacles_path%>
   <div class="row">
     <div class="mt-5">
       <%= link_to "Back to my obstacles", obstacles_path%>
@@ -15,13 +17,28 @@
     </div>
   </div>
 
-<div class="reco-cards">
-  <% @recommendations.each do |recommendation| %>
-    <div class="reco-card">
-      <%= render "recommendation_card", recommendation: recommendation %>
+  <div data-controller="loading" data-loading-id-value="<%= @obstacle.id %>">
+
+    <div class="text-center loading_card" data-loading-target="loadingCard">
+      <div class="loading_margins">
+        <h2 class="loading_text">Generating personalized recommendations that will help you solve your obstacle...</h2>
+        <%= image_tag "loading.gif", class: "loading_gif" %>
+      </div>
     </div>
-  <% end %>
-</div>
+
+    <div class="reco-cards hidden" data-loading-target="recoCards">
+      <% @recommendations.each do |recommendation| %>
+        <div class="reco-card">
+          <%= render "recommendation_card", recommendation: recommendation %>
+        </div>
+      <% end %>
+    </div>
+
+
+  </div>
+
+  <br>
+  <br>
 
   <h2>Entries relevant to this obstacle</h2>
   <div class="row">
@@ -35,4 +52,5 @@
       <% end %>
     </div>
   </div>
+
 </div>
