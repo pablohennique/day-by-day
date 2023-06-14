@@ -1,8 +1,10 @@
+// Wraps header and obstacle cards
 .obstacle-container {
   padding-top: 100px;
   padding-bottom: 50px;
 }
 
+// h1 and h2
 #obstacle-header {
   padding-bottom: 50px;
   margin-left: 180px;
@@ -21,6 +23,7 @@
   }
 }
 
+// Obstacle cards grid
 .obstacles {
   display: flex;
   flex-wrap: wrap;
@@ -29,6 +32,7 @@
   gap: 50px;
 }
 
+// Obstacle cards
 .obstacle-card {
   display: block;
   width: 550px;
