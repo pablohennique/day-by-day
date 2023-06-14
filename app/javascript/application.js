@@ -6,7 +6,7 @@ import "trix"
 import "@rails/actiontext"
 
 
-import 'swiper/swiper-bundle.min.css'
+// import 'swiper/swiper-bundle.min.css'
 
 
 
