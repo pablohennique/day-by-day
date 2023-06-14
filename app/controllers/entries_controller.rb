@@ -97,8 +97,8 @@ class EntriesController < ApplicationController
       parameters: {
         model: "gpt-3.5-turbo",
         messages: [{ role: "user",
-                     content: "Write a gratefulness statement of 30 words or less based on
-                              the followoing entry: #{entry}" }],
+                    content: "Write a gratefulness statement of 30 words or less based on
+                              the following entry: #{entry}" }],
         temperature: 0.1
       }
     )

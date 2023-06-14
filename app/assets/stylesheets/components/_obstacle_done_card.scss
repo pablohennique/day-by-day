@@ -1,9 +1,11 @@
+// Wraps h2 and done obstacle cards
 .obstacle-done-container {
   margin-left: 60px;
   margin-right: 60px;
   padding-bottom: 100px;
 }
 
+// Grid for done obstacle cards
 .obstacle-done-cards {
   display: flex;
   flex-wrap: wrap;
@@ -11,6 +13,7 @@
   column-gap: 70px;
 }
 
+// Done obstacle card
 .obstacle-done-card {
   display: flex;
   justify-content: space-between;
@@ -31,35 +34,17 @@
     margin: 0;
   }
 
-  .fa-circle-check {
-    font-size: 30px;
-    color: $yellow;
-  }
-
+  // div to wrap checkmark and p text
   .obstacle-done-infos {
     display: flex;
     align-items: center;
   }
 }
 
+.fa-circle-check {
+  font-size: 30px;
+  color: $yellow;
+}
 .obstacle-done-card:hover{
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-}
-
-// Card that appears on obstacle show page ("this obstacle has been resolved"
-.obstacle-resolved-card {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border: 1px solid;
-  border-color: #EAEAEA;
-  border-radius: 10px;
-  background-color: white;
-  padding: 15px;
-  color: black;
-
-  p {
-    padding: 5px;
-    margin: 0;
-  }
 }
