@@ -1,21 +1,22 @@
-<div class="row text-center" id="obstacle-header" data-controller="annotate">
-  <h1><span data-annotate-target="underline">My obstacles</span></h1>
-  <p>Based on your journal entries, Open AI has identified obstacles you are
-    facing in your life and generated personalized recommendations for you to face them
-  </p>
+<div class="obstacle-container">
+  <div class="row text-center" id="obstacle-header" data-controller="annotate">
+    <h1><span data-annotate-target="underline">My obstacles</span></h1>
+    <p>Based on your journal entries, Open AI has identified obstacles you are
+      facing in your life and generated personalized recommendations for you to face them
+    </p>
+  </div>
+
+  <div class="obstacles">
+    <% @obstacles.each do |obstacle| %>
+      <%= render "obstacle_card", obstacle: obstacle unless obstacle.done?%>
+    <% end %>
+  </div>
 </div>
 
-<div class="obstacles">
-  <% @obstacles.each do |obstacle| %>
-    <%= render "obstacle_card", obstacle: obstacle unless obstacle.done?%>
-  <% end %>
-</div>
-
-
-<div class="pb-5">
+<div class="obstacle-done-container">
   <% unless @done_obstacles.count == 0 %>
     <h2 class="pt-5 pb-5">Obstacles I've overcome</h2>
-    <div class="row justify-content-between">
+    <div class="obstacle-done-cards">
       <%= render 'done_obstacles', obstacles: @obstacles %>
     </div>
   <% end %>

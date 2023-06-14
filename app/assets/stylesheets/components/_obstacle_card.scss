@@ -1,5 +1,9 @@
+.obstacle-container {
+  padding-top: 100px;
+  padding-bottom: 50px;
+}
+
 #obstacle-header {
-  padding-top: 50px;
   padding-bottom: 50px;
   margin-left: 180px;
   margin-right: 180px;
@@ -12,7 +16,8 @@
     text-align: center;
     font-size: 18px;
     color: grey;
-    padding: 0;
+    padding-bottom: 30px;
+
   }
 }
 
@@ -33,7 +38,7 @@
   border-radius: 10px;
   background-color: white;
   padding: 45px;
-  margin: 10px;
+  // margin: 10px;
   margin-bottom: 30px;
   color: black;
   transition: box-shadow .3s;
