@@ -7,6 +7,9 @@ import { application } from "./application"
 import AnnotateController from "./annotate_controller"
 application.register("annotate", AnnotateController)
 
+import FilterEntriesController from "./filter_entries_controller"
+application.register("filter-entries", FilterEntriesController)
+
 import FlatpickrController from "./flatpickr_controller"
 application.register("flatpickr", FlatpickrController)
 
@@ -18,6 +21,3 @@ application.register("loading", LoadingController)
 
 import ReadMoreController from "./read_more_controller"
 application.register("read-more", ReadMoreController)
-
-import CarouselController from "./carousel_controller"
-application.register("carousel", CarouselController)
