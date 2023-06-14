@@ -1,4 +1,7 @@
 <div class="reco-card-top">
+</div>
+
+<div class ="reco-card-text">
   <% case recommendation.category %>
   <% when "Reframing" %>
     <h3>Reframe</h3>
@@ -9,9 +12,6 @@
   <% when "Feel Emotions" %>
     <h3>Feel Emotions</h3>
   <% end %>
-</div>
-
-<div class ="reco-card-text">
   <div data-controller="read-more" data-read-more-more-text-value="Read more" data-read-more-less-text-value="Read less">
     <p class="my-content" data-read-more-target="content">
       <%= recommendation.content %>
