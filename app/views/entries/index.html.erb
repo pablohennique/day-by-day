@@ -23,22 +23,11 @@
     </div>
   </div>
 
-  <%# <div>
+  <swiper-container class="mySwiper" navigation="true">
     <%= render 'carousel_entries', entries_by_months: @entries_by_months %>
-  <%# </div> %>
+  </swiper-container>
 
-<%# --simulus-- %>
-
-<div data-controller="carousel" class="swiper-container">
-  <div class="swiper-wrapper">
-    <div class="swiper-slide">Slide 1</div>
-    <div class="swiper-slide">Slide 2</div>
-    <div class="swiper-slide">Slide 3</div>
-  </div>
-</div>
-
-<%# --simulus-- %>
-
+  <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-element-bundle.min.js"></script>
 
   <div class="good_memory">
     <div class="row">
