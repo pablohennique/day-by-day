@@ -24,10 +24,9 @@
 .obstacles {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  margin-left: 60px;
-  margin-right: 60px;
+  gap: 50px;
 }
 
 .obstacle-card {
@@ -38,8 +37,6 @@
   border-radius: 10px;
   background-color: white;
   padding: 45px;
-  // margin: 10px;
-  margin-bottom: 30px;
   color: black;
   transition: box-shadow .3s;
 

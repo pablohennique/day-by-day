@@ -7,8 +7,8 @@
 .obstacle-done-cards {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
   align-items: center;
+  column-gap: 70px;
 }
 
 .obstacle-done-card {
