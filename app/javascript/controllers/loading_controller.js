@@ -8,27 +8,27 @@ export default class extends Controller {
     id: String
   }
   connect() {
-    // console.log(this.idValue);
-    // console.log(localStorage.getItem("hasCodeRunBefore"));
-    // console.log(localStorage.getItem("hasCodeRunBefore") === this.idValue);
-    // console.log(localStorage.getItem("hasCodeRunBefore") !== this.idValue);
+    let visitedPages = (JSON.parse(localStorage.getItem("visitedPages")));
 
-  const hasCodeRunBefore = localStorage.getItem("hasCodeRunBefore")
-      if (hasCodeRunBefore !== this.idValue) {
-        setTimeout(() => {
-          this.loadingCardTarget.remove();
-          this.recoCardsTarget.classList.remove("hidden");
-            }, 4000);
-        localStorage.setItem("hasCodeRunBefore", this.idValue);
+    if (visitedPages === null) {
+      visitedPages = []
+    }
 
-        console.log("IF activated")
+    if (visitedPages.includes(this.idValue)) {
+      this.loadingCardTarget.remove();
+      this.recoCardsTarget.classList.remove("hidden")
 
-      } else {
+      // console.log("Page Visited Already")
+
+    } else {
+      setTimeout(() => {
         this.loadingCardTarget.remove();
-        this.recoCardsTarget.classList.remove("hidden")
+        this.recoCardsTarget.classList.remove("hidden");
+      }, 4000);
+      visitedPages.push(this.idValue)
+      localStorage.setItem("visitedPages", JSON.stringify(visitedPages));
 
-        console.log("IF skipped")
-
-      }
+      // console.log("First time page visit")
+    }
   };
 }
