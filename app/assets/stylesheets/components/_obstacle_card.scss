@@ -1,3 +1,30 @@
+#obstacle-header {
+  padding-top: 50px;
+  padding-bottom: 50px;
+  margin-left: 180px;
+  margin-right: 180px;
+
+  h1 {
+    padding-bottom: 30px;
+  }
+
+  p {
+    text-align: center;
+    font-size: 18px;
+    color: grey;
+    padding: 0;
+  }
+}
+
+.obstacles {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 60px;
+  margin-right: 60px;
+}
+
 .obstacle-card {
   display: block;
   width: 550px;
@@ -6,6 +33,7 @@
   border-radius: 10px;
   background-color: white;
   padding: 45px;
+  margin: 10px;
   margin-bottom: 30px;
   color: black;
   transition: box-shadow .3s;
@@ -36,22 +64,4 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-
-#obstacle-header {
-  justify-content: space-between;
-  align-items: center;
-
-  h1 {
-    padding-top: 60px;
-    padding-bottom: 60px;
-  }
-
-  p {
-    text-align: right;
-    font-size: 18px;
-    color: grey;
-    padding: 0;
-    margin: 0;
-  }
 }
