@@ -3,8 +3,9 @@ class GenerateObstaclesJob < ApplicationJob
 
   def perform(entry)
     @entry = entry
-    turn_to_summary(@entry.content)
-    match_summary(@entry.content)
+    begin
+      turn_to_summary(@entry.content)
+      match_summary(@entry.content)
     if @match.include?("fs") || @match.include?("false")
       create_obstacle
     else
@@ -12,6 +13,10 @@ class GenerateObstaclesJob < ApplicationJob
     end
     summarize_entries_in_obstacle
     get_recommendations
+
+    rescue
+      perform(@entry)
+    end
   end
 
   private
