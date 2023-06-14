@@ -13,7 +13,21 @@
   border: none !important;
 }
 
-.new_button{
+.new_button {
+  border-radius: 30px;
+  background-color: #5550F3;
+  color: white;
+  padding: 16px 40px 14px 40px;
+  margin-left: 80px;
+  i {
+    margin-right: 10px;
+  }
+}
+.new_button:hover {
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+.save_button{
   border-radius: 30px;
   background-color: #5550F3;
   color: white;

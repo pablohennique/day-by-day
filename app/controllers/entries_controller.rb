@@ -1,9 +1,14 @@
 class EntriesController < ApplicationController
   def index
+    @entries = Entry.where(user_id: current_user)
+    # Entries - Per months
+    @entries_by_months = @entries.group_by { |entry_month| entry_month.date.month }
+    # Gratefulness
     @rand_gratefulness = Gratefulness.where(user_id: current_user).sample
-    @entries = Entry.where(user_id: current_user).order('id DESC')
-    @good_memory = Entry.where(sentiment: "Positive").sample
+    # Search
     search_by_date if !params[:To].nil? && params[:To].split[0].present? && params[:To].split[2].present?
+    # Good memory
+    @good_memory = Entry.where(sentiment: "Positive").sample
   end
 
   def show
@@ -28,7 +33,6 @@ class EntriesController < ApplicationController
     else
       render :new, status: 422
     end
-
   end
 
   def edit
@@ -93,8 +97,8 @@ class EntriesController < ApplicationController
       parameters: {
         model: "gpt-3.5-turbo",
         messages: [{ role: "user",
-                     content: "Write a gratefulness statement of 30 words or less based on
-                              the followoing entry: #{entry}" }],
+                    content: "Write a gratefulness statement of 30 words or less based on
+                              the following entry: #{entry}" }],
         temperature: 0.1
       }
     )

@@ -1,31 +1,43 @@
-<div class="obstacle-container">
-  <div class="row text-center" id="obstacle-header" data-controller="annotate">
-    <h1><span data-annotate-target="underline">My obstacles</span></h1>
-    <% unless @obstacles.empty? %>
-      <h2 class="subtitle">
-        Based on your journal entries, Day by Day has identified obstacles you are
-        facing in your life and provided personalized recommendations for you to face them
-      </h2>
-    <% else %>
-      <h2 class="light-h2">
-        Once you start writing in your journal, Day by Day will identify obstacles
-        you are facing in your life and provide personalized recommendations to help you face them
-      </h2>
-    <% end %>
-  </div>
-
-  <div class="obstacles">
-    <% @obstacles.each do |obstacle| %>
-      <%= render "obstacle_card", obstacle: obstacle unless obstacle.done?%>
-    <% end %>
-  </div>
-</div>
-
-<div class="obstacle-done-container">
-  <% unless @done_obstacles.count == 0 %>
-    <h2 class="pt-5 pb-5">Obstacles I've overcome</h2>
-    <div class="obstacle-done-cards">
-      <%= render 'done_obstacles', obstacles: @obstacles %>
+<div class="container-content">
+  <div class="obstacle-container">
+    <div class="row text-center" id="obstacle-header" data-controller="annotate">
+      <h1><span data-annotate-target="underline">My obstacles</span></h1>
+      <% unless @obstacles.empty? %>
+        <h2 class="subtitle">
+          Based on your journal entries, Day by Day has identified obstacles you are
+          facing in your life and provided personalized recommendations for you to face them
+        </h2>
+      <% else %>
+        <h2 class="light-h2">
+          Once you start writing in your journal, Day by Day will identify obstacles
+          you are facing in your life and provide personalized recommendations to help you face them
+        </h2>
+      <% end %>
     </div>
-  <% end %>
+
+    <div class="obstacle-container">
+      <div class="row text-center" id="obstacle-header" data-controller="annotate">
+        <h1><span data-annotate-target="underline">My obstacles</span></h1>
+        <h2 class="subtitle">Based on your journal entries, Day by Day has identified obstacles you are
+          facing in your life and generated personalized recommendations for you to face them
+        </h2>
+      </div>
+
+      <div class="obstacles">
+        <% @obstacles.each do |obstacle| %>
+          <%= render "obstacle_card", obstacle: obstacle unless obstacle.done?%>
+        <% end %>
+      </div>
+
+      <div class="obstacle-done-container">
+        <% unless @done_obstacles.count == 0 %>
+          <h2 class="pt-5 pb-5">Obstacles I've overcome</h2>
+          <div class="obstacle-done-cards">
+            <%= render 'done_obstacles', obstacles: @obstacles %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+  </div>
 </div>
