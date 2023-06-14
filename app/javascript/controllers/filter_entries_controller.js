@@ -13,5 +13,4 @@ export default class extends Controller {
     this.listTarget.classList.remove("hidden");
     this.carouselTarget.classList.add("hidden");
   }
-
 }
