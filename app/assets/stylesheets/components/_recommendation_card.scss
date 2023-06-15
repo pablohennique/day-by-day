@@ -1,4 +1,8 @@
 // Recommendation card
+.reco-cards {
+  display: flex;
+  justify-content: space-between;
+}
 .reco-card {
   border-radius: 10px;
   margin-bottom: 50px;
