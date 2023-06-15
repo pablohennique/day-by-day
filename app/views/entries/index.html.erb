@@ -35,6 +35,13 @@
     </div>
   </div>
 
+  <%# NEW USER IF/STATEMENT %>
+  <% if @entries.count == 0 %>
+    <h2 class="light-h2 text-center">
+      Welcome! Get started by writing your first journal entry
+    </h2>
+  <% end %>
+
       <%# ALL ENTRIES FOR SEARCH %>
       <div class="row list hidden" data-filter-entries-target="list">
         <% @entries.each do | entry | %>
