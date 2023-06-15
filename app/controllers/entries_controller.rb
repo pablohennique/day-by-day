@@ -8,7 +8,7 @@ class EntriesController < ApplicationController
     # Search
     search_by_date if !params[:To].nil? && params[:To].split[0].present? && params[:To].split[2].present?
     # Good memory
-    @good_memory = Entry.where(sentiment: "Positive").sample
+    @good_memory = @entries.where(sentiment: "Positive").sample
   end
 
   def show
