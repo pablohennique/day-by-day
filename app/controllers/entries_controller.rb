@@ -50,7 +50,7 @@ class EntriesController < ApplicationController
         obstacle_in_progress.save(validate: false)
         GenerateObstaclesJob.perform_later(@entry, obstacle_in_progress)
       end
-      redirect_to edit_entry_path(@entry)
+      redirect_to entries_path
     else
       render :new, status: 422
     end
