@@ -1,5 +1,5 @@
 import { Controller } from "@hotwired/stimulus"
-import { end } from "@popperjs/core";
+// import { end } from "@popperjs/core";
 
 // Connects to data-controller="loading"
 export default class extends Controller {
@@ -17,9 +17,6 @@ export default class extends Controller {
     if (visitedPages.includes(this.idValue)) {
       this.loadingCardTarget.remove();
       this.recoCardsTarget.classList.remove("hidden")
-
-      // console.log("Page Visited Already")
-
     } else {
       setTimeout(() => {
         this.loadingCardTarget.remove();
@@ -27,8 +24,6 @@ export default class extends Controller {
       }, 4000);
       visitedPages.push(this.idValue)
       localStorage.setItem("visitedPages", JSON.stringify(visitedPages));
-
-      // console.log("First time page visit")
     }
   };
 }

@@ -1,7 +1,6 @@
 <div class="container-content">
   <div class="obstacle-container">
 
-    <%# HEADER %>
     <div class="row text-center" id="obstacle-header" data-controller="annotate">
       <h1><span data-annotate-target="underline">My obstacles</span></h1>
       <%# START OF IF STATEMENT %>
@@ -18,10 +17,25 @@
       <% end %>
     </div>
 
-    <div class="obstacles">
-      <% @obstacles.each do |obstacle| %>
-        <%= render "obstacle_card", obstacle: obstacle unless obstacle.done? %>
+    <div data-controller="obstacle-loading"
+      data-obstacle-loading-user-id-value="<%= current_user.id %>"
+      <% if Obstacle.where(user_id: current_user.id).exists? %>
+        data-obstacle-loading-obstacle-status-value="<%= Obstacle.where(user_id: current_user.id).last.status %>"
       <% end %>
+    >
+
+      <div class="obstacles">
+
+        <% @obstacles.each do |obstacle| %>
+          <% if obstacle.status == "started" %>
+            <%= render "loading_obstacle_card", obstacle: obstacle %>
+          <% else %>
+            <%= render "obstacle_card", obstacle: obstacle unless obstacle.done? %>
+          <% end %>
+        <% end %>
+
+      </div>
+
     </div>
 
     <div class="obstacle-done-container">
@@ -32,6 +46,8 @@
         </div>
       <% end %>
     </div>
+
+  </div>
 
   </div>
 </div>
