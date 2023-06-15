@@ -23,4 +23,11 @@ class ObstaclesController < ApplicationController
       format.text { render partial: "get_obstacle_status", locals: { status: @status }, formats: :html }
     end
   end
+
+  def render_completed_obstacle_card
+    @obstacle = current_user.obstacles.last
+    respond_to do |format|
+      format.text { render partial: "obstacle_card", locals: { obstacle: @obstacle }, formats: :html }
+    end
+  end
 end

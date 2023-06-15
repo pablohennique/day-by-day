@@ -14,7 +14,7 @@
       data-obstacle-loading-obstacle-status-value="<%= Obstacle.where(user_id: current_user.id).last.status %>"
     >
 
-      <div class="obstacles" data-obstacle-loading-target="list">
+      <div class="obstacles">
 
         <% @obstacles.each do |obstacle| %>
           <% if obstacle.status == "started" %>
