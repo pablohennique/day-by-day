@@ -31,13 +31,11 @@
 }
 
 .entries_cards{
-  // display:flex;
-  // align-items: center;
-  // justify-content: center;
+  align-items: center;
+  justify-items: center;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  // display: inline-block;
-  // padding: 50px;
+  padding: 0px;
 }
 
 
@@ -55,11 +53,16 @@
 }
 
 .entries_top{
+  text-align: start;
   background-color: $blue;
-  color: white;
-  font-weight: bold;
-  font-size: 20px;
-  padding: 12px 8px;
+
+  p {
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    padding: 12px 20px 12px 20px;
+    margin: 0;
+  }
 }
 
 .entries_bottom{
@@ -67,6 +70,7 @@
   height: 100px;
   text-decoration: underline;
   text-decoration-color: lightgrey;
+  color: black;
   padding: 12px 8px;
   p {
     overflow: hidden;
@@ -130,14 +134,14 @@
 // Small devices (landscape phones, 576px and up)
 @media (min-width: 576px) {
   .entries_cards{
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
   }
 }
 
 // Medium devices (tablets, 768px and up)
 @media (min-width: 768px) {
   .entries_cards {
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
   }
 }
 

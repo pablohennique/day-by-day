@@ -1,12 +1,20 @@
 <div class="container-content">
-
   <div class="obstacle-container">
 
     <div class="row text-center" id="obstacle-header" data-controller="annotate">
       <h1><span data-annotate-target="underline">My obstacles</span></h1>
-      <h2 class="subtitle">Based on your journal entries, Day by Day has identified obstacles you are
-        facing in your life and generated personalized recommendations for you to face them
-      </h2>
+      <%# START OF IF STATEMENT %>
+      <% if @obstacles.empty? %>
+        <h2 class="light-h2">
+          Once you start writing in your journal, Day by Day will identify obstacles
+          you are facing in your life and provide personalized recommendations to help you face them
+        </h2>
+      <% else %>
+        <h2 class="subtitle">Based on your journal entries, Day by Day has identified obstacles you are
+          facing in your life and provided personalized recommendations for you to face them
+        </h2>
+      <%# END OF IF STATEMENT %>
+      <% end %>
     </div>
 
     <div data-controller="obstacle-loading"
@@ -20,7 +28,7 @@
           <% if obstacle.status == "started" %>
             <%= render "loading_obstacle_card", obstacle: obstacle %>
           <% else %>
-            <%= render "obstacle_card", obstacle: obstacle unless obstacle.done?%>
+            <%= render "obstacle_card", obstacle: obstacle unless obstacle.done? %>
           <% end %>
         <% end %>
 
@@ -39,4 +47,5 @@
 
   </div>
 
+  </div>
 </div>
