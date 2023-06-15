@@ -31,13 +31,11 @@
 }
 
 .entries_cards{
-  // display:flex;
-  // align-items: center;
-  // justify-content: center;
+  align-items: center;
+  justify-items: center;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  // display: inline-block;
-  // padding: 50px;
+  padding: 0px;
 }
 
 
@@ -136,14 +134,14 @@
 // Small devices (landscape phones, 576px and up)
 @media (min-width: 576px) {
   .entries_cards{
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
   }
 }
 
 // Medium devices (tablets, 768px and up)
 @media (min-width: 768px) {
   .entries_cards {
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
   }
 }
 
