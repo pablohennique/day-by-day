@@ -29,7 +29,7 @@ class EntriesController < ApplicationController
       elsif @entry.sentiment != "Positive"
         GenerateObstaclesJob.perform_later(@entry)
       end
-      redirect_to edit_entry_path(@entry)
+      redirect_to entries_path
     else
       render :new, status: 422
     end
@@ -46,7 +46,7 @@ class EntriesController < ApplicationController
   def update
     @entry = Entry.find(params[:id])
     @entry.update(content: params[:entry][:content])
-    redirect_to edit_entry_path(@entry)
+    redirect_to entries_path
   end
 
   def destroy
