@@ -21,6 +21,3 @@ application.register("loading", LoadingController)
 
 import ReadMoreController from "./read_more_controller"
 application.register("read-more", ReadMoreController)
-
-import SavedController from "./saved_controller"
-application.register("saved", SavedController)
