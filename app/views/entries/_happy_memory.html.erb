@@ -1,5 +1,7 @@
-<h2>Relive a good memory</h2>
-<p>"<%= @good_memory.content %>"</p>
-<p>
-  You wrote about this on: <%="#{@good_memory.date.strftime("%A")} #{@good_memory.date.strftime("%B")} #{@good_memory.date.day}, #{@good_memory.date.year}" %>
-</p>
+<div class="good_memory_infos">
+  <h2>Relive a good memory</h2>
+  <p>"<%= @good_memory.content %>"</p>
+  <p>
+    <%="#{@good_memory.date.strftime("%A")} #{@good_memory.date.strftime("%B")} #{@good_memory.date.day}, #{@good_memory.date.year}" %>
+  </p>
+</div>
