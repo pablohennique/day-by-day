@@ -35,6 +35,13 @@
     </div>
   </div>
 
+  <%# NEW USER IF/STATEMENT %>
+  <% if @entries.count == 0 %>
+    <h2 class="light-h2 text-center">
+      Welcome! Get started by writing your first journal entry
+    </h2>
+  <% end %>
+
       <%# ALL ENTRIES FOR SEARCH %>
       <div class="row list hidden" data-filter-entries-target="list">
         <% @entries.each do | entry | %>
@@ -69,15 +76,13 @@
 
   <%# --THIRST BLOCK (GOOD MEMORY)-- %>
 
-  <% unless @good_memory.nil? %>
-    <div class="good_memory">
-      <div class="row">
-        <div class="col-sm-12 col-lg-6">
-          <%= render 'happy_memory', good_memory: @good_memory %>
-        </div>
-      </div>
+<% unless @good_memory.nil? %>
+  <div class="good_memory">
+    <div class="row">
+      <%= render 'happy_memory', good_memory: @good_memory %>
     </div>
-  <% end %>
+  </div>
+<% end %>
 
   <%# --THIRST BLOCK (end)-- %>
 </div>
