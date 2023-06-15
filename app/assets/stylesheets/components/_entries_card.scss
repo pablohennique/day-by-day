@@ -55,11 +55,16 @@
 }
 
 .entries_top{
+  text-align: start;
   background-color: $blue;
-  color: white;
-  font-weight: bold;
-  font-size: 20px;
-  padding: 12px 8px;
+
+  p {
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    padding: 12px 20px 12px 20px;
+    margin: 0;
+  }
 }
 
 .entries_bottom{
@@ -67,6 +72,7 @@
   height: 100px;
   text-decoration: underline;
   text-decoration-color: lightgrey;
+  color: black;
   padding: 12px 8px;
   p {
     overflow: hidden;

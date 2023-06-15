@@ -6,12 +6,12 @@
           </h2>
             <% value.each do |entry| %>
               <div class="col-sm-3">
-                <div class="entries_cards" >
-                  <button class="btn w-25" onclick="location.href='/entries/<%=entry.id%>/edit'" >
+                <div class="entries_cards">
+                  <a href="<%= edit_entry_path(entry) %>">
                     <div class="entries_card">
                         <%= render "entries_card", entry: entry %>
                     </div>
-                  </button>
+                  </a>
                 </div>
               </div>
             <% end %>
