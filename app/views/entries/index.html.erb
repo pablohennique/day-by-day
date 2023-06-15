@@ -69,13 +69,15 @@
 
   <%# --THIRST BLOCK (GOOD MEMORY)-- %>
 
-  <div class="good_memory">
-    <div class="row">
-      <div class="col-sm-12 col-lg-6">
-        <%= render 'happy_memory', good_memory: @good_memory %>
+  <% unless @good_memory.nil? %>
+    <div class="good_memory">
+      <div class="row">
+        <div class="col-sm-12 col-lg-6">
+          <%= render 'happy_memory', good_memory: @good_memory %>
+        </div>
       </div>
     </div>
-  </div>
+  <% end %>
 
   <%# --THIRST BLOCK (end)-- %>
 </div>
