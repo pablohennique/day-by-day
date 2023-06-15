@@ -42,17 +42,17 @@
     </h2>
   <% end %>
 
-      <%# ALL ENTRIES FOR SEARCH %>
-      <div class="row list hidden" data-filter-entries-target="list">
-          <% render "entries_cards", entries: @entries %>
-      </div>
+    <%# ALL ENTRIES FOR SEARCH %>
+    <div class="row list hidden" data-filter-entries-target="list">
+        <% render "entries_cards", entries: @entries %>
+    </div>
 
-      <%# CAROUSEL %>
-      <div class="mt-2" data-filter-entries-target="carousel">
-        <swiper-container class="carousel" navigation="true">
-          <%= render 'carousel_entries', entries_by_months: @entries_by_months %>
-        </swiper-container>
-      </div>
+    <%# CAROUSEL %>
+    <div class="mt-2" data-filter-entries-target="carousel">
+      <swiper-container class="carousel" navigation="true">
+        <%= render 'carousel_entries', entries_by_months: @entries_by_months %>
+      </swiper-container>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-element-bundle.min.js"></script>
     </div>

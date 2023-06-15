@@ -7,7 +7,12 @@ class EntriesController < ApplicationController
     # Gratefulness
     @rand_gratefulness = Gratefulness.where(user_id: current_user).sample
     # Search
-    search_by_date if !params[:To].nil? && params[:To].split[0].present? && params[:To].split[2].present?
+    if !params[:To].nil? && params[:To].split[0].present? && params[:To].split[2].present?
+      search_by_date
+    elsif !params[:To].nil? && params[:To].split[0].present? && !params[:To].split[2].present?
+      @from_date = params[:To].split[0]
+      @entries = @entries.where(date: @from_date)
+    end
     # Good memory
     @good_memory = Entry.where(sentiment: "Positive").sample
 

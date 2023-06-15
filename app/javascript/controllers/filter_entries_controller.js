@@ -12,6 +12,7 @@ export default class extends Controller {
     event.preventDefault();
 
     this.carouselTarget.classList.add("hidden");
+    this.listTarget.innerHTML = "";
     this.listTarget.classList.remove("hidden");
 
     fetch(`${this.calendarTarget.action}?To=${this.inputFieldTarget.value}`, {
@@ -19,8 +20,7 @@ export default class extends Controller {
     })
     .then(response => response.json())
     .then( (data) => {
-      console.log(this.listTarget)
-      this.listTarget.innerHTML = data.form
+      this.listTarget.insertAdjacentHTML("afterbegin", data.form)
     })
   }
 }
