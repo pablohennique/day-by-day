@@ -1,14 +1,28 @@
 class EntriesController < ApplicationController
   def index
+
     @entries = Entry.where(user_id: current_user).order(date: :desc)
     # Entries - Per months
     @entries_by_months = @entries.group_by { |entry_month| entry_month.date.month}
     # Gratefulness
     @rand_gratefulness = Gratefulness.where(user_id: current_user).sample
-    # Search
-    search_by_date if !params[:To].nil? && params[:To].split[0].present? && params[:To].split[2].present?
     # Good memory
     @good_memory = @entries.where(sentiment: "Positive").sample
+
+    # Search
+    if !params[:To].nil? && params[:To].split[0].present? && params[:To].split[2].present?
+      search_by_date
+    elsif !params[:To].nil? && params[:To].split[0].present? && !params[:To].split[2].present?
+      @from_date = params[:To].split[0]
+      @entries = @entries.where(date: @from_date)
+    end
+
+
+    respond_to do |format|
+      format.html
+      format.json
+    end
+
   end
 
   def show
@@ -20,6 +34,11 @@ class EntriesController < ApplicationController
   end
 
   def create
+
+    respond_to do |format|
+      format.html
+      format.json
+    end
     @entry = Entry.new(rich_body: params[:entry][:rich_body], user: current_user, date: Date.today)
     @entry.content = @entry.rich_body.body.to_plain_text
     if @entry.save
