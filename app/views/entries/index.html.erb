@@ -35,9 +35,33 @@
     </div>
   </div>
 
+  <%# NEW USER IF/STATEMENT %>
+  <% if @entries.count == 0 %>
+    <h2 class="light-h2 text-center">
+      Welcome! Get started by writing your first journal entry
+    </h2>
+  <% end %>
+
       <%# ALL ENTRIES FOR SEARCH %>
       <div class="row list hidden" data-filter-entries-target="list">
+<<<<<<< HEAD
           <% render "entries_cards", entries: @entries %>
+=======
+        <div class="entries_cards">
+          <% @entries.each do | entry | %>
+            <a href="<%= edit_entry_path(entry) %>">
+              <div class="entries_card">
+                <%= render "entries_card", entry: entry %>
+              </div>
+            </a>
+          <% end %>
+        </div>
+        <div class="d-flex justify-content-around align-items-center mt-5" >
+          <%= link_to entries_path do%>
+            <i class="fa-solid fa-arrow-left"></i>  Back to my entries
+        </div>
+        <% end %>
+>>>>>>> master
       </div>
 
       <%# CAROUSEL %>
@@ -54,13 +78,13 @@
 
   <%# --THIRST BLOCK (GOOD MEMORY)-- %>
 
+<% unless @good_memory.nil? %>
   <div class="good_memory">
     <div class="row">
-      <div class="col-sm-12 col-lg-6">
-        <%= render 'happy_memory', good_memory: @good_memory %>
-      </div>
+      <%= render 'happy_memory', good_memory: @good_memory %>
     </div>
   </div>
+<% end %>
 
   <%# --THIRST BLOCK (end)-- %>
 </div>
