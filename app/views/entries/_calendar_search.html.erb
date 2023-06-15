@@ -1,17 +1,21 @@
-<%= form_with  url: "/entries", method: :get  do |form| %>
-<div class="d-flex justify-content-around align-items-center" >
-  <div>
-    <%= form.datetime_field :To,
-                data: {controller: "flatpickr"},
-                class:"entry_calendar_left",
-                placeholder: 'To                                    |   From                                    ',
-                label:false %>
-  </div>
+<%= form_with  url: "/entries", method: :get,
+              data: {
+                filter_entries_target: "calendar",
+                action:"submit->filter-entries#showResult"
+              }  do |form| %>
+  <div class="d-flex justify-content-around align-items-center" >
+    <div>
+      <%= form.datetime_field :To,
+                  data: {controller: "flatpickr", filter_entries_target: "inputField"},
+                  class:"entry_calendar_left",
+                  placeholder: 'To                                    |   From                                    ',
+                  label:false %>
+    </div>
 
-  <div>
-    <button type="submit" class="btn entry_calendar_search">
-        <i class="fa-solid fa-magnifying-glass text-light"></i>
-    </button>
+    <div>
+      <button type="submit" class="btn entry_calendar_search">
+          <i class="fa-solid fa-magnifying-glass text-light"></i>
+      </button>
+    </div>
   </div>
-</div>
 <% end %>
