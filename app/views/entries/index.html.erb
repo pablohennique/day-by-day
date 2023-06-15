@@ -69,10 +69,10 @@
 
   <%# --THIRST BLOCK (GOOD MEMORY)-- %>
 
-<% unless @entries.empty? %>
+<% unless @good_memory.nil? %>
   <div class="good_memory">
     <div class="row">
-        <%= render 'happy_memory', good_memory: @good_memory %>
+      <%= render 'happy_memory', good_memory: @good_memory %>
     </div>
   </div>
 <% end %>
