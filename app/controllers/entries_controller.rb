@@ -1,5 +1,6 @@
 class EntriesController < ApplicationController
   def index
+
     @entries = Entry.where(user_id: current_user)
     # Entries - Per months
     @entries_by_months = @entries.group_by { |entry_month| entry_month.date.month }
@@ -9,6 +10,11 @@ class EntriesController < ApplicationController
     search_by_date if !params[:To].nil? && params[:To].split[0].present? && params[:To].split[2].present?
     # Good memory
     @good_memory = Entry.where(sentiment: "Positive").sample
+
+    respond_to do |format|
+      format.html
+      format.json
+    end
   end
 
   def show
@@ -20,6 +26,11 @@ class EntriesController < ApplicationController
   end
 
   def create
+
+    respond_to do |format|
+      format.html
+      format.json
+    end
     @entry = Entry.new(rich_body: params[:entry][:rich_body], user: current_user, date: Date.today)
     @entry.content = @entry.rich_body.body.to_plain_text
     if @entry.save

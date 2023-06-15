@@ -1,0 +1,16 @@
+      <% entries.each do | entry | %>
+          <div class="col-sm-3">
+            <div class="entries_cards" >
+              <button class="btn w-25" onclick="location.href='/entries/<%=entry.id%>/edit'" >
+                <div class="entries_card">
+                    <%= render "entries_card", entry: entry %>
+                </div>
+              </button>
+            </div>
+          </div>
+          <% end %>
+        <div class="d-flex justify-content-around align-items-center mt-5" >
+          <%= link_to entries_path do%>
+            <i class="fa-solid fa-arrow-left"></i>  Back to my entries
+        </div>
+        <% end %>
