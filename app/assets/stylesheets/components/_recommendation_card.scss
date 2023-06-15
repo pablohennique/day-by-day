@@ -1,16 +1,16 @@
+// Recommendation card
 .reco-cards {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
+  display: flex;
+  justify-content: space-between;
 }
-
 .reco-card {
   border-radius: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 50px;
+  width: 640px;
 }
 
 .reco-card-top {
-  padding: 15px;
+  padding: 30px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   background-color: $purple;
@@ -36,17 +36,4 @@
     -webkit-box-orient: vertical;
     -webkit-line-clamp: var(--read-more-line-clamp, 4);
   }
-}
-
-.grey-link{
-  border: none !important;
-  background-color: white !important;
-  color: rgb(104, 104, 104) !important;
-  padding: none !important;
-}
-
-.recos-heading{
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
 }

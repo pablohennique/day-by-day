@@ -1,3 +1,38 @@
+// Wraps header and obstacle cards
+.obstacle-container {
+  padding-top: 100px;
+  padding-bottom: 50px;
+}
+
+// h1 and h2
+#obstacle-header {
+  padding-bottom: 50px;
+  margin-left: 180px;
+  margin-right: 180px;
+
+  h1 {
+    padding-bottom: 30px;
+  }
+
+  .subtitle {
+    text-align: center;
+    font-size: 18px;
+    line-height: 25px;
+    color: grey !important;
+    padding-bottom: 30px;
+  }
+}
+
+// Obstacle cards grid
+.obstacles {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+}
+
+// Obstacle cards
 .obstacle-card {
   display: block;
   width: 550px;
@@ -6,9 +41,12 @@
   border-radius: 10px;
   background-color: white;
   padding: 45px;
-  margin: 20px;
   color: black;
   transition: box-shadow .3s;
+
+  h3 {
+    margin-top: 10px;
+  }
 
   p {
     padding: 0;
@@ -21,8 +59,8 @@
 }
 
 .dot {
-  height: 25px;
-  width: 25px;
+  height: 30px;
+  width: 30px;
   background-color: $yellow;
   border-radius: 50%;
   display: inline-block;

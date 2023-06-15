@@ -1,42 +1,81 @@
-<div class="container">
-  <div class="row">
-    <div class="entries_flex" style="margin-top: 100px;" data-controller="annotate">
-      <div class="entries_logo col-5">
-        <span data-annotate-target="underline">My Entries</span>
-      </div>
+<%# --FIRST BLOCK (INTRO)-- %>
+<div class="intro">
+  <div class="container">
+    <div class="row">
+      <div class="entries_flex" style="margin-top: 100px;" data-controller="annotate">
 
-      <div class="gratefulness px-3 col">
-          <%= render "daily_gratefulness"%>
+        <div class="entries_logo col-5">
+          <span data-annotate-target="underline">My entries</span>
+        </div>
+
+        <div class="gratefulness px-3 col">
+            <%= render "daily_gratefulness"%>
+        </div>
+
       </div>
     </div>
   </div>
+</div>
+<%# --FIRST BLOCK (end)-- %>
 
-  <div class="d-flex justify-content-around" style="gap:390px;">
-    <div class="mt-2">
-      <%= link_to new_entry_path, class: "button" do%>
-        <i class="fa-solid fa-pen"></i> NEW ENTRY
-      <% end %>
-    </div>
+<div class="container-content py-5">
 
+<%# --SECOND BLOCK (NEW, SEARCH AND CAROUSEL)-- %>
+<div data-controller="filter-entries">
+  <div class="d-flex justify-content-between align-content-center">
+    <%= link_to new_entry_path, class: "new_button" do%>
+      <i class="fa-solid fa-pen"></i> WRITE A NEW ENTRY
+    <% end %>
+
+      <%# CALENDRAR FORM %>
     <div class="d-flex justify-content-around align-items-center" >
-      <%= render "calendar_search" %>
+      <div data-action="submit->filter-entries#showResult">
+        <%= render "calendar_search" %>
+      </div>
     </div>
   </div>
 
-  <div class="row">
-      <div class="entries_cards" >
-          <% @entries.each do |entry| %>
-          <button class="btn w-25" onclick="location.href='/entries/<%=entry.id%>/edit'" >
-            <div class="entries_card col-4">
-                <%= render "entries_card", entry: entry %>
+      <%# ALL ENTRIES FOR SEARCH %>
+      <div class="row list hidden" data-filter-entries-target="list">
+        <% @entries.each do | entry | %>
+          <div class="col-sm-3">
+            <div class="entries_cards" >
+              <button class="btn w-25" onclick="location.href='/entries/<%=entry.id%>/edit'" >
+                <div class="entries_card">
+                    <%= render "entries_card", entry: entry %>
+                </div>
+              </button>
             </div>
-          </button>
+          </div>
           <% end %>
+        <div class="d-flex justify-content-around align-items-center mt-5" >
+          <%= link_to entries_path do%>
+            <i class="fa-solid fa-arrow-left"></i>  Back to my entries
+        </div>
+        <% end %>
+      </div>
+
+      <%# CAROUSEL %>
+      <div class="mt-2" data-filter-entries-target="carousel">
+        <swiper-container class="carousel" navigation="true">
+          <%= render 'carousel_entries', entries_by_months: @entries_by_months %>
+        </swiper-container>
+      </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-element-bundle.min.js"></script>
+    </div>
+
+<%# --SECOND BLOCK (end)-- %>
+
+  <%# --THIRST BLOCK (GOOD MEMORY)-- %>
+
+  <div class="good_memory">
+    <div class="row">
+      <div class="col-sm-12 col-lg-6">
+        <%= render 'happy_memory', good_memory: @good_memory %>
       </div>
     </div>
-   </div>
+  </div>
 
-   <%= render 'happy_memory', good_memory: @good_memory %>
-
-
+  <%# --THIRST BLOCK (end)-- %>
 </div>

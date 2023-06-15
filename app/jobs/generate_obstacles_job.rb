@@ -4,15 +4,22 @@ class GenerateObstaclesJob < ApplicationJob
   def perform(entry, obstacle_in_progress)
     @entry = entry
     @obstacle_in_progress = obstacle_in_progress
-    turn_to_summary(@entry.content)
-    match_summary(@entry.content)
-    if @match.include?("fs") || @match.include?("false")
-      set_obstacle
-    else
-      update_entry
+
+    begin
+      turn_to_summary(@entry.content)
+      match_summary(@entry.content)
+
+      if @match.include?("fs") || @match.include?("false")
+        set_obstacle
+      else
+        update_entry
+      end
+      summarize_entries_in_obstacle
+      get_recommendations
+    rescue
+      perform(@entry, @obstacle_in_progress)
     end
-    summarize_entries_in_obstacle
-    get_recommendations
+
     SideqikChannel.broadcast_to(
       @entry.user,
       "hello"

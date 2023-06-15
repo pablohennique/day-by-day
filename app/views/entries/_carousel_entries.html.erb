@@ -1,0 +1,20 @@
+<% @entries_by_months.each do |key, value| %>
+    <swiper-slide>
+      <div class="row">
+          <h2>
+              <%= Date::MONTHNAMES[key] %> 2023
+          </h2>
+            <% value.each do |entry| %>
+              <div class="col-sm-3">
+                <div class="entries_cards" >
+                  <button class="btn w-25" onclick="location.href='/entries/<%=entry.id%>/edit'" >
+                    <div class="entries_card">
+                        <%= render "entries_card", entry: entry %>
+                    </div>
+                  </button>
+                </div>
+              </div>
+            <% end %>
+        </div>
+    </swiper-slide>
+<% end %>
