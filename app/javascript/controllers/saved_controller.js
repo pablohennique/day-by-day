@@ -7,10 +7,10 @@ export default class extends Controller {
   connect() {
   }
 
-  checked(event) {
+  hideSaved(event) {
     event.preventDefault()
     console.log(this.validTarget);
     this.validTarget.classList.remove("hidden");
-    this.validTarget.classList.add("hidden");
+    // this.validTarget.classList.add("hidden");
   }
 }

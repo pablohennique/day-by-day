@@ -12,7 +12,7 @@
           <p style="font-size: 35px;font-weight: bold;" data-annotate-target="box"><%= @entry.date.strftime('%A, %B %d')   %></p>
         </div>
         <div>
-          <button type="submit" class="save_button" data-action="click->saved#checked">SAVE</button>
+          <button type="submit" class="save_button" data-action="click->saved#hideSaved">SAVE</button>
           <div class="saved hidden" data-saved-target="valid">
             <p><%= "Saved" %><i class="fa-solid fa-check"></i></p>
           </div>
