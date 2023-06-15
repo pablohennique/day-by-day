@@ -9,15 +9,21 @@
 }
 
 .good_memory {
-  margin-top: 50px;
+  margin-top: 30px;
   margin-bottom: 50px;
-  padding: 70px;
+  padding: 50px;
   background-color: white;
+  border: $pigeons-gray;
+  border-radius: 10px;
 
-    .row {
-      justify-content: space-between;
-      align-items: center;
-    }
+  .row {
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.good_memory_infos {
+  padding-right: 30px;
 }
 
 .good_memory h2 {
@@ -27,4 +33,6 @@
 .good_memory p {
   color: gray;
   text-align: end;
+  padding-top: 15px;
+  font-size: 18px;
 }

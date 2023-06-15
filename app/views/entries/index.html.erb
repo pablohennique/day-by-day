@@ -77,7 +77,12 @@
 <% unless @good_memory.nil? %>
   <div class="good_memory">
     <div class="row">
-      <%= render 'happy_memory', good_memory: @good_memory %>
+      <div class="col-sm-12 col-lg-6">
+        <%= image_tag('good_memory.png') %>
+      </div>
+      <div class="col-sm-12 col-lg-6">
+        <%= render 'happy_memory', good_memory: @good_memory %>
+      </div>
     </div>
   </div>
 <% end %>
