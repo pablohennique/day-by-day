@@ -1,11 +1,7 @@
-<div class="col-sm-12 col-lg-6">
-  <iframe src="https://giphy.com/embed/VbEuHLBUPQm55MyqJg"
-          width="350" height="380" frameBorder="0" allowFullScreen>
-  </iframe>
-</div>
-
-<div class="col-sm-12 col-lg-6">
-  <h2>My happy memory</h2>
+<div class="good_memory_infos">
+  <h2>Relive a good memory</h2>
   <p>"<%= @good_memory.content %>"</p>
-  <p><em><%="#{@good_memory.date.strftime("%A")}, #{@good_memory.date.strftime("%B")} #{@good_memory.date.day} #{@good_memory.date.year}" %></em></p>
+  <p>
+    <%="#{@good_memory.date.strftime("%A")} #{@good_memory.date.strftime("%B")} #{@good_memory.date.day}, #{@good_memory.date.year}" %>
+  </p>
 </div>
