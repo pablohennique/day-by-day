@@ -6,6 +6,9 @@ class EntriesController < ApplicationController
     @entries_by_months = @entries.group_by { |entry_month| entry_month.date.month}
     # Gratefulness
     @rand_gratefulness = Gratefulness.where(user_id: current_user).sample
+    # Good memory
+    @good_memory = @entries.where(sentiment: "Positive").sample
+
     # Search
     if !params[:To].nil? && params[:To].split[0].present? && params[:To].split[2].present?
       search_by_date
@@ -13,8 +16,7 @@ class EntriesController < ApplicationController
       @from_date = params[:To].split[0]
       @entries = @entries.where(date: @from_date)
     end
-    # Good memory
-    @good_memory = Entry.where(sentiment: "Positive").sample
+
 
     respond_to do |format|
       format.html
