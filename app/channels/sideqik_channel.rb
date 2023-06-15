@@ -1,7 +1,8 @@
 class SideqikChannel < ApplicationCable::Channel
   def subscribed
     # stream_from "some_channel"
-    user = User.find(params[:id])
+    # user = User.find(params[:id])
+    user = current_user
     stream_for user
   end
 
