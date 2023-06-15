@@ -19,7 +19,9 @@
 
     <div data-controller="obstacle-loading"
       data-obstacle-loading-user-id-value="<%= current_user.id %>"
-      data-obstacle-loading-obstacle-status-value="<%= Obstacle.where(user_id: current_user.id).last.status %>"
+      <% if Obstacle.where(user_id: current_user.id).exists? %>
+        data-obstacle-loading-obstacle-status-value="<%= Obstacle.where(user_id: current_user.id).last.status %>"
+      <% end %>
     >
 
       <div class="obstacles">
