@@ -13,7 +13,7 @@ tom = User.new(first_name:"Tom", last_name:"Kim", email:"ehdgus5289@gmail.com", 
 tom.save
 alexane = User.new(first_name:"Alexane", last_name:"Krek", email:"alexane@gmail.com", password:"111111")
 alexane.save
-emily = User.new(first_name:"Emily", last_name:"Brown", email:"emily6@gmail.com", password:"111111")
+emily = User.new(first_name:"Pablo", last_name:"Brown", email:"emily6@gmail.com", password:"111111")
 emily.save
 pablo = User.new(first_name:"Pablo", last_name:"Hennique", email:"pablo@gmail.com", password:"111111", admin: true)
 pablo.save
@@ -99,7 +99,7 @@ Entry.create!(content: "I am happy that I found my cat. It was super scary not t
                         obstacle: nil)
 
 Entry.create!(content: "Charlene welcomed me with an amazing dinner and wine. I did not see that coming. We had a good chat and spent so much time laughing and reminiscing about our past.",
-                        date: Date.today - 45,
+                        date: Date.today - 51,
                         sentiment: "Positive",
                         user: pablo,
                         obstacle: nil)
@@ -109,6 +109,25 @@ Entry.create!(content: "Ever since I got to Canada things have been working out 
                         sentiment: "Positive",
                         user: pablo,
                         obstacle: nil)
+
+Entry.create!(content: "Today we turned Sacha's crib into a bed. Sacha was excited but it was very difficult to get him to sleep. Kept wanting to leave his bed",
+                        date: Date.today - 6,
+                        sentiment: "Negative",
+                        user: pablo,
+                        obstacle: Obstacle.create!(title: "Sacha Starts Sleeping in a Bed", user_id: pablo.id))
+
+  Entry.create!(content: "Sacha woke up several times throughout the night and walked out of his bed. We are exhausted. This new change is more difficult than I thought it would be",
+                          date: Date.today - 4,
+                          sentiment: "Negative",
+                          user: pablo,
+                          obstacle: Obstacle.find_by(title: "Sacha Starts Sleeping in a Bed"))
+
+  Entry.create!(content: "This time Sacha jumped into our bed and told us he did not want to sleep alone. I had to pick him up and bring him back to his bed. We did this 5 times throughout the night. Its hard",
+                          date: Date.today - 2,
+                          sentiment: "Negative",
+                          user: pablo,
+                          obstacle: Obstacle.find_by(title: "Sacha Starts Sleeping in a Bed"))
+
 
 
 puts "Adding recommendations"
@@ -138,3 +157,38 @@ Recommendation.create(content: "You might want to focus on the sensation of pain
                                 equiped to deal with Mike",
                       category: "Feel Emotions",
                       obstacle: Obstacle.find_by(title: "Fight with Mike"))
+
+
+Recommendation.create(content: "I’m sorry that you're going through a difficult time because it's been hard for Sacha to sleep in his new bed.
+                                Maybe seeing the situation from a different perspective would help.
+                                This experience is an excellent opportunity to teach Sacha how to be autonomous.
+                                Even though it might be difficult, you are reinforcing an independent personality.
+                                It is also giving you the opportunity to show Sacha how much you care for him by showing him that you trust him.
+                                This experience serves as a valuable lesson to become a better parent and will probably help you in the long run
+                                since sacha will be able to sleep alone in his bed without your help.",
+                      category: "Reframe",
+                      obstacle: Obstacle.find_by(title: "Sacha Starts Sleeping in a Bed"))
+
+
+Recommendation.create(content: "It might help to put yourself in the shoes of Sacha and understand where he is coming from.
+                                This will help you offer him compassion for what he is going through.
+                                As a toddler, it might be intimidating to learn to sleep on your own. Sounds and the dark could be scary.
+                                Try to vosualize love an dunderstanding for Sacha. See that it is difficult for him as well.
+                                Offering compassion might help you gain more patience and understanding to go through your sleepless nights",
+                      category: "Compassion",
+                      obstacle: Obstacle.find_by(title: "Sacha Starts Sleeping in a Bed"))
+
+
+Recommendation.create(content: "You might want to focus on the sensations of frustration and fatige that you feel througout your body.
+                                Welcoming these emotions will help you better relate to them and less prone to being frustrated with Sacha.
+                                On top of that, noticing these emotions and allowing them to be, will help you better manage your emotional state
+                                and by consequence be more nurturing with Sacha",
+                      category: "Feel Emotions",
+                      obstacle: Obstacle.find_by(title: "Sacha Starts Sleeping in a Bed"))
+
+
+puts "Adding gratefulness..."
+
+Gratefulness.create(content: "I'm grateful for having such a wonderful partner. Charlene is always taking care of the family and I appreciate all she does for us",
+                    created_at: "Mon, 14 Aug 2023 20:38:57.461908000 UTC +00:00",
+                    user: pablo)
