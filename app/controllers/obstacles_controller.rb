@@ -16,4 +16,11 @@ class ObstaclesController < ApplicationController
     @obstacle.update(done: true)
     redirect_to obstacles_path
   end
+
+  def get_obstacle_status
+    @status = current_user.obstacles.last.status
+    respond_to do |format|
+      format.text { render partial: "get_obstacle_status", locals: { status: @status }, formats: :html }
+    end
+  end
 end

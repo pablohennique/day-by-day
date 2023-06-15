@@ -16,15 +16,10 @@ class GenerateObstaclesJob < ApplicationJob
       end
       summarize_entries_in_obstacle
       get_recommendations
+      obstacle_status_completed
     rescue
       perform(@entry, @obstacle_in_progress)
     end
-
-    SideqikChannel.broadcast_to(
-      @entry.user,
-      "hello"
-      # render_to_string(partial: "message", locals: {message: @message})
-    )
   end
 
   private
@@ -83,12 +78,6 @@ class GenerateObstaclesJob < ApplicationJob
     )
   end
 
-  def set_obstacle
-    @obstacle_in_progress.update(title: @summary, status: "completed")
-    @entry.update(obstacle_id: @obstacle_in_progress.id)
-    @obstacle = @obstacle_in_progress
-  end
-
   def update_entry
     # @match.to_i
     @obstacle = Obstacle.find_by(id: @match)
@@ -98,6 +87,12 @@ class GenerateObstaclesJob < ApplicationJob
       @entry.update(obstacle_id: @obstacle.id)
       delete_obstacle_in_progress
     end
+  end
+
+  def set_obstacle
+    @obstacle_in_progress.update(title: @summary)
+    @entry.update(obstacle_id: @obstacle_in_progress.id)
+    @obstacle = @obstacle_in_progress
   end
   # OBSTACLE ENDS
 
@@ -162,4 +157,8 @@ class GenerateObstaclesJob < ApplicationJob
     Recommendation.create(content: @reframing_recommendation_content, category: tactic, obstacle: @obstacle)
   end
   # RECOMMENDATIONS END
+
+  def obstacle_status_completed
+    @obstacle.update(status: "completed")
+  end
 end

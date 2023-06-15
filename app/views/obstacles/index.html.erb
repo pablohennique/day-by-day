@@ -9,7 +9,10 @@
       </h2>
     </div>
 
-    <div data-controller="obstacle-loading" data-obstacle-loading-user-id-value="<%= current_user.id %>">
+    <div data-controller="obstacle-loading"
+      data-obstacle-loading-user-id-value="<%= current_user.id %>"
+      data-obstacle-loading-obstacle-status-value="<%= Obstacle.where(user_id: current_user.id).last.status %>"
+    >
 
       <div class="obstacles" data-obstacle-loading-target="list">
 
