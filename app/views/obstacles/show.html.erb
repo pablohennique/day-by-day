@@ -13,13 +13,14 @@
           <h1><%= @obstacle.title %></h1>
           <h2 class="subtitle">Explore science-backed tactics to help you face this challenge</h2>
         </div>
-          <% if @obstacle.done %>
-            <%= render "obstacle_resolved_card" %>
-          <% else %>
-            <%= (button_to "Mark obstacle as resolved", done_path, method:'patch', class:"bootstrap-override-button") %>
-          <% end %>
-        </div>
       </div>
+
+        <% if @obstacle.done %>
+          <%= render "obstacle_resolved_card" %>
+        <% else %>
+          <%= (button_to "RESOLVE OBSTACLE", done_path, method:'patch', class:"bootstrap-override-button mt-2 mb-5 fw-bold") %>
+        <% end %>
+
     </div>
 
   <%# Loading block REMOVED %>
