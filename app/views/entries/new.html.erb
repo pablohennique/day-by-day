@@ -1,24 +1,27 @@
 <div class="container-content">
-<div class="row">
-  <%= simple_form_for @entry do |f| %>
-    <div class="my-4">
-    <%= link_to entries_path do%>
-        <i class="fa-solid fa-arrow-left"></i>  Back to my entries
-    </div>
-    <% end %>
-    <div class="d-flex align-items-center justify-content-between mb-5 mt-5">
-      <div>
-        <p style="font-size: 35px;font-weight: bold;"><%= Date.today.strftime('%A, %B %d')  %></p>
-      </div>
-
-      <div class="d-flex">
-        <div class="saved hidden">
-          <%= "Saved" %><i class="fa-solid fa-check"></i>
+  <div class="container">
+    <div class="row">
+      <%= simple_form_for @entry do |f| %>
+        <div class="my-4">
+        <%= link_to entries_path do%>
+            <i class="fa-solid fa-arrow-left"></i>  Back to my entries
         </div>
-        <button type="submit" class="save_button">SAVE</button>
-      </div>
+        <% end %>
+        <div class="d-flex align-items-center justify-content-between mb-5 mt-5">
+          <div>
+            <p style="font-size: 35px;font-weight: bold;"><%= Date.today.strftime('%A, %B %d')  %></p>
+          </div>
 
+          <div class="d-flex">
+            <div class="saved hidden">
+              <%= "Saved" %><i class="fa-solid fa-check"></i>
+            </div>
+            <button type="submit" class="save_button">SAVE</button>
+          </div>
+
+        </div>
+        <%= f.rich_text_area :rich_body, class:"entry_new" %>
+      <% end%>
     </div>
-    <%= f.rich_text_area :rich_body, class:"entry_new" %>
-  <% end%>
+  </div>
 </div>
