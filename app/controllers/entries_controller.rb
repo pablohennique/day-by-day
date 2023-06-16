@@ -50,7 +50,7 @@ class EntriesController < ApplicationController
         obstacle_in_progress.save(validate: false)
         GenerateObstaclesJob.perform_later(@entry, obstacle_in_progress)
       end
-      redirect_to entries_path
+      redirect_to entries_path, notice: "Your entry is saved."
     else
       render :new, status: 422
     end
@@ -67,7 +67,7 @@ class EntriesController < ApplicationController
   def update
     @entry = Entry.find(params[:id])
     @entry.update(content: params[:entry][:content])
-    redirect_to entries_path
+    redirect_to entries_path, notice: "Your entry is saved."
   end
 
   def destroy
