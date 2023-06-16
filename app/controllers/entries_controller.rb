@@ -1,6 +1,5 @@
 class EntriesController < ApplicationController
   def index
-
     @entries = Entry.where(user_id: current_user).order(date: :desc).order(id: :desc)
     # Entries - Per months
     @entries_by_months = @entries.group_by { |entry_month| entry_month.date.month }
