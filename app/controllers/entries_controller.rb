@@ -42,9 +42,20 @@ class EntriesController < ApplicationController
     @entry = Entry.new(rich_body: params[:entry][:rich_body], user: current_user, date: Date.today)
     @entry.content = @entry.rich_body.body.to_plain_text
     if @entry.save
-      sentiment_analysis(@entry.content)
+      # If we get an error for sentiment analysis rerun it
+      begin
+        sentiment_analysis(@entry.content)
+      rescue
+        sentiment_analysis(@entry.content)
+      end
+
       if @entry.sentiment == "Positive"
-        turn_to_gratefulness(@entry.content)
+        begin
+          turn_to_gratefulness(@entry.content)
+        rescue
+          turn_to_gratefulness(@entry.content)
+        end
+
       elsif @entry.sentiment != "Positive"
         obstacle_in_progress = Obstacle.new(user_id: current_user.id, status: "started")
         obstacle_in_progress.save(validate: false)
