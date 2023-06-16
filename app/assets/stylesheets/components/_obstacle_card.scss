@@ -16,7 +16,7 @@
 
   .subtitle {
     text-align: center;
-    font-size: 18px;
+    font-size: 21px;
     line-height: 25px;
     color: grey !important;
     padding-bottom: 30px;
@@ -35,6 +35,7 @@
 // Obstacle cards
 .obstacle-card {
   display: block;
+  height: 280px;
   width: 550px;
   border: 1px solid;
   border-color: #EAEAEA;
