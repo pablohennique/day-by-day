@@ -31,13 +31,13 @@ Entry.create!(content: "I woke up halfway through the night because Sacha was cr
                         date: Date.today - 1,
                         sentiment: "Negative",
                         user: pablo,
-                        obstacle: Obstacle.create!(title: "Baby Sacha Crying", user_id: pablo.id))
+                        obstacle: Obstacle.create!(title: "Sacha's transition to toddler bed", user_id: pablo.id))
 
 Entry.create!(content: "Today was the first day of career week, I think there were some good tips but I don’t know if it will really help me to find a job. However, I met Sam and got me really excited about her company. I’m going to send her my CV.",
                         date: Date.today - 4,
                         sentiment: "Neutral",
                         user: pablo,
-                        obstacle: Obstacle.create!(title: "Career Week Was Not Helpful", user_id: pablo.id))
+                        obstacle: Obstacle.create!(title: "Job hunt stress", user_id: pablo.id, done: true))
 
 Entry.create!(content: "I got into a fight with Mike. He was very aggressive and I had to tell him to stop. It sucks because he is a good friend and now, we are not talking",
                         date: Date.today - 6,
@@ -45,29 +45,29 @@ Entry.create!(content: "I got into a fight with Mike. He was very aggressive and
                         user: pablo,
                         obstacle: Obstacle.create!(title: "Fight with Mike", user_id: pablo.id))
 
-Entry.create!(content: "I found a coin while I was walking to work. It made me think about my grandmother. She always used to say that finding a penny would make give you luck for the rest of the day. I miss her",
+Entry.create!(content: "I ate too much pizza today and I had really bad stomach issues. I know I'm lactose intolerant and am so mad that I didn't take my Lactaid",
                         date: Date.today - 10,
-                        sentiment: "Positive",
+                        sentiment: "Negative",
                         user: pablo,
-                        obstacle: Obstacle.create!(title: "Miss my grandmother", user_id: pablo.id))
+                        obstacle: Obstacle.create!(title: "Pizza overindulgence led to stomach discomfort", user_id: pablo.id))
 
 Entry.create!(content: "I did not understand a single thing the Stephan was talking about during the lecture today. The entire AJAX concept is way above my head. I am happy Mark asked about it because otherwise I would have been more lost",
                         date: Date.today - 11,
                         sentiment: "Negative",
                         user: pablo,
-                        obstacle: Obstacle.create!(title: "Coudln't Understand a Lecture", user_id: pablo.id))
+                        obstacle: Obstacle.create!(title: "Difficulty understanding the SQL lecture", user_id: pablo.id, done: true))
 
 Entry.create!(content: "I was unable to fall asleep last night because I could not stop thinking about whether or not I will be able to find a job. I concluded that I just have to do my best and trust that things will work out in the end.",
                         date: Date.today - 16,
                         sentiment: "Negative",
                         user: pablo,
-                        obstacle: Obstacle.find_by(title: "Career Week Was Not Helpful"))
+                        obstacle: Obstacle.find_by(title: "Job hunt stress"))
 
 Entry.create!(content: "I was watching finding nemo and it made me cry so much. The scene with the dad really touched me. It made me think about me and my dad.",
                         date: Date.today - 18,
                         sentiment: "Neutral",
                         user: pablo,
-                        obstacle: Obstacle.create!(title: "Think about my dad", user_id: pablo.id))
+                        obstacle: Obstacle.create!(title: "Thinking about my dad", user_id: pablo.id, done: true))
 
 Entry.create!(content: "Mike was being mean again. This time he was the one who started the discussion. It was only logical that I would tell him to stop. If he ever brings up my sister again, I’ll lose it. I’m so pissed!",
                         date: Date.today - 19,
@@ -79,12 +79,12 @@ Entry.create!(content: "I keep thinking about finding a job once I am done with 
                         date: Date.today - 21,
                         sentiment: "Neutral",
                         user: pablo,
-                        obstacle: Obstacle.find_by(title: "Career Week Was Not Helpful"))
-Entry.create!(content: "I saw this story on IG that made me shed a tear. A baby squirl thought that he was being raised by a family of cats. It made me feel so hopeful about life and nature in general. Its weird in a way, but feels good.",
+                        obstacle: Obstacle.find_by(title: "Job hunt stress"))
+Entry.create!(content: "I saw this story on IG that made me shed a tear. A baby squirrel thought that he was being raised by a family of cats. It made me feel so hopeful about life and nature in general. Its weird in a way, but feels good.",
                         date: Date.today - 23,
                         sentiment: "Neutral",
                         user: pablo,
-                        obstacle: Obstacle.create!(title: "IG Post Made Me Cry", user_id: pablo.id))
+                        obstacle: Obstacle.create!(title: "IG post about baby squirrel made me cry", user_id: pablo.id))
 
 Entry.create!(content: "I love Mondays! It’s a bit weird, but I think it’s because I finally get some break from my being a dad and I get to sip my coffee in peace.",
                         date: Date.today - 29,
@@ -114,19 +114,19 @@ Entry.create!(content: "Today we turned Sacha's crib into a bed. Sacha was excit
                         date: Date.today - 6,
                         sentiment: "Negative",
                         user: pablo,
-                        obstacle: Obstacle.create!(title: "Sacha Starts Sleeping in a Bed", user_id: pablo.id))
+                        obstacle: Obstacle.find_by(title: "Sacha's transition to toddler bed"))
 
   Entry.create!(content: "Sacha woke up several times throughout the night and walked out of his bed. We are exhausted. This new change is more difficult than I thought it would be",
                         date: Date.today - 4,
                         sentiment: "Negative",
                         user: pablo,
-                        obstacle: Obstacle.find_by(title: "Sacha Starts Sleeping in a Bed"))
+                        obstacle: Obstacle.find_by(title: "Sacha's transition to toddler bed"))
 
   Entry.create!(content: "This time Sacha jumped into our bed and told us he did not want to sleep alone. I had to pick him up and bring him back to his bed. We did this 5 times throughout the night. Its hard",
                         date: Date.today - 2,
                         sentiment: "Negative",
                         user: pablo,
-                        obstacle: Obstacle.find_by(title: "Sacha Starts Sleeping in a Bed"))
+                        obstacle: Obstacle.find_by(title: "Sacha's transition to toddler bed"))
 
 
 Entry.create!(content: "I stayed up late watching Arcane on Netflix. I might be a bit tired today but I really needed to disconnect yesterday. I am glad I did it",
@@ -196,7 +196,7 @@ Recommendation.create(content: "I’m sorry that you're going through a difficul
                                 This experience serves as a valuable lesson to become a better parent and will probably help you in the long run
                                 since sacha will be able to sleep alone in his bed without your help.",
                       category: "Reframing",
-                      obstacle: Obstacle.find_by(title: "Sacha Starts Sleeping in a Bed"))
+                      obstacle: Obstacle.find_by(title: "Sacha's transition to toddler bed"))
 
 
 Recommendation.create(content: "It might help to put yourself in the shoes of Sacha and understand where he is coming from.
@@ -205,7 +205,7 @@ Recommendation.create(content: "It might help to put yourself in the shoes of Sa
                                 Try to vosualize love an dunderstanding for Sacha. See that it is difficult for him as well.
                                 Offering compassion might help you gain more patience and understanding to go through your sleepless nights",
                       category: "Compassion",
-                      obstacle: Obstacle.find_by(title: "Sacha Starts Sleeping in a Bed"))
+                      obstacle: Obstacle.find_by(title: "Sacha's transition to toddler bed"))
 
 
 Recommendation.create(content: "You might want to focus on the sensations of frustration and fatige that you feel througout your body.
@@ -213,7 +213,7 @@ Recommendation.create(content: "You might want to focus on the sensations of fru
                                 On top of that, noticing these emotions and allowing them to be, will help you better manage your emotional state
                                 and by consequence be more nurturing with Sacha",
                       category: "Feel Emotions",
-                      obstacle: Obstacle.find_by(title: "Sacha Starts Sleeping in a Bed"))
+                      obstacle: Obstacle.find_by(title: "Sacha's transition to toddler bed"))
 
 
 puts "Adding gratefulness..."
