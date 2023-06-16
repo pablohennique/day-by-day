@@ -194,7 +194,7 @@ Recommendation.create(content: "I’m sorry that you're going through a difficul
                                 Even though it might be difficult, you are reinforcing an independent personality.
                                 It is also giving you the opportunity to show Sacha how much you care for him by showing him that you trust him.
                                 This experience serves as a valuable lesson to become a better parent and will probably help you in the long run
-                                since sacha will be able to sleep alone in his bed without your help.",
+                                since Sacha will be able to sleep alone in his bed without your help.",
                       category: "Reframing",
                       obstacle: Obstacle.find_by(title: "Sacha's transition to toddler bed"))
 
@@ -202,16 +202,16 @@ Recommendation.create(content: "I’m sorry that you're going through a difficul
 Recommendation.create(content: "It might help to put yourself in the shoes of Sacha and understand where he is coming from.
                                 This will help you offer him compassion for what he is going through.
                                 As a toddler, it might be intimidating to learn to sleep on your own. Sounds and the dark could be scary.
-                                Try to vosualize love an dunderstanding for Sacha. See that it is difficult for him as well.
-                                Offering compassion might help you gain more patience and understanding to go through your sleepless nights",
+                                Try to visualize love and understanding for Sacha. See that it is difficult for him as well.
+                                Offering compassion might help you gain more patience and understanding to go through your sleepless nights.",
                       category: "Compassion",
                       obstacle: Obstacle.find_by(title: "Sacha's transition to toddler bed"))
 
 
-Recommendation.create(content: "You might want to focus on the sensations of frustration and fatige that you feel througout your body.
+Recommendation.create(content: "You might want to focus on the sensations of frustration and fatigue that you feel througout your body.
                                 Welcoming these emotions will help you better relate to them and less prone to being frustrated with Sacha.
                                 On top of that, noticing these emotions and allowing them to be, will help you better manage your emotional state
-                                and by consequence be more nurturing with Sacha",
+                                and by consequence be more nurturing with Sacha.",
                       category: "Feel Emotions",
                       obstacle: Obstacle.find_by(title: "Sacha's transition to toddler bed"))
 
