@@ -189,6 +189,6 @@ Recommendation.create(content: "You might want to focus on the sensations of fru
 
 puts "Adding gratefulness..."
 
-Gratefulness.create(content: "I'm grateful for having such a wonderful partner. Charlene is always taking care of the family and I appreciate all she does for us",
+Gratefulness.create(content: "I'm grateful for Sacha's independence and growth, and for the small moments that remind me of how lucky I am to have him as my son.",
                     created_at: "Mon, 14 Aug 2023 20:38:57.461908000 UTC +00:00",
                     user: pablo)
