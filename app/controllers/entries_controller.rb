@@ -17,12 +17,10 @@ class EntriesController < ApplicationController
       @entries = @entries.where(date: @from_date)
     end
 
-
     respond_to do |format|
       format.html
       format.json
     end
-
   end
 
   def show
