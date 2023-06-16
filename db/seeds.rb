@@ -21,8 +21,8 @@ pablo.save
 
 puts "Adding an entry..."
 
-Entry.create!(content: "I saw this story on IG that made me shed a tear. A baby squirl thought that he was being raised by a family of cats. It made me feel so hopeful about life and nature in general. Its weird in a way, but feels good.",
-                        date: Date.today,
+Entry.create!(content: "I was stretching after climbing today and it felt so good! I should really try to do it more often.",
+                        date: Date.today - 8,
                         sentiment: "Positive",
                         user: pablo,
                         obstacle: nil)
@@ -117,20 +117,49 @@ Entry.create!(content: "Today we turned Sacha's crib into a bed. Sacha was excit
                         obstacle: Obstacle.create!(title: "Sacha Starts Sleeping in a Bed", user_id: pablo.id))
 
   Entry.create!(content: "Sacha woke up several times throughout the night and walked out of his bed. We are exhausted. This new change is more difficult than I thought it would be",
-                          date: Date.today - 4,
-                          sentiment: "Negative",
-                          user: pablo,
-                          obstacle: Obstacle.find_by(title: "Sacha Starts Sleeping in a Bed"))
+                        date: Date.today - 4,
+                        sentiment: "Negative",
+                        user: pablo,
+                        obstacle: Obstacle.find_by(title: "Sacha Starts Sleeping in a Bed"))
 
   Entry.create!(content: "This time Sacha jumped into our bed and told us he did not want to sleep alone. I had to pick him up and bring him back to his bed. We did this 5 times throughout the night. Its hard",
-                          date: Date.today - 2,
-                          sentiment: "Negative",
-                          user: pablo,
-                          obstacle: Obstacle.find_by(title: "Sacha Starts Sleeping in a Bed"))
+                        date: Date.today - 2,
+                        sentiment: "Negative",
+                        user: pablo,
+                        obstacle: Obstacle.find_by(title: "Sacha Starts Sleeping in a Bed"))
 
 
+Entry.create!(content: "I stayed up late watching Arcane on Netflix. I might be a bit tired today but I really needed to disconnect yesterday. I am glad I did it",
+                        date: Date.today - 60,
+                        sentiment: "Neutral",
+                        user: pablo,
+                        obstacle: nil)
 
-puts "Adding recommendations"
+Entry.create!(content: "I had a great conversation with Charlene. We really are on the same wavelength when it comes to cooking. Hard at first, but we've found a good rhythm",
+                        date: Date.today - 62,
+                        sentiment: "Positive",
+                        user: pablo,
+                        obstacle: nil)
+
+Entry.create!(content: "Reading Homo Sapiens now and its such a great book! I love how the author explains the evolution of human kind and how we are free to choose our own spiritual path",
+                        date: Date.today - 68,
+                        sentiment: "Neutral",
+                        user: pablo,
+                        obstacle: nil)
+
+Entry.create!(content: "Reading Homo Sapiens now and its such a great book! I love how the author explains the evolution of human kind and how we are free to choose our own spiritual path",
+                        date: Date.today - 68,
+                        sentiment: "Neutral",
+                        user: pablo,
+                        obstacle: nil)
+
+Entry.create!(content: "I'm having a hard time understanding why my mom keeps telling me to call her every Sunday. Its so annoying",
+                        date: Date.today - 40,
+                        sentiment: "Negative",
+                        user: pablo,
+                        obstacle: nil)
+
+puts "Adding recommendations..."
 
 Recommendation.create(content: "I’m sorry that you had a fight with Mike. It must be difficult, specially because its your best friend.
                                 Maybe seeing the situation from a different perspective would help. The recent fight
