@@ -15,12 +15,13 @@
         </div>
       </div>
 
+      <div>
         <% if @obstacle.done %>
           <%= render "obstacle_resolved_card" %>
         <% else %>
           <%= (button_to "RESOLVE OBSTACLE", done_path, method:'patch', class:"bootstrap-override-button mt-2 mb-5") %>
         <% end %>
-
+      </div>
     </div>
 
   <%# Loading block REMOVED %>
