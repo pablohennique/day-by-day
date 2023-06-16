@@ -1,11 +1,6 @@
 // Recommendation cards grid
 
 
-.back-link {
-  margin-top: 50px;
-  padding: 0px;
-}
-
 // h1, h2, and obstacle resolved button/card
 .recos-heading{
   display: flex;
@@ -25,7 +20,7 @@
   }
 
   .subtitle {
-    font-size: 30px;
+    font-size: 25px;
     color: grey !important;
     padding-top: 5px;
   }
@@ -42,6 +37,8 @@
   background-color: white;
   padding: 15px;
   color: black;
+  width: 420px;
+  margin-bottom: 30px;
 
   p {
     padding: 5px;

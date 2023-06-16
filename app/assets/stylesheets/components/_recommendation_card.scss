@@ -11,7 +11,7 @@
 }
 
 .reco-card-top {
-  padding: 30px;
+  padding: 10px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   background-color: $purple;
@@ -37,4 +37,9 @@
     -webkit-box-orient: vertical;
     -webkit-line-clamp: var(--read-more-line-clamp, 4);
   }
+}
+
+.purple_title{
+  margin-left: 8px;
+    padding-top: 5px;
 }

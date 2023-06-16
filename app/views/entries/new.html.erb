@@ -1,12 +1,13 @@
+<div class="path_bar">
+  <%= link_to entries_path do%>
+      <i class="fa-solid fa-arrow-left"></i>  Back to my journal
+  <% end %>
+</div>
+
 <div class="container-content">
   <div class="container">
     <div class="row">
       <%= simple_form_for @entry do |f| %>
-        <div class="my-4">
-        <%= link_to entries_path do%>
-            <i class="fa-solid fa-arrow-left"></i>  Back to my entries
-        </div>
-        <% end %>
         <div class="d-flex align-items-center justify-content-between mb-5 mt-5">
           <div>
             <p style="font-size: 35px;font-weight: bold;"><%= Date.today.strftime('%A, %B %d')  %></p>

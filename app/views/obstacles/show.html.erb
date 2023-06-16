@@ -1,11 +1,12 @@
+<div class="path_bar">
+  <%= link_to obstacles_path do%>
+    <i class="fa-solid fa-arrow-left"></i> Back to my obstacles
+  <% end %>
+</div>
+
 <div class="container-content">
   <div class="container">
     <div class="row">
-      <div class="back-link">
-        <%= link_to obstacles_path do%>
-          <i class="fa-solid fa-arrow-left"></i> Back to all obstacles
-        <% end %>
-      </div>
       <div class="recos-heading">
         <div>
           <p>OBSTACLE IDENTIFIED</p>
@@ -14,12 +15,13 @@
         </div>
       </div>
 
+      <div>
         <% if @obstacle.done %>
           <%= render "obstacle_resolved_card" %>
         <% else %>
-          <%= (button_to "RESOLVE OBSTACLE", done_path, method:'patch', class:"bootstrap-override-button mt-2 mb-5 fw-bold") %>
+          <%= (button_to "RESOLVE OBSTACLE", done_path, method:'patch', class:"bootstrap-override-button mt-2 mb-5") %>
         <% end %>
-
+      </div>
     </div>
 
   <%# Loading block REMOVED %>
