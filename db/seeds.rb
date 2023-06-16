@@ -195,7 +195,7 @@ Recommendation.create(content: "I’m sorry that you're going through a difficul
                                 It is also giving you the opportunity to show Sacha how much you care for him by showing him that you trust him.
                                 This experience serves as a valuable lesson to become a better parent and will probably help you in the long run
                                 since sacha will be able to sleep alone in his bed without your help.",
-                      category: "Reframe",
+                      category: "Reframing",
                       obstacle: Obstacle.find_by(title: "Sacha Starts Sleeping in a Bed"))
 
 

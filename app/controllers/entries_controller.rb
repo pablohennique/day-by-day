@@ -58,7 +58,6 @@ class EntriesController < ApplicationController
         rescue
           turn_to_gratefulness(@entry.content)
         end
-
       elsif @entry.sentiment != "Positive"
         obstacle_in_progress = Obstacle.new(user_id: current_user.id, status: "started")
         obstacle_in_progress.save(validate: false)
