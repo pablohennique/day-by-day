@@ -21,25 +21,25 @@
       </div>
     </div>
 
-  <%# Loading block %>
-    <div data-controller="loading" data-loading-id-value="<%= @obstacle.id %>">
+  <%# Loading block REMOVED %>
+    <%# <div data-controller="loading" data-loading-id-value="<%= @obstacle.id %>
 
-      <div class="text-center loading_card" data-loading-target="loadingCard">
+      <%# <div class="text-center loading_card" data-loading-target="loadingCard">
         <div class="loading_margins">
           <h2 class="loading_text">Generating personalized recommendations that will help you solve your obstacle...</h2>
           <%= image_tag "loading.gif", class: "loading_gif" %>
-        </div>
-      </div>
+        <%# </div> %>
+      <%# </div> %>
 
   <%# Recommendation cards %>
-      <div class="reco-cards row hidden" data-loading-target="recoCards">
+      <div class="reco-cards row" data-loading-target="recoCards">
         <% @recommendations.each do |recommendation| %>
           <div class="reco-card">
             <%= render "recommendation_card", recommendation: recommendation %>
           </div>
         <% end %>
       </div>
-    </div>
+    <%# </div> %>
 
     <br>
     <br>
