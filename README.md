@@ -36,11 +36,9 @@ Install extensions??
 
 # Running the Script
 
-After setting up the project, run the main script using:
-Rails s
-
-Make sure that you are running a sidekiq server and JavaScript: 
-Rails 
-yarn build --watch
+After setting up the project, run: 
+- Rails server
+- Yarn JavaScript compiler 
+- Run Sidekiq 
 
 Open your browser and run your local host (http://localhost:3000/)
