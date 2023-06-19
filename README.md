@@ -32,11 +32,15 @@ OPENAI_API_KEY=your_api_key_here
 
 Replace your_api_key_here with your actual OpenAI API key
 
+Install gems??
 
 # Running the Script
 
 After setting up the project, run the main script using:
+Rails s
 
-ruby agent.rb
+Make sure that you are running a sidekiq server and JavaScript: 
+Rails 
+yarn build --watch
 
-Open your browser and run your local host
+Open your browser and run your local host (http://localhost:3000/)
