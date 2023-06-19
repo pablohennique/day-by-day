@@ -6,13 +6,13 @@ identify your main obstacles and provide you with personalized recommendations t
 <br>
 https://www.ai-journaling.online/
 
-### How it Works
+
+# How it Works
 
 The application integrates with ChatGPT via the <a href="https://github.com/alexrudall/ruby-openai">OpenAI Ruby Gem</a>. 
-<br>
-<br>
+
 Users are encouraged to write on their online journal on a daily basis (aka "entries"). 
-<br>
+
 For every entry created by the user, the application calls OpenAI several times following a series of steps: 
 - Identify the sentiment of the post (Positive, Neutral, Negative)
 - If Positive, it will generate a gratefulness statement 
@@ -21,11 +21,22 @@ For every entry created by the user, the application calls OpenAI several times 
 - For every Obstacle created, ChatGPT will assess which of the following 4 Mindfulness tactics can be applied: Reframing, Visualization, Compassion or Feel Emotions
 - ChatGPT will then generate recommendations for each of the tactics that were applicable to the Obstacle. Recommendations are based on the user entries linked to the Obstacle
 
-<br>
 The user has access to his/her entries, Obstacles and recommendations. The user can mark an Obstacle as resolved whenever he/she feels like the Obstacle has been addressed and thus get a feeling of progression
 
-### How to Run the App
+
+# Set Up
+
+Clone this repository. Create a .env file in the project directory. Add your OpenAI API key to the .env file as follows:
+
+OPENAI_API_KEY=your_api_key_here
+
+Replace your_api_key_here with your actual OpenAI API key
 
 
+# Running the Script
 
+After setting up the project, run the main script using:
 
+ruby agent.rb
+
+Open your browser and run your local host
