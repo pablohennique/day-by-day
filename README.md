@@ -32,13 +32,23 @@ OPENAI_API_KEY=your_api_key_here
 
 Replace your_api_key_here with your actual OpenAI API key
 
-Install extensions??
+Run: Bundle Install
+
+Then install extensions
+
+### Install extensions
+-  Install Redis
+-  Install Sideqik
+-  Install Rough Notation (JS Library)
+-  Install Read More (Stimulus)
+-  Install Flatpickr
+-  Install Rich Text
 
 # Running the Script
 
 After setting up the project, run: 
 - Rails server
 - Yarn JavaScript compiler 
-- Run Sidekiq 
+- Run Sidekiq
 
-Open your browser and run your local host (http://localhost:3000/)
+Open your browser and run your local host http://localhost:3000/
