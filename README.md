@@ -4,10 +4,10 @@ Day by Day is an online journaling app built on Ruby on Rails that uses ChatGPT 
 identify your main obstacles and provide you with personalized recommendations to help you navigate them
 <br>
 <br>
-https://www.ai-journaling.online/
+Access the app: https://www.ai-journaling.online/
 <br>
 
-For a quick overview demo: https://youtu.be/y8YGC2BUcFo?t=3873
+Quick overview demo: https://youtu.be/y8YGC2BUcFo?t=3873
 
 # How it Works
 
