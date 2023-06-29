@@ -5,7 +5,9 @@ identify your main obstacles and provide you with personalized recommendations t
 <br>
 <br>
 https://www.ai-journaling.online/
+<br>
 
+For a quick overview demo: https://youtu.be/y8YGC2BUcFo?t=3873
 
 # How it Works
 
