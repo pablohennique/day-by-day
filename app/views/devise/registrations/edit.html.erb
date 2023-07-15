@@ -1,4 +1,11 @@
-<div class="container-content py-5">
+<div class="container-devise">
+  <div class="row">
+    <div class="col-sm-12 col-lg-4">
+      <div>
+        <%= image_tag('homme-heureux-tenue-ordinateur-portable.jpg', class: 'image-devise') %>
+      </div>
+    </div>
+
   <h2>Edit <%= resource_name.to_s.humanize %></h2>
 
   <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>

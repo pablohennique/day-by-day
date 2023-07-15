@@ -1,19 +1,5 @@
 .container-devise {
   background-color: #F8F8F8;
-}
-
-.container-form {
-  padding: 40px;
-
-  h2 {
-    margin-bottom: 40px;
-    font-weight: 500;
-  }
-
-  .names {
-    justify-content: space-between;
-    width: auto;
-  }
 
   .button {
     margin-top: 30px;
@@ -24,11 +10,24 @@
   }
 }
 
+.container-form {
+  padding: 70px 40px 70px 40px;
+
+  h2 {
+    margin-bottom: 50px;
+    font-weight: 500;
+  }
+
+  .names {
+    justify-content: space-between;
+    width: auto;
+  }
+}
+
 .form-inputs input{
   border-radius: 50px;
 }
 
-// sign up
 .image-devise {
   width: 100%;
   height: 700px;
