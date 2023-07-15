@@ -2,11 +2,21 @@
   background-color: #F8F8F8;
 
   .button {
-    margin-top: 30px;
+    margin-top: 25px;
     border-radius: 50px;
     background-color: #5550F3;
     color: white;
     padding: 10px 40px 10px 40px;
+  }
+
+  .delete-button {
+    margin-top: 25px;
+    margin-left: 20px;
+    border-radius: 50px;
+    background-color: $orange;
+    color: white;
+    padding: 10px 40px 10px 40px;
+    border-color: transparent;
   }
 }
 
@@ -22,6 +32,10 @@
     justify-content: space-between;
     width: auto;
   }
+}
+
+.form-actions {
+  display: flex;
 }
 
 .form-inputs input{
