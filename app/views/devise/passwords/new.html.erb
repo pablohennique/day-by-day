@@ -25,7 +25,13 @@
             <%= f.button :submit, "RESET PASSWORD", class:'button' %>
           </div>
         <% end %>
-        <%= render "devise/shared/links" %>
+
+        <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
+          <div class="mt-5">No account yet?
+           <%= link_to "Sign up", new_registration_path(resource_name)%><br />
+          </div>
+        <% end %>
+        Find your password? <%= render "devise/shared/links" %>
       </div>
   </div>
 </div>
