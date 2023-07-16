@@ -1,20 +1,31 @@
-<div class="container-content py-5">
-  <h2>Forgot your password?</h2>
+<div class="container-devise">
+    <div class="row">
 
-  <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-    <%= f.error_notification %>
+      <div class="col-sm-12 col-lg-4">
+        <div>
+          <%= image_tag('gros-plan-femme-dactylographie-ordinateur-portable-dans-cafe-restaurant.jpg', class: 'image-devise') %>
+        </div>
+      </div>
 
-    <div class="form-inputs">
-      <%= f.input :email,
-                  required: true,
-                  autofocus: true,
-                  input_html: { autocomplete: "email" } %>
-    </div>
+      <div class="container-form col-sm-12 col-lg-8" data-controller="annotate">
 
-    <div class="form-actions">
-      <%= f.button :submit, "Send me reset password instructions" %>
-    </div>
-  <% end %>
+        <h2>Forgot your password?</h2>
 
-  <%= render "devise/shared/links" %>
+        <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+          <%= f.error_notification %>
+
+          <div class="form-inputs">
+            <%= f.input :email,
+                        required: true,
+                        autofocus: true,
+                        input_html: { autocomplete: "email" } %>
+          </div>
+
+          <div class="form-actions">
+            <%= f.button :submit, "RESET PASSWORD", class:'button' %>
+          </div>
+        <% end %>
+        <%= render "devise/shared/links" %>
+      </div>
+  </div>
 </div>
