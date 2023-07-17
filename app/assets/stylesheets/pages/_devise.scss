@@ -1,0 +1,50 @@
+.container-devise {
+  background-color: #F8F8F8;
+
+  .button {
+    margin-top: 25px;
+    border-radius: 50px;
+    background-color: #5550F3;
+    color: white;
+    padding: 10px 40px 10px 40px;
+  }
+
+  .delete-button {
+    margin-top: 25px;
+    margin-left: 20px;
+    border-radius: 50px;
+    background-color: $orange;
+    color: white;
+    padding: 10px 40px 10px 40px;
+    border-color: transparent;
+  }
+}
+
+.container-form {
+  padding: 70px 40px 70px 40px;
+
+  h2 {
+    margin-bottom: 50px;
+    font-weight: 500;
+  }
+
+  .names {
+    justify-content: space-between;
+    width: auto;
+  }
+}
+
+.form-actions {
+  display: flex;
+}
+
+.form-inputs input{
+  border-radius: 50px;
+}
+
+.image-devise {
+  width: 100%;
+  height: 700px;
+  object-fit: cover;
+  border-radius: 0px 70% 70% 0px;
+}
