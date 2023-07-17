@@ -7,6 +7,7 @@ class GenerateObstaclesJob < ApplicationJob
 
     begin
       turn_to_summary(@entry.content)
+      get_vector(@entry.content)
       match_summary(@entry.content)
 
       if @match.include?("fs") || @match.include?("false")
@@ -42,12 +43,23 @@ class GenerateObstaclesJob < ApplicationJob
       parameters: {
         model: "gpt-3.5-turbo",
         messages: [{ role: "user",
-                    content: "Create a title that summarizes this entry.
-                              Include proper nouns and use maximum
-                              7 words: #{entry}" }],
-        temperature: 0.1
+          content: "Create a title that summarizes this entry.
+          Include proper nouns and use 7 words or less: #{entry}" }],
+          temperature: 0.1
       }
     )
+  end
+
+  def get_vector(entry)
+    @client = OpenAI::Client.new
+    @response = @client.embeddings(
+      parameters: {
+        model: "text-embedding-ada-002",
+        input: entry
+      }
+    )
+    @vector = @response.dig("data", 0, "embedding").to_s
+    @entry.update(vector: @vector)
   end
 
   def match_summary(entry)
