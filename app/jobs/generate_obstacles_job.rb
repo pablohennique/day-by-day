@@ -116,7 +116,7 @@ class GenerateObstaclesJob < ApplicationJob
 
     dot_product = 0
 
-    @vecA.zip(vecB).each do |v1i, v2i|
+    vecA.zip(vecB).each do |v1i, v2i|
       dot_product += v1i * v2i
     end
 
