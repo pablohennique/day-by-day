@@ -83,5 +83,5 @@ group :test do
   gem "webdrivers"
 end
 
-#  Chat GPT integration
+# Chat GPT integration
 gem "ruby-openai"

@@ -50,18 +50,6 @@ class GenerateObstaclesJob < ApplicationJob
     )
   end
 
-  def get_vector(entry)
-    @client = OpenAI::Client.new
-    @response = @client.embeddings(
-      parameters: {
-        model: "text-embedding-ada-002",
-        input: entry
-      }
-    )
-    @vector = @response.dig("data", 0, "embedding").to_s
-    @entry.update(vector: @vector)
-  end
-
   def match_summary(entry)
     # @obstacles_titles_arr = Obstacle.pluck(:title)
     @obstacles_titles_arr = Obstacle.where(user_id: @entry.user.id).where.not(title: nil).map { |obstacle| "#{obstacle.id} - #{obstacle.title}" }
@@ -107,6 +95,37 @@ class GenerateObstaclesJob < ApplicationJob
     @obstacle = @obstacle_in_progress
   end
   # OBSTACLE ENDS
+
+  # VECTOR STARTS
+  def get_vector(entry)
+    @client = OpenAI::Client.new
+    @response = @client.embeddings(
+      parameters: {
+        model: "text-embedding-ada-002",
+        input: entry
+      }
+    )
+    @vector = @response.dig("data", 0, "embedding").to_s
+    @entry.update(vector: @vector)
+  end
+
+  def calculate_similarity(vecA, vecB)
+    return nil unless vecA.is_a? Array
+    return nil unless vecB.is_a? Array
+    return nil if vecA.size != vecB.size
+
+    dot_product = 0
+
+    @vecA.zip(vecB).each do |v1i, v2i|
+      dot_product += v1i * v2i
+    end
+
+    a = vecA.map { |n| n ** 2 }.reduce(:+)
+    b = vecB.map { |n| n ** 2 }.reduce(:+)
+
+    return dot_product / (Math.sqrt(a) * Math.sqrt(b))
+  end
+  # VECTOR ENDS
 
   # RECOMMENDATIONS START
   def summarize_entries_in_obstacle
