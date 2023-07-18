@@ -8,7 +8,8 @@ class GenerateObstaclesJob < ApplicationJob
     begin
       turn_to_summary(@entry.content)
       get_entry_vector(@entry.content)
-      match_summary(@entry.content)
+      # match_summary(@entry.content)
+      match_through_vectors
 
       if @match.include?("fs") || @match.include?("false")
         set_obstacle
@@ -63,6 +64,30 @@ class GenerateObstaclesJob < ApplicationJob
     vector = @response.dig("data", 0, "embedding").to_s
     @entry.update(vector: vector)
   end
+
+  def match_through_vectors
+    # get an array with all Obstacles associated with user
+    # Map each obstacle in array into obstacle-id with vector
+    # Iterate through each vector in the array to calculate cosine similarity against entry vector
+    # Match with the highest cosine similarity as long as it is higher than .85
+  end
+
+  def calculate_cosine_similarity(vecA, vecB)
+    return nil unless vecA.is_a? Array
+    return nil unless vecB.is_a? Array
+    return nil if vecA.size != vecB.size
+
+    dot_product = 0
+
+    vecA.zip(vecB).each do |v1i, v2i|
+      dot_product += v1i * v2i
+    end
+
+    a = vecA.map { |n| n ** 2 }.reduce(:+)
+    b = vecB.map { |n| n ** 2 }.reduce(:+)
+
+    return dot_product / (Math.sqrt(a) * Math.sqrt(b))
+  end
   # VECTOR ASSIGNMENT TO ENTRY AND MATCHING - END
 
   # def match_summary(entry)
@@ -108,28 +133,6 @@ class GenerateObstaclesJob < ApplicationJob
     @obstacle = @obstacle_in_progress
   end
   # ENTRY/OBSTACLE ENDS
-
-  # VECTOR STARTS
-  def calculate_similarity(vecA, vecB)
-    return nil unless vecA.is_a? Array
-    return nil unless vecB.is_a? Array
-    return nil if vecA.size != vecB.size
-
-    dot_product = 0
-
-    vecA.zip(vecB).each do |v1i, v2i|
-      dot_product += v1i * v2i
-    end
-
-    a = vecA.map { |n| n ** 2 }.reduce(:+)
-    b = vecB.map { |n| n ** 2 }.reduce(:+)
-
-    return dot_product / (Math.sqrt(a) * Math.sqrt(b))
-  end
-  # VECTOR ENDS
-
-
-
 
   # RECOMMENDATIONS START
   def summarize_entries_in_obstacle
@@ -193,9 +196,6 @@ class GenerateObstaclesJob < ApplicationJob
   end
   # RECOMMENDATIONS END
 
-
-
-
   # VECTOR ASSIGNMENT TO OBSTACLE - START
   def get_obstacle_vector
     @client = OpenAI::Client.new
@@ -209,6 +209,8 @@ class GenerateObstaclesJob < ApplicationJob
     @obstacle.update(vector: vector)
   end
   # VECTOR ASSIGNMENT TO OBSTACLE - END
+
+
 
   def obstacle_status_completed
     @obstacle.update(status: "completed")
