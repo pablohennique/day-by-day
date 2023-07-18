@@ -7,7 +7,7 @@ class GenerateObstaclesJob < ApplicationJob
 
     begin
       turn_to_summary(@entry.content)
-      get_vector(@entry.content)
+      get_entry_vector(@entry.content)
       match_summary(@entry.content)
 
       if @match.include?("fs") || @match.include?("false")
@@ -16,6 +16,7 @@ class GenerateObstaclesJob < ApplicationJob
         update_entry
       end
       summarize_entries_in_obstacle
+      get_obstacle_vector
       get_recommendations
       obstacle_status_completed
     rescue
@@ -25,7 +26,7 @@ class GenerateObstaclesJob < ApplicationJob
 
   private
 
-  # OBSTACLES STARTS
+  # ENTRY/OBSTACLE STARTS
   def delete_obstacle_in_progress
     @obstacle_in_progress.destroy
   end
@@ -50,36 +51,48 @@ class GenerateObstaclesJob < ApplicationJob
     )
   end
 
-  def match_summary(entry)
-    # @obstacles_titles_arr = Obstacle.pluck(:title)
-    @obstacles_titles_arr = Obstacle.where(user_id: @entry.user.id).where.not(title: nil).map { |obstacle| "#{obstacle.id} - #{obstacle.title}" }
-
-    gpt_match_summary(entry)
-    @match = @gpt_match["choices"][0]["message"]["content"]
-    @match.chop! if @match.last == "."
-    @match.downcase! if @match == "False"
-    @match.delete!("'Potential match: '\"")
-  end
-
-  def gpt_match_summary(entry)
+  # VECTOR ASSIGNMENT TO ENTRY AND MATCHING - START
+  def get_entry_vector(entry)
     @client = OpenAI::Client.new
-    @gpt_match = @client.chat(
+    @response = @client.embeddings(
       parameters: {
-        model: "gpt-3.5-turbo",
-        messages: [{ role: "user",
-                    content: "I'm attempting to match life situations that might be related to each other. These situations are separate entries in a user's journal.
-                    Indicate if there is a potential match between the New Entry and the Existing Entries Array.
-                    If there is a potential match, return the id associated to the Existing Entries Array where the match might exist. Do not provide any additional explanation.
-                    If no relationship is found, return 'false'.
-                    New Entry:'#{entry}'
-                    Existing Entries Array: '#{@obstacles_titles_arr}'"}],
-        temperature: 0.3
+        model: "text-embedding-ada-002",
+        input: entry
       }
     )
+    vector = @response.dig("data", 0, "embedding").to_s
+    @entry.update(vector: vector)
   end
+  # VECTOR ASSIGNMENT TO ENTRY AND MATCHING - END
+
+  # def match_summary(entry)
+  #   @obstacles_titles_arr = Obstacle.where(user_id: @entry.user.id).where.not(title: nil).map { |obstacle| "#{obstacle.id} - #{obstacle.title}" }
+
+  #   gpt_match_summary(entry)
+  #   @match = @gpt_match["choices"][0]["message"]["content"]
+  #   @match.chop! if @match.last == "."
+  #   @match.downcase! if @match == "False"
+  #   @match.delete!("'Potential match: '\"")
+  # end
+
+  # def gpt_match_summary(entry)
+  #   @client = OpenAI::Client.new
+  #   @gpt_match = @client.chat(
+  #     parameters: {
+  #       model: "gpt-3.5-turbo",
+  #       messages: [{ role: "user",
+  #                   content: "I'm attempting to match life situations that might be related to each other. These situations are separate entries in a user's journal.
+  #                   Indicate if there is a potential match between the New Entry and the Existing Entries Array.
+  #                   If there is a potential match, return the id associated to the Existing Entries Array where the match might exist. Do not provide any additional explanation.
+  #                   If no relationship is found, return 'false'.
+  #                   New Entry:'#{entry}'
+  #                   Existing Entries Array: '#{@obstacles_titles_arr}'"}],
+  #       temperature: 0.3
+  #     }
+  #   )
+  # end
 
   def update_entry
-    # @match.to_i
     @obstacle = Obstacle.find_by(id: @match)
     if @obstacle.done == true
       set_obstacle
@@ -94,21 +107,9 @@ class GenerateObstaclesJob < ApplicationJob
     @entry.update(obstacle_id: @obstacle_in_progress.id)
     @obstacle = @obstacle_in_progress
   end
-  # OBSTACLE ENDS
+  # ENTRY/OBSTACLE ENDS
 
   # VECTOR STARTS
-  def get_vector(entry)
-    @client = OpenAI::Client.new
-    @response = @client.embeddings(
-      parameters: {
-        model: "text-embedding-ada-002",
-        input: entry
-      }
-    )
-    @vector = @response.dig("data", 0, "embedding").to_s
-    @entry.update(vector: @vector)
-  end
-
   def calculate_similarity(vecA, vecB)
     return nil unless vecA.is_a? Array
     return nil unless vecB.is_a? Array
@@ -126,6 +127,9 @@ class GenerateObstaclesJob < ApplicationJob
     return dot_product / (Math.sqrt(a) * Math.sqrt(b))
   end
   # VECTOR ENDS
+
+
+
 
   # RECOMMENDATIONS START
   def summarize_entries_in_obstacle
@@ -188,6 +192,23 @@ class GenerateObstaclesJob < ApplicationJob
     Recommendation.create(content: @reframing_recommendation_content, category: tactic, obstacle: @obstacle)
   end
   # RECOMMENDATIONS END
+
+
+
+
+  # VECTOR ASSIGNMENT TO OBSTACLE - START
+  def get_obstacle_vector
+    @client = OpenAI::Client.new
+    @response = @client.embeddings(
+      parameters: {
+        model: "text-embedding-ada-002",
+        input: @obstacle.overview
+      }
+    )
+    vector = @response.dig("data", 0, "embedding").to_s
+    @obstacle.update(vector: vector)
+  end
+  # VECTOR ASSIGNMENT TO OBSTACLE - END
 
   def obstacle_status_completed
     @obstacle.update(status: "completed")
