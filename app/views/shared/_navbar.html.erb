@@ -22,16 +22,15 @@
         <% if user_signed_in? %>
         <div class = "d-flex align-items-center" style= "gap: 20px; margin-right:20px">
           <div>
-            <%= "#{current_user.first_name}" %>
+            <%= "Hi, #{current_user.first_name}" %>
           </div>
           <div>
             <li class="nav-item dropdown">
             <a href="#" class="avatar" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <%= image_tag "PabloGreatSmile.jpg", class: "avatar", alt: "dropdown menu" %>
+              <%= image_tag "avatar_grey.png", class: "avatar", alt: "dropdown menu" %>
             </a>
               <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                <%= link_to "Action", "#", class: "dropdown-item" %>
-                <%= link_to "Another action", "#", class: "dropdown-item" %>
+                <%= link_to "Account", edit_user_registration_path, class: "dropdown-item" %>
                 <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
               </div>
             </div>
