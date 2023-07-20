@@ -28,10 +28,6 @@ class GenerateObstaclesJob < ApplicationJob
   private
 
   # ENTRY/OBSTACLE STARTS
-  def delete_obstacle_in_progress
-    @obstacle_in_progress.destroy
-  end
-
   def turn_to_summary(entry)
     gpt_summary_entry(entry)
     @summary = @gpt_summary["choices"][0]["message"]["content"]
@@ -71,11 +67,11 @@ class GenerateObstaclesJob < ApplicationJob
     obstacles_vector_arr = obstacles_arr.pluck(:vector)
     # Map each obstacle in @obstactles_vector_arr to its vector, converted from string to array or floats
     obstacles_vector_arr_float = obstacles_vector_arr.map { |arr| arr.split(',').map(&:to_f) }
-    # Iterate through each vector in the array to calculate cosine similarity against entry vector
+    # Iterate through each obstacle vector in the array to calculate cosine similarity against entry vector
     cosine_similarity_arr = obstacles_vector_arr_float.map { |vec| calculate_cosine_similarity(vec, @entry.vector.split(',').map(&:to_f)) }
     # Match with the highest cosine similarity as long as it is higher than .85
     if cosine_similarity_arr.max > 0.85
-      highest_value_index = cosine_similarity_arr.each_index.max
+      highest_value_index = cosine_similarity_arr.index(cosine_similarity_arr.max)
       @obstacle_match = obstacles_arr[highest_value_index]
       update_entry
     else
@@ -106,6 +102,7 @@ class GenerateObstaclesJob < ApplicationJob
     else
       @entry.update(obstacle_id: @obstacle_match.id)
       delete_obstacle_in_progress
+      @obstacle = @obstacle_match
     end
   end
 
@@ -113,6 +110,10 @@ class GenerateObstaclesJob < ApplicationJob
     @obstacle_in_progress.update(title: @summary)
     @entry.update(obstacle_id: @obstacle_in_progress.id)
     @obstacle = @obstacle_in_progress
+  end
+
+  def delete_obstacle_in_progress
+    @obstacle_in_progress.destroy
   end
   # VECTOR ASSIGNMENT TO ENTRY AND MATCHING - ENDS
   # ENTRY/OBSTACLE ENDS
@@ -192,8 +193,6 @@ class GenerateObstaclesJob < ApplicationJob
     @obstacle.update(vector: vector)
   end
   # VECTOR ASSIGNMENT TO OBSTACLE - END
-
-
 
   def obstacle_status_completed
     @obstacle.update(status: "completed")
