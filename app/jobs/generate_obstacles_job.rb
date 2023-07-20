@@ -4,16 +4,16 @@ class GenerateObstaclesJob < ApplicationJob
   def perform(entry, obstacle_in_progress)
     @entry = entry
     @obstacle_in_progress = obstacle_in_progress
+    @cosine_similarity_threshold = 0.85
 
     begin
       turn_to_summary(@entry.content)
       get_entry_vector(@entry.content)
       match_through_vectors
-
       summarize_entries_in_obstacle
       get_obstacle_vector
 
-      if @cosine_similarity_arr.max < 0.85
+      if @cosine_similarity_arr.max < @cosine_similarity_threshold
         get_recommendations
         obstacle_status_completed
       end
@@ -66,8 +66,8 @@ class GenerateObstaclesJob < ApplicationJob
     obstacles_vector_arr_float = obstacles_vector_arr.map { |arr| arr.split(',').map(&:to_f) }
     # Iterate through each obstacle vector in the array to calculate cosine similarity against entry vector
     @cosine_similarity_arr = obstacles_vector_arr_float.map { |vec| calculate_cosine_similarity(vec, @entry.vector.split(',').map(&:to_f)) }
-    # Match with the highest cosine similarity as long as it is higher than .85
-    if @cosine_similarity_arr.max > 0.85
+    # Match with the highest cosine similarity as long as it is higher than the cosine_similarity_threshold
+    if @cosine_similarity_arr.max > @cosine_similarity_threshold
       highest_value_index = @cosine_similarity_arr.index(@cosine_similarity_arr.max)
       @obstacle_match = obstacles_arr[highest_value_index]
       update_entry
