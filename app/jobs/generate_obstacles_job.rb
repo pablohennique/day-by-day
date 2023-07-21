@@ -4,19 +4,19 @@ class GenerateObstaclesJob < ApplicationJob
   def perform(entry, obstacle_in_progress)
     @entry = entry
     @obstacle_in_progress = obstacle_in_progress
+    @cosine_similarity_threshold = 0.85
 
     begin
       turn_to_summary(@entry.content)
-      match_summary(@entry.content)
-
-      if @match.include?("fs") || @match.include?("false")
-        set_obstacle
-      else
-        update_entry
-      end
+      get_entry_vector(@entry.content)
+      match_through_vectors
       summarize_entries_in_obstacle
-      get_recommendations
-      obstacle_status_completed
+      get_obstacle_vector
+
+      if @cosine_similarity_arr.max < @cosine_similarity_threshold
+        get_recommendations
+        obstacle_status_completed
+      end
     rescue
       perform(@entry, @obstacle_in_progress)
     end
@@ -24,11 +24,7 @@ class GenerateObstaclesJob < ApplicationJob
 
   private
 
-  # OBSTACLES STARTS
-  def delete_obstacle_in_progress
-    @obstacle_in_progress.destroy
-  end
-
+  # ENTRY/OBSTACLE STARTS
   def turn_to_summary(entry)
     gpt_summary_entry(entry)
     @summary = @gpt_summary["choices"][0]["message"]["content"]
@@ -42,50 +38,68 @@ class GenerateObstaclesJob < ApplicationJob
       parameters: {
         model: "gpt-3.5-turbo",
         messages: [{ role: "user",
-                    content: "Create a title that summarizes this entry.
-                              Include proper nouns and use maximum
-                              7 words: #{entry}" }],
-        temperature: 0.1
+          content: "Create a title that summarizes this entry.
+          Include proper nouns and use 7 words or less: #{entry}" }],
+          temperature: 0.1
       }
     )
   end
 
-  def match_summary(entry)
-    # @obstacles_titles_arr = Obstacle.pluck(:title)
-    @obstacles_titles_arr = Obstacle.where(user_id: @entry.user.id).where.not(title: nil).map { |obstacle| "#{obstacle.id} - #{obstacle.title}" }
-
-    gpt_match_summary(entry)
-    @match = @gpt_match["choices"][0]["message"]["content"]
-    @match.chop! if @match.last == "."
-    @match.downcase! if @match == "False"
-    @match.delete!("'Potential match: '\"")
-  end
-
-  def gpt_match_summary(entry)
+  # VECTOR ASSIGNMENT TO ENTRY AND MATCHING - START
+  def get_entry_vector(entry)
     @client = OpenAI::Client.new
-    @gpt_match = @client.chat(
+    @response = @client.embeddings(
       parameters: {
-        model: "gpt-3.5-turbo",
-        messages: [{ role: "user",
-                    content: "I'm attempting to match life situations that might be related to each other. These situations are separate entries in a user's journal.
-                    Indicate if there is a potential match between the New Entry and the Existing Entries Array.
-                    If there is a potential match, return the id associated to the Existing Entries Array where the match might exist. Do not provide any additional explanation.
-                    If no relationship is found, return 'false'.
-                    New Entry:'#{entry}'
-                    Existing Entries Array: '#{@obstacles_titles_arr}'"}],
-        temperature: 0.3
+        model: "text-embedding-ada-002",
+        input: entry
       }
     )
+    vector = @response.dig("data", 0, "embedding").join(", ")
+    @entry.update(vector: vector)
+  end
+
+  def match_through_vectors
+    # get an array with all Obstacles associated with user
+    obstacles_arr = Obstacle.where(user_id: @entry.user.id).where.not(vector: nil)
+    obstacles_vector_arr = obstacles_arr.pluck(:vector)
+    # Map each obstacle in @obstactles_vector_arr to its vector, converted from string to array or floats
+    obstacles_vector_arr_float = obstacles_vector_arr.map { |arr| arr.split(',').map(&:to_f) }
+    # Iterate through each obstacle vector in the array to calculate cosine similarity against entry vector
+    @cosine_similarity_arr = obstacles_vector_arr_float.map { |vec| calculate_cosine_similarity(vec, @entry.vector.split(',').map(&:to_f)) }
+    # Match with the highest cosine similarity as long as it is higher than the cosine_similarity_threshold
+    if @cosine_similarity_arr.max > @cosine_similarity_threshold
+      highest_value_index = @cosine_similarity_arr.index(@cosine_similarity_arr.max)
+      @obstacle_match = obstacles_arr[highest_value_index]
+      update_entry
+    else
+      set_obstacle
+    end
+  end
+
+  def calculate_cosine_similarity(vecA, vecB)
+    return nil unless vecA.is_a? Array
+    return nil unless vecB.is_a? Array
+    return nil if vecA.size != vecB.size
+
+    dot_product = 0
+
+    vecA.zip(vecB).each do |v1i, v2i|
+      dot_product += v1i * v2i
+    end
+
+    a = vecA.map { |n| n ** 2 }.reduce(:+)
+    b = vecB.map { |n| n ** 2 }.reduce(:+)
+
+    return dot_product / (Math.sqrt(a) * Math.sqrt(b))
   end
 
   def update_entry
-    # @match.to_i
-    @obstacle = Obstacle.find_by(id: @match)
-    if @obstacle.done == true
+    if @obstacle_match.done == true
       set_obstacle
     else
-      @entry.update(obstacle_id: @obstacle.id)
+      @entry.update(obstacle_id: @obstacle_match.id)
       delete_obstacle_in_progress
+      @obstacle = @obstacle_match
     end
   end
 
@@ -94,7 +108,12 @@ class GenerateObstaclesJob < ApplicationJob
     @entry.update(obstacle_id: @obstacle_in_progress.id)
     @obstacle = @obstacle_in_progress
   end
-  # OBSTACLE ENDS
+
+  def delete_obstacle_in_progress
+    @obstacle_in_progress.destroy
+  end
+  # VECTOR ASSIGNMENT TO ENTRY AND MATCHING - ENDS
+  # ENTRY/OBSTACLE ENDS
 
   # RECOMMENDATIONS START
   def summarize_entries_in_obstacle
@@ -157,6 +176,20 @@ class GenerateObstaclesJob < ApplicationJob
     Recommendation.create(content: @reframing_recommendation_content, category: tactic, obstacle: @obstacle)
   end
   # RECOMMENDATIONS END
+
+  # VECTOR ASSIGNMENT TO OBSTACLE - START
+  def get_obstacle_vector
+    @client = OpenAI::Client.new
+    @response = @client.embeddings(
+      parameters: {
+        model: "text-embedding-ada-002",
+        input: @obstacle.overview
+      }
+    )
+    vector = @response.dig("data", 0, "embedding").join(", ")
+    @obstacle.update(vector: vector)
+  end
+  # VECTOR ASSIGNMENT TO OBSTACLE - END
 
   def obstacle_status_completed
     @obstacle.update(status: "completed")
