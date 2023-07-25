@@ -1,4 +1,12 @@
-<div class="obstacle-resolved-card">
-  <i class="fa-solid fa-circle-check"></i>
-  <p>You've marked this obstacle as resolved</p>
+<div class="d-flex justify-content-between">
+
+  <div>
+    <%= (button_to "MARK OBSTACLE AS UNRESOLVED", done_path, method:'patch', class:"bootstrap-override-button mt-2 mb-5") %>
+  </div>
+
+  <div class="obstacle-resolved-card">
+    <i class="fa-solid fa-circle-check"></i>
+    <p>You've marked this obstacle as resolved</p>
+  </div>
+
 </div>
