@@ -71,10 +71,10 @@ class EntriesController < ApplicationController
 
   def edit
     @entry = Entry.find(params[:id])
-    unless @entry.obstacle_id.nil?
-      ob_id = @entry.obstacle_id
-      @obstacle = Obstacle.find(ob_id)
-    end
+    # unless @entry.obstacle_id.nil?
+    #   ob_id = @entry.obstacle_id
+    #   @obstacle = Obstacle.find(ob_id)
+    # end
   end
 
   def update
@@ -86,6 +86,13 @@ class EntriesController < ApplicationController
   def destroy
     @entry = Entry.find(params[:id])
     @entry.destroy
+
+    obstacle = Obstacle.find(@entry.obstacle_id)
+    entries = Entry.where(user_id: current_user.id)
+    entries_associated_with_obstacle = entries.select { |entry| entry.obstacle == obstacle }
+
+    obstacle.destroy if entries_associated_with_obstacle.empty?
+
     redirect_to entries_path
   end
 
