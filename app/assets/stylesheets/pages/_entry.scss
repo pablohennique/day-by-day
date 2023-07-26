@@ -14,13 +14,19 @@
   .flex-item-right {
     flex: 70%;
     text-align: right;
+    color: grey;
+    font-size: 20px;
+
+    .title {
+      font-weight: bold;
+    }
   }
 }
 
-@media (max-width: 800px) {
+@media (max-width: 900px) {
   .flex-item-right, .flex-item-left {
     flex: 100%;
-    text-align:center !important;
+    text-align: center !important;
   }
 }
 
