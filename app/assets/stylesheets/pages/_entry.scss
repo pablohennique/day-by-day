@@ -1,21 +1,24 @@
 .intro {
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-between;
   background-color: white;
   border-top: 1px solid $pigeons-gray;
-  padding-top: 100px;
-  margin-left: 150px;
-  margin-right: 150px;
+  padding: 75px 0 75px 0;
+  margin: 0 150px 0 150px;
 
   .flex-item-left {
-    flex: 30%;
+    flex: 20%;
+    padding-top: 20px;
   }
 
   .flex-item-right {
     flex: 70%;
-    text-align: right;
     color: grey;
     font-size: 20px;
+    padding-top: 25px;
+    margin-left: 70px;
+    text-align: right;
 
     .title {
       font-weight: bold;
@@ -27,6 +30,7 @@
   .flex-item-right, .flex-item-left {
     flex: 100%;
     text-align: center !important;
+    margin-left: 0 !important;
   }
 }
 
