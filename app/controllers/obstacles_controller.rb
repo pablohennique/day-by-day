@@ -13,7 +13,7 @@ class ObstaclesController < ApplicationController
 
   def done
     @obstacle = Obstacle.find(params[:id])
-    @obstacle.update(done: true)
+    @obstacle.done? ? @obstacle.update(done: false) : @obstacle.update(done: true)
     redirect_to obstacles_path
   end
 
