@@ -13,12 +13,14 @@
 
   .flex-item-right {
     flex: 70%;
+    text-align: right;
   }
 }
 
 @media (max-width: 800px) {
   .flex-item-right, .flex-item-left {
     flex: 100%;
+    text-align:center !important;
   }
 }
 
