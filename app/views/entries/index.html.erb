@@ -1,5 +1,5 @@
 <%# --FIRST BLOCK (INTRO)-- %>
-<div class="intro">
+<%# <div class="intro">
   <div class="container">
     <div class="row">
       <div class="entries_flex" style="margin-top: 100px;" data-controller="annotate">
@@ -10,10 +10,19 @@
 
         <div class="gratefulness px-3 col">
             <%= render "daily_gratefulness"%>
-        </div>
+        <%# </div>
 
       </div>
     </div>
+  </div>
+</div> %>
+
+<div class="intro" data-controller="annotate">
+  <div class="flex-item-left">
+    <h1 data-annotate-target="underline">My journal</h1>
+  </div>
+  <div class="flex-item-right">
+      <%= render "daily_gratefulness"%>
   </div>
 </div>
 <%# --FIRST BLOCK (end)-- %>
