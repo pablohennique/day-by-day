@@ -15,15 +15,15 @@
 <div data-controller="filter-entries">
 
   <div id="new-search">
-    <div class="flex-item-left">
-      <%= link_to new_entry_path, class: "new_button" do%>
-        <i class="fa-solid fa-pen"></i> WRITE A NEW ENTRY
-      <% end %>
-    </div>
+    <%= link_to new_entry_path, class: "new_button" do%>
+      <i class="fa-solid fa-pen"></i> WRITE A NEW ENTRY
+    <% end %>
 
       <%# CALENDRAR FORM %>
     <div class="flex-item-right">
-      <%= render "calendar_search" %>
+      <div>
+        <%= render "calendar_search" %>
+      </div>
     </div>
   </div>
 

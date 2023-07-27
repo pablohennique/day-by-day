@@ -36,16 +36,13 @@
 
 #new-search {
   display: flex;
-  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
 
-  .flex-item-left {
-    padding-top: 25px;
-  }
-
   .flex-item-right {
-    padding-top: 25px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
   }
 }
 
