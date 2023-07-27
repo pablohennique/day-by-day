@@ -1,5 +1,5 @@
 <%# --FIRST BLOCK (INTRO)-- %>
-<div class="intro" data-controller="annotate">
+<div id="intro" data-controller="annotate">
   <div class="flex-item-left">
     <h1 data-annotate-target="underline">My journal</h1>
   </div>
@@ -13,7 +13,8 @@
 
 <%# --SECOND BLOCK (NEW, SEARCH AND CAROUSEL)-- %>
 <div data-controller="filter-entries">
-  <div class="d-flex justify-content-between align-content-center">
+
+  <div id="new-search">
     <%= link_to new_entry_path, class: "new_button" do%>
       <i class="fa-solid fa-pen"></i> WRITE A NEW ENTRY
     <% end %>
