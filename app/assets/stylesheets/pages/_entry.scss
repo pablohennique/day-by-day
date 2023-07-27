@@ -26,6 +26,14 @@
   }
 }
 
+@media (max-width: 800px) {
+  .flex-item-right, .flex-item-left {
+    flex: 100%;
+    text-align: center !important;
+    margin-left: 0 !important;
+  }
+}
+
 #new-search {
   display: flex;
   flex-wrap: wrap;
@@ -41,13 +49,7 @@
   }
 }
 
-@media (max-width: 900px) {
-  .flex-item-right, .flex-item-left {
-    flex: 100%;
-    text-align: center !important;
-    margin-left: 0 !important;
-  }
-}
+
 
 .list{
   padding: 0 50px 0 50px;
