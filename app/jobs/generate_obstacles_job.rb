@@ -154,10 +154,17 @@ class GenerateObstaclesJob < ApplicationJob
   end
 
   def apply_tactics
-    apply_tactic("Reframing") if @gpt_recommendations_content.include?("Reframing")
-    apply_tactic("Compassion") if @gpt_recommendations_content.include?("Compassion")
-    apply_tactic("Feel Emotions") if @gpt_recommendations_content.include?("Emotions")
-    apply_tactic("Visualization") if @gpt_recommendations_content.include?("Visualization")
+    reframing = "Reframing: a tactic used to shift one's perspective and find positive or constructive meaning in a difficult or challenging situation"
+    compassion = "Compassion: recognizing the pain, struggles, or distress of others or ourselves in order to respond with empathy, care, and a genuine desire to help"
+    emotions = "Feel Emotions: to prevent becoming overwhelmed by emotions, it's essential to understand and navigate the emotions we feel"
+    visualization = "Visualization: a cognitive tactic that involves creating mental images or representations to achieve a specific goal."
+    forgiveness = "involves letting go of resentment, anger, and the desire for revenge, and instead, choosing to respond with understanding, empathy, and love"
+
+    apply_tactic(reframing) if @gpt_recommendations_content.include?("Reframing")
+    apply_tactic(compassion) if @gpt_recommendations_content.include?("Compassion")
+    apply_tactic(emotions) if @gpt_recommendations_content.include?("Emotions")
+    apply_tactic(visualization) if @gpt_recommendations_content.include?("Visualization")
+    apply_tactic(forgiveness) if @gpt_recommendations_content.include?("Forgiveness")
   end
 
   def apply_tactic(tactic)
@@ -166,8 +173,8 @@ class GenerateObstaclesJob < ApplicationJob
       parameters: {
         model: "gpt-3.5-turbo",
         messages: [{ role: "user",
-                    content: "Considering 4 tactics: Reframing, Compassion, Feel Emotions and Visualization.
-                              How could I apply #{tactic} to the following situation:
+                    content: "Consider this tactic: #{tactic}.
+                              How could I apply the tactic to the following situation:
                               #{@gpt_obstacle_overview_content}" }],
         temperature: 0.1
       }
