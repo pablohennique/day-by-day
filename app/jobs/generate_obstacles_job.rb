@@ -135,52 +135,58 @@ class GenerateObstaclesJob < ApplicationJob
   end
 
   def get_recommendations
+    reframing = "Reframing: a tactic used to shift one's perspective and find positive or constructive meaning in a difficult or challenging situation"
+    compassion = "Compassion: recognizing the pain, struggles, or distress of others or ourselves in order to respond with empathy, care, and a genuine desire to help"
+    emotions = "Feel Emotions: to prevent becoming overwhelmed by emotions, it's essential to understand and navigate the emotions we feel"
+    visualization = "Visualization: a cognitive tactic that involves creating mental images or representations to achieve a specific goal."
+    forgiveness = "Forgiveness: involves letting go of resentment, anger, and the desire for revenge, and instead, choosing to respond with understanding, empathy, and love"
+
     Recommendation.where(obstacle: @obstacle).destroy_all
     @client = OpenAI::Client.new
     @gpt_recommendations = @client.chat(
       parameters: {
         model: "gpt-3.5-turbo",
         messages: [{ role: "user",
-                    content: "For the following entry, which of the following 4 techniques
-                              could be applied? (1-Reframing, 2-Compassion, 3-Feel Emotions,
-                              4-Visualization). Only return the techniques that are highly applicable.
+                    content: "Consider the following entry: #{@gpt_obstacle_overview_content}.
+                              Now consider the following 5 tactics and their descriptions:
+                              1-#{reframing}
+                              2-#{compassion}
+                              3-#{emotions}
+                              4-#{visualization}
+                              5-#{forgiveness}
+                              Which tactics are applicable to the provided entry?
+                              Return only the name of the tactics that are highly applicable.
                               Do not include any additional information.
                               #{@gpt_obstacle_overview_content}" }],
         temperature: 0.1
       }
     )
     @gpt_recommendations_content = @gpt_recommendations["choices"][0]["message"]["content"]
-    apply_tactics
+    apply_tactics(reframing, compassion, emotions, visualization, forgiveness)
   end
 
-  def apply_tactics
-    reframing = "Reframing: a tactic used to shift one's perspective and find positive or constructive meaning in a difficult or challenging situation"
-    compassion = "Compassion: recognizing the pain, struggles, or distress of others or ourselves in order to respond with empathy, care, and a genuine desire to help"
-    emotions = "Feel Emotions: to prevent becoming overwhelmed by emotions, it's essential to understand and navigate the emotions we feel"
-    visualization = "Visualization: a cognitive tactic that involves creating mental images or representations to achieve a specific goal."
-    forgiveness = "involves letting go of resentment, anger, and the desire for revenge, and instead, choosing to respond with understanding, empathy, and love"
-
-    apply_tactic(reframing) if @gpt_recommendations_content.include?("Reframing")
-    apply_tactic(compassion) if @gpt_recommendations_content.include?("Compassion")
-    apply_tactic(emotions) if @gpt_recommendations_content.include?("Emotions")
-    apply_tactic(visualization) if @gpt_recommendations_content.include?("Visualization")
-    apply_tactic(forgiveness) if @gpt_recommendations_content.include?("Forgiveness")
+  def apply_tactics(reframing, compassion, emotions, visualization, forgiveness)
+    apply_tactic(reframing, "Reframing") if @gpt_recommendations_content.include?("Reframing")
+    apply_tactic(compassion, "Compassion") if @gpt_recommendations_content.include?("Compassion")
+    apply_tactic(emotions, "Feel Emotions") if @gpt_recommendations_content.include?("Emotions")
+    apply_tactic(visualization, "Visualization") if @gpt_recommendations_content.include?("Visualization")
+    apply_tactic(forgiveness, "Forgiveness") if @gpt_recommendations_content.include?("Forgiveness")
   end
 
-  def apply_tactic(tactic)
+  def apply_tactic(tactic_description, tactic_title)
     @client = OpenAI::Client.new
     @gpt_reframing_recommendation = @client.chat(
       parameters: {
         model: "gpt-3.5-turbo",
         messages: [{ role: "user",
-                    content: "Consider this tactic: #{tactic}.
+                    content: "Consider this tactic: #{tactic_description}.
                               How could I apply the tactic to the following situation:
                               #{@gpt_obstacle_overview_content}" }],
         temperature: 0.1
       }
     )
     @reframing_recommendation_content = @gpt_reframing_recommendation["choices"][0]["message"]["content"]
-    Recommendation.create(content: @reframing_recommendation_content, category: tactic, obstacle: @obstacle)
+    Recommendation.create(content: @reframing_recommendation_content, category: tactic_title, obstacle: @obstacle)
   end
   # RECOMMENDATIONS END
 
