@@ -135,7 +135,7 @@ class GenerateObstaclesJob < ApplicationJob
   end
 
   def get_recommendations
-    reframing = "Reframing: a tactic used to shift one's perspective and find positive or constructive meaning in a difficult or challenging situation"
+    reframing = "Reframing: tactic used to shift one's perspective and find positive or constructive meaning in a difficult or challenging situation"
     compassion = "Compassion: recognizing the pain, struggles, or distress of others or ourselves in order to respond with empathy, care, and a genuine desire to help"
     emotions = "Feel Emotions: to prevent becoming overwhelmed by emotions, it's essential to understand and navigate the emotions we feel"
     visualization = "Visualization: a cognitive tactic that involves creating mental images or representations to achieve a specific goal."
