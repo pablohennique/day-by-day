@@ -15,9 +15,9 @@
 
 <div class ="reco-card-text">
   <div data-controller="read-more" data-read-more-more-text-value="Read more" data-read-more-less-text-value="Read less">
-    <p class="my-content" data-read-more-target="content">
-      <%= recommendation.content %>
-    </p>
+    <div class="my-content" data-read-more-target="content">
+      <%= simple_format recommendation.content %>
+    </div>
     <button class="grey-link" data-action="click->read-more#toggle">Read more</button>
   </div>
 </div>
