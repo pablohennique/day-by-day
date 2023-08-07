@@ -30,13 +30,13 @@
   border-bottom-right-radius: 10px;
   padding-left: 20px;
   padding-right: 20px;
+}
 
-  p {
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: var(--read-more-line-clamp, 4);
-  }
+.my-content {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: var(--read-more-line-clamp, 4);
 }
 
 .purple_title{
