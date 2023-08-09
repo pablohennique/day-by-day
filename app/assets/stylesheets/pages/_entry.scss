@@ -46,12 +46,12 @@
   }
 }
 
-@media (max-width: 800px) {
+@media (max-width: 1000px) {
   .flex-box {
     justify-content: space-around !important;
   }
   .flex-item-right, .flex-item-left {
-    flex: 100%;
+    flex-direction: column !important;
     text-align: center !important;
     margin-left: 0 !important;
     margin-right: 0 !important;
