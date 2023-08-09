@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   patch 'obstacles/:id', to: 'obstacles#done', as: :done
   resources :recommendations, only: %i[show update]
 
-  get '/tactics', to: 'pages#tactics'
+  get '/tactics', to: 'pages#tactics', as: :tactics
 
   require "sidekiq"
   authenticate :user, ->(user) { user.admin? } do
