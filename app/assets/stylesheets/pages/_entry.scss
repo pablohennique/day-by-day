@@ -26,27 +26,35 @@
   }
 }
 
-@media (max-width: 800px) {
-  .flex-item-right, .flex-item-left {
-    flex: 100%;
-    text-align: center !important;
-    margin-left: 0 !important;
-  }
-}
-
-#new-search {
+.flex-box {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
 
+  .flex-item-left {
+    padding-top: 25px;
+    margin-left: 50px;
+  }
+
   .flex-item-right {
+    padding-top: 25px;
     display: flex;
     justify-content: space-around;
     align-items: center;
   }
 }
 
-
+@media (max-width: 800px) {
+  .flex-box {
+    justify-content: space-around !important;
+  }
+  .flex-item-right, .flex-item-left {
+    flex: 100%;
+    text-align: center !important;
+    margin-left: 0 !important;
+  }
+}
 
 .list{
   padding: 0 50px 0 50px;

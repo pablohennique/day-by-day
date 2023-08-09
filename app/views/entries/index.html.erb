@@ -14,10 +14,12 @@
 <%# --SECOND BLOCK (NEW, SEARCH AND CAROUSEL)-- %>
 <div data-controller="filter-entries">
 
-  <div id="new-search">
-    <%= link_to new_entry_path, class: "new_button" do%>
-      <i class="fa-solid fa-pen"></i> WRITE A NEW ENTRY
-    <% end %>
+  <div class="flex-box">
+    <div class="flex-item-left">
+      <%= link_to new_entry_path, class: "new_button" do%>
+        <i class="fa-solid fa-pen"></i> WRITE A NEW ENTRY
+      <% end %>
+    </div>
 
       <%# CALENDRAR FORM %>
     <div class="flex-item-right">
