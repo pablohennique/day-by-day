@@ -33,12 +33,13 @@
   align-items: center;
 
   .flex-item-left {
-    padding-top: 25px;
+    // padding-top: 25px;
     margin-left: 50px;
   }
 
   .flex-item-right {
-    padding-top: 25px;
+    // padding-top: 25px;
+    margin-right: 50px;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -53,6 +54,8 @@
     flex: 100%;
     text-align: center !important;
     margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-top: 35px;
   }
 }
 
