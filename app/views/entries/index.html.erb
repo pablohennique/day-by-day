@@ -1,19 +1,10 @@
 <%# --FIRST BLOCK (INTRO)-- %>
-<div class="intro">
-  <div class="container">
-    <div class="row">
-      <div class="entries_flex" style="margin-top: 100px;" data-controller="annotate">
-
-        <div class="entries_logo col-5">
-          <span data-annotate-target="underline">My journal</span>
-        </div>
-
-        <div class="gratefulness px-3 col">
-            <%= render "daily_gratefulness"%>
-        </div>
-
-      </div>
-    </div>
+<div id="intro" data-controller="annotate">
+  <div class="flex-item-left">
+    <h1 data-annotate-target="underline">My journal</h1>
+  </div>
+  <div class="flex-item-right">
+      <%= render "daily_gratefulness"%>
   </div>
 </div>
 <%# --FIRST BLOCK (end)-- %>
@@ -22,13 +13,16 @@
 
 <%# --SECOND BLOCK (NEW, SEARCH AND CAROUSEL)-- %>
 <div data-controller="filter-entries">
-  <div class="d-flex justify-content-between align-content-center">
-    <%= link_to new_entry_path, class: "new_button" do%>
-      <i class="fa-solid fa-pen"></i> WRITE A NEW ENTRY
-    <% end %>
+
+  <div class="flex-box">
+    <div class="flex-item-left">
+      <%= link_to new_entry_path, class: "new_button" do%>
+        <i class="fa-solid fa-pen"></i> WRITE A NEW ENTRY
+      <% end %>
+    </div>
 
       <%# CALENDRAR FORM %>
-    <div class="d-flex justify-content-around align-items-center" >
+    <div class="flex-item-right">
       <div>
         <%= render "calendar_search" %>
       </div>
