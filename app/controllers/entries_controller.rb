@@ -78,23 +78,32 @@ class EntriesController < ApplicationController
 
   def update
     @entry = Entry.find(params[:id])
+    obstacle = Obstacle.find(@entry.obstacle_id)
+
     @entry.update(rich_body: params[:entry][:rich_body])
-    @entry.content = @entry.rich_body.body.to_plain_text
+    @entry.update(content: @entry.rich_body.body.to_plain_text)
     sentiment_analysis(@entry.content)
+    @entry.update(obstacle: nil) if @entry.sentiment == 'Positive'
+
+    entries_associated_with_obstacle = find_entries_associated_with_obstacle(obstacle)
+    obstacle.destroy if entries_associated_with_obstacle.empty?
+
     redirect_to entries_path, notice: "Your entry has been saved."
   end
 
   def destroy
     @entry = Entry.find(params[:id])
-    @entry.destroy
-
     obstacle = Obstacle.find(@entry.obstacle_id)
-    entries = Entry.where(user_id: current_user.id)
-    entries_associated_with_obstacle = entries.select { |entry| entry.obstacle == obstacle }
-
+    @entry.destroy
+    entries_associated_with_obstacle = find_entries_associated_with_obstacle(obstacle)
     obstacle.destroy if entries_associated_with_obstacle.empty?
 
     redirect_to entries_path
+  end
+
+  def find_entries_associated_with_obstacle(obstacle)
+    entries = Entry.where(user_id: current_user.id)
+    entries.select { |entry| entry.obstacle == obstacle }
   end
 
   def search_by_date
