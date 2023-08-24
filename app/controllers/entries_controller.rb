@@ -80,6 +80,7 @@ class EntriesController < ApplicationController
     @entry = Entry.find(params[:id])
     @entry.update(rich_body: params[:entry][:rich_body])
     @entry.content = @entry.rich_body.body.to_plain_text
+    sentiment_analysis(@entry.content)
     redirect_to entries_path, notice: "Your entry has been saved."
   end
 
