@@ -60,7 +60,7 @@ class GenerateObstaclesJob < ApplicationJob
 
   def match_through_vectors
     # get an array with all Obstacles associated with user
-    obstacles_arr = Obstacle.where(user_id: @entry.user.id).where.not(vector: nil)
+    obstacles_arr = Obstacle.where(user: @entry.user.id).where.not(vector: nil)
     obstacles_vector_arr = obstacles_arr.pluck(:vector)
     # Map each obstacle in @obstactles_vector_arr to its vector, converted from string to array or floats
     obstacles_vector_arr_float = obstacles_vector_arr.map { |arr| arr.split(',').map(&:to_f) }
