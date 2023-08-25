@@ -37,7 +37,6 @@ class EntriesController < ApplicationController
   end
 
   def create
-
     respond_to do |format|
       format.html
       format.json
@@ -79,8 +78,9 @@ class EntriesController < ApplicationController
 
   def update
     @entry = Entry.find(params[:id])
-    @entry.update(content: params[:entry][:content])
-    redirect_to entries_path, notice: "Your entry is saved."
+    @entry.update(rich_body: params[:entry][:rich_body])
+    @entry.content = @entry.rich_body.body.to_plain_text
+    redirect_to entries_path, notice: "Your entry has been saved."
   end
 
   def destroy
