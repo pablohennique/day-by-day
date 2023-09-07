@@ -1,19 +1,65 @@
 #intro {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  // justify-content: space-between;
   background-color: white;
   border-top: 1px solid $pigeons-gray;
-  padding: 75px 0 75px 0;
-  margin: 0 150px 0 150px;
+  // padding: 75px 0 75px 0;
+  // margin: 0 150px 0 150px;
 
-  .flex-item-left {
-    flex: 20%;
+  // .intro-left {
+  //   padding-top: 20px;
+  // }
+
+  // .intro-right {
+  //   color: grey;
+  //   font-size: 20px;
+  //   padding-top: 25px;
+  //   margin-left: 70px;
+  //   text-align: right;
+
+    // .title {
+    //   font-weight: bold;
+    // }
+  // }
+}
+
+
+@media (min-width: 100px) and (max-width: 800px) {
+  #intro {
+    flex-wrap: wrap;
+  }
+
+  .intro-left, .intro-right {
+    text-align: center !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-top: 35px;
+  }
+
+  .flex-box {
+    justify-content: space-around !important;
+  }
+// .flex-item-right, .flex-item-left {
+  //   flex-direction: column !important;
+  //   text-align: center !important;
+  //   margin-left: 0 !important;
+  //   margin-right: 0 !important;
+  //   padding-top: 35px;
+  // }
+}
+
+@media (min-width: 801px) {
+  #intro {
+    display: flex;
+    padding: 75px 0 75px 0;
+    margin: 0 150px 0 150px;
+  }
+
+  .intro-left {
     padding-top: 20px;
   }
 
-  .flex-item-right {
-    flex: 70%;
+  .intro-right {
     color: grey;
     font-size: 20px;
     padding-top: 25px;
@@ -33,12 +79,10 @@
   align-items: center;
 
   .flex-item-left {
-    // padding-top: 25px;
     margin-left: 50px;
   }
 
   .flex-item-right {
-    // padding-top: 25px;
     margin-right: 50px;
     display: flex;
     justify-content: space-around;
@@ -46,18 +90,6 @@
   }
 }
 
-@media (max-width: 1000px) {
-  .flex-box {
-    justify-content: space-around !important;
-  }
-  .flex-item-right, .flex-item-left {
-    flex-direction: column !important;
-    text-align: center !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-    padding-top: 35px;
-  }
-}
 
 .list{
   padding: 0 50px 0 50px;
@@ -73,7 +105,7 @@
 
   .row {
     justify-content: space-between;
-    align-items: center;
+  align-items: center;
   }
 }
 
